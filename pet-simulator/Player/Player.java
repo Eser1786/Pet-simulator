@@ -1,0 +1,13 @@
+package Player;
+
+public class Player {
+    private String name;
+    private int coins;
+    
+    public String getName(){return name;}
+    public int getCoin(){return coins;}
+
+    public void setName(String name){this.name = name;}
+    public void setCoin(int coins){this.coins = coins;}
+    
+}

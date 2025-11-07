@@ -97,7 +97,7 @@ public class PetManager {
     //  tạo danh sách để lưu trữ các pets
     ArrayList<Pet> ownedPet = new ArrayList<>();
 
-    void AddPet(String filePath, int petID){
+    public void AddPet(String filePath, int petID){
 
         Scanner scan = new Scanner(System.in);
         
@@ -145,8 +145,11 @@ public class PetManager {
                             pet.setMentalHealth(100);
                             pet.setItem(null);
                             pet.setFavoriteDish(null);  // mốt thêm sau dựa theo species
+                            
                             ownedPet.add(pet);
                             savePetToFile(pet, "ownedPets.txt");
+
+                            System.out.println("Đã lưu");
                         }
                     }
                 }
