@@ -16,7 +16,10 @@
 
 2. Chỉnh sửa file - BufferedWriter
 
+    Sửa dựa theo id của pet
+
     BufferedWriter writer = new BufferedWriter(new FileWriter("pets.txt"));
+
 
 
 

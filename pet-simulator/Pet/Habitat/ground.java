@@ -1,4 +1,4 @@
-package Habitat;
+package Pet.Habitat;
 
 public interface ground {
     void run();

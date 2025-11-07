@@ -1,3 +1,5 @@
+package Pet;
+
 public abstract class Pet{
     private int petID;       // bao gồm 3 chữ số
     private String species;
@@ -36,10 +38,10 @@ public abstract class Pet{
     public void setFavoriteDish(String favoriteDish){this.favoriteDish = favoriteDish;}
 
 
-    abstract String sound();
-    abstract String feeling();
+    public abstract void sound();
+    public abstract void feeling();
 
-    Pet(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item, String favoriteDish){
+    public Pet(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item, String favoriteDish){
         
         if(petID >= 100 && petID <= 999){
             setPetID(petID);
@@ -66,5 +68,33 @@ public abstract class Pet{
         setFavoriteDish(favoriteDish);
 
     }
+
+
+    public Pet(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

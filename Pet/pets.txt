@@ -1,5 +1,0 @@
-petID | species | name | health | level | hunger | mentalHealth | sex | item | favoriteDish 
-101 | dog | Milo | 100 | 0 | 1 | 100 | male | bóng tennis | xương 
-102 | cat | Meo | 120 | 3 | 1 | 100 | female | cuộn chỉ | pate 
-103 | parrot | Mike | 50 | 1 | 12 | 100 | male | nón nhỏ | hạt giống 
-104 | parrot | Mike | 50 | 1 | 12 | 100 | male | nón nhỏ | hạt giống 
