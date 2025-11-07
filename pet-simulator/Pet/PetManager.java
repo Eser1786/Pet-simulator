@@ -89,7 +89,7 @@ public class PetManager {
     }
 
     // PetManager manager = new PetManage();
-    // manager.loadPetFromFile("ownedPets.txt") để tải lại các pets đã có
+    // manager.loadPetFromFile("C:\Users\ACER\Documents\GitHub\Pet-simulator\pet-simulator\Pet\ownedPets.txt") để tải lại các pets đã có
 
 
 
@@ -147,7 +147,7 @@ public class PetManager {
                             pet.setFavoriteDish(null);  // mốt thêm sau dựa theo species
                             
                             ownedPet.add(pet);
-                            savePetToFile(pet, "ownedPets.txt");
+                            savePetToFile(pet, "C:\\Users\\ACER\\Documents\\GitHub\\Pet-simulator\\pet-simulator\\Pet\\ownedPets.txt");
 
                             System.out.println("Đã lưu");
                         }
