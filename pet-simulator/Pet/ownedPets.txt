@@ -1,2 +1,2 @@
-101|dog|mike|0|100|0|100|male|null|null
-301|parrot|quy|0|100|0|100|male|null|null
+101|dog|mike|0|100|0|100|female|null|null
+102|dog|eser|0|100|0|100|male|null|null

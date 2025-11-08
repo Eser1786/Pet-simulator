@@ -21,7 +21,7 @@ public class PetManager {
                 break;
             default:
                 speciesID = 10;    
-                break;
+                break; 
         }
         int count = 0;
         for(Pet pet : ownedPet){
@@ -100,6 +100,8 @@ public class PetManager {
     public void AddPet(String filePath, int petID){
 
         Scanner scan = new Scanner(System.in);
+
+        loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
         
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
@@ -149,7 +151,6 @@ public class PetManager {
                             ownedPet.add(pet);
                             savePetToFile(pet, "C:\\Users\\ACER\\Documents\\GitHub\\Pet-simulator\\pet-simulator\\Pet\\ownedPets.txt");
 
-                            System.out.println("Đã lưu");
                         }
                     }
                 }

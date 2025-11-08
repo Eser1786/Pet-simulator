@@ -9,6 +9,7 @@ public class Accessory extends Item {
 
     public Accessory(){
         super();
+        setStylePoint(0);
     }
     public Accessory(int id, String name, int stylePoint){
         super(id,name);

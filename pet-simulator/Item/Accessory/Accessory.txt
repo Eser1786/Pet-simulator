@@ -1,1 +1,5 @@
-ID | name | stylePoint
+1 | hat 
+2 | cape
+3 | collar
+4 | crown
+5 | backpack
