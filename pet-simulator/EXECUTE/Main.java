@@ -1,13 +1,17 @@
 package EXECUTE;
 
-import Item.Accessory.*;
-import Pet.PetManager;
+// import Item.Accessory.*;
+// import Item.Food.*;
+import Item.Furniture.*;
 public class Main {
-    public static void main(String[] args){
-        AccessoryList a = new AccessoryList();
-        a.addAccessory("pet-simulator\\Item\\Accessory\\Accessory.txt", 4);
-    }
 
-    
 
+  public static void main(String[] args){
+      // FoodList food = new FoodList();
+      // AccessoryList accessory = new AccessoryList();
+      // food.addFood( 3, 10);
+      // accessory.addAccessory( 4, 3);
+      FurnitureList a = new FurnitureList();
+      a.addFurniture(4, 3);
+  }
 }
