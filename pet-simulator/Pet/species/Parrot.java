@@ -1,6 +1,6 @@
 package Pet.species;
 import Pet.Pet;
-import Pet.typeWriter;
+import Utils.typeWriter;
 
 public class Parrot extends Pet {
     public Parrot(){

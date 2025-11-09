@@ -1,4 +1,4 @@
-package Pet;
+package Utils;
 
 
 public class typeWriter {
