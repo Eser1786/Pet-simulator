@@ -1,5 +1,5 @@
-1 | hat 
-2 | cape
-3 | collar
-4 | crown
-5 | backpack
+1 | hat | 6
+2 | cape | 8
+3 | collar | 5
+4 | crown | 9
+5 | backpack | 7

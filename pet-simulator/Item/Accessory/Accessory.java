@@ -11,8 +11,8 @@ public class Accessory extends Item {
         super();
         setStylePoint(0);
     }
-    public Accessory(int id, String name, int stylePoint){
-        super(id,name);
+    public Accessory(int id, String name, int quantity, int stylePoint){
+        super(id,name,quantity);
         setStylePoint(stylePoint);
     }
     
