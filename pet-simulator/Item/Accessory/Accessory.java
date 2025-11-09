@@ -2,7 +2,7 @@ package Item.Accessory;
 import Item.Item;
 
 public class Accessory extends Item {
-    private int stylePoint;     // điểm 
+    private int stylePoint;    
 
     public int getStylePoint(){return stylePoint;}
     public void setStylePoint(int stylePoint){this.stylePoint = stylePoint;}

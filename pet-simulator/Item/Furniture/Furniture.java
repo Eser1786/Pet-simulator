@@ -3,14 +3,14 @@ import Item.Item;
 public class Furniture extends Item {
     private int comfort;
 
-    public int getSat(){return comfort;}
-    public void setSat(int comfort){this.comfort = comfort;}
+    public int getComfort(){return comfort;}
+    public void setComfort(int comfort){this.comfort = comfort;}
 
     Furniture(){
         super();
     }
-    Furniture(int id, String name, int comfort){
-        super(id,name);
-        setSat(comfort);
+    Furniture(int id, String name,int quantity, int comfort){
+        super(id,name,quantity);
+        setComfort(comfort);
     }
 }

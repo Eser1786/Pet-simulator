@@ -1,0 +1,5 @@
+1 | chair | 5
+2 | table | 2
+3 | sofa | 9
+4 | TV | 6
+5 | radio | 4
