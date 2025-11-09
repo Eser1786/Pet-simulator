@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 
 public class AccessoryList {
-    // public static final String ACCESSORY_PATH = "pet-simulator\\Item\\Accessory\\Accessory.txt";
+    public static final String ACCESSORY_PATH = "pet-simulator\\Item\\Accessory\\Accessory.txt";
     public static final String OWNED_ACCESSORY_PATH = "pet-simulator\\Item\\Accessory\\ownedAccessory.txt";
 
     
@@ -95,9 +95,9 @@ public class AccessoryList {
 
 
     
-    public void addAccessory(String filePath,int accessoryID, int quantity){      // đọc file từ Accessory.txt rồi lưu vào ownedAccessory.txt
+    public void addAccessory(int accessoryID, int quantity){      // đọc file từ Accessory.txt rồi lưu vào ownedAccessory.txt
         loadAccessory(OWNED_ACCESSORY_PATH);
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+        try(BufferedReader br = new BufferedReader(new FileReader(ACCESSORY_PATH))){
             String line;
 
             while( (line = br.readLine()) != null){

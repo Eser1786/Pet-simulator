@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class FoodList {
-    
+    public static final String FOOD_PATH = "pet-simulator\\Item\\Food\\Food.txt";
     public static final String OWNED_FOOD_PATH = "pet-simulator\\Item\\Food\\ownedFood.txt";
 
     
@@ -15,13 +15,13 @@ public class FoodList {
             case "pate":  return 300;
             case "seeds":  return 400;
             default: return 1000;
-            }
         }
+    }
         
         
         
-    public void saveFood( String filePath){
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))){
+    public void saveFood(String filePath){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
             for(Food food : ownedFood){
                 String line = food.getItemID() + "|" + food.getItemName() + "|" + food.getQuantity();
                 bw.write(line);
@@ -35,6 +35,7 @@ public class FoodList {
 
 
     public void loadFood(String filePath){
+        ownedFood.clear();
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
 
@@ -42,11 +43,10 @@ public class FoodList {
                 String[] parts = line.split("\\|");
 
                 if(parts.length == 3){
-                    int FoodID = Integer.parseInt(parts[0]);
+                    int FoodID = Integer.parseInt(parts[0].trim());
                     String name = parts[1];
                     int quantity = Integer.parseInt(parts[2].trim());
                     
-                    // int Sat = Integer.parseInt(parts[2]);
 
                     Food food = null;
                     
@@ -77,7 +77,9 @@ public class FoodList {
 
     public Food findFoodByID(int id){
         for(Food a : ownedFood){
-            return a;
+            if(a.getItemID() == id){
+                return a;
+            }
         }
         return null;
     }
@@ -89,20 +91,19 @@ public class FoodList {
 
 
     
-    public void addFood(String filePath,int FoodID, int quantity){      // đọc file từ Food.txt rồi lưu vào ownedFood.txt
+    public void addFood(int FoodID, int quantity){      
         loadFood(OWNED_FOOD_PATH);
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+        try(BufferedReader br = new BufferedReader(new FileReader(FOOD_PATH))){
             String line;
 
             while( (line = br.readLine()) != null){
                 String[] parts = line.split("\\|");
 
-                if(parts.length == 2){
+                if(parts.length == 3){
                     int id = Integer.parseInt(parts[0].trim());
                     String name = parts[1].trim();
                     int sat = Integer.parseInt(parts[2].trim());
 
-                    
                     
                     if(FoodID == id){
                         int fixedID = generateID(name);
@@ -112,24 +113,24 @@ public class FoodList {
 
                         if(existed != null){
                             existed.setQuantity(existed.getQuantity() + quantity);
+                            updated = true;
                         }
                         else{
-
-                        Food Food = new Food();
-
-                        Food.setItemID(generateID(name));
-                        Food.setItemName(name);
-                        Food.setSat(sat);
-                        Food.setQuantity(quantity);
-
-                        ownedFood.add(Food);
+                            Food Food = new Food();
+                            
+                            Food.setItemID(generateID(name));
+                            Food.setItemName(name);
+                            Food.setSat(sat);
+                            Food.setQuantity(quantity);
+                            
+                            ownedFood.add(Food);
+                            updated = true;
                         }
 
                         if(updated){
-                        saveFood(OWNED_FOOD_PATH);
+                            saveFood(OWNED_FOOD_PATH);
                         }
-                }
-
+                    }
                 }
             }
         } catch(IOException e){
