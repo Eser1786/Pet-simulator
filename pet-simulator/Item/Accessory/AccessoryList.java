@@ -3,10 +3,12 @@ import java.util.*;
 import java.io.*;
 
 public class AccessoryList {
+    // public static final String ACCESSORY_PATH = "pet-simulator\\Item\\Accessory\\Accessory.txt";
+    public static final String OWNED_ACCESSORY_PATH = "pet-simulator\\Item\\Accessory\\ownedAccessory.txt";
+
     
     
-    //có thể có 1 vật phẩm nhiều lần và sử dụng cho nhiều thứ cưng khác nhau dựa trên id
-    private int generateID(String name){   // AccessoryID lấy từ file ID của vật phẩm      // là id lưu trữ vào trong file để sử dụng trong túi đồ của người chơi
+    private int generateID(String name){   
         switch(name){
             case "hat": return 100;
             case "cape": return 200;
@@ -19,7 +21,7 @@ public class AccessoryList {
         
 
 
-        //  lưu thông tin của accessory vào file 
+         
     public void saveAccessory(String filePath){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
             for(Accessory accessory: ownedAccessory){
@@ -88,13 +90,13 @@ public class AccessoryList {
 
 
 
-    //  khởi tạo danh sách chứa các biến accessory
+    
     ArrayList<Accessory> ownedAccessory = new ArrayList<>();
 
 
     
     public void addAccessory(String filePath,int accessoryID, int quantity){      // đọc file từ Accessory.txt rồi lưu vào ownedAccessory.txt
-        loadAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+        loadAccessory(OWNED_ACCESSORY_PATH);
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
 
@@ -128,7 +130,7 @@ public class AccessoryList {
                             updated = true;
                         }
                         if(updated){
-                            saveAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+                            saveAccessory(OWNED_ACCESSORY_PATH);
                         }
                     }   
 
@@ -140,5 +142,5 @@ public class AccessoryList {
     }
     
 
-    
+
 }

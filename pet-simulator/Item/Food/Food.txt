@@ -1,0 +1,4 @@
+1 | bone | 10
+2 | beef | 25
+3 | pate | 20
+4 | seeds | 5

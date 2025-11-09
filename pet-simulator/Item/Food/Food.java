@@ -10,8 +10,8 @@ public class Food extends Item {
     Food(){
         super();
     }
-    Food(int id, String name, int saturation){
-        super(id,name);
+    Food(int id, String name, int quantity, int saturation){
+        super(id,name, quantity);
         setSat(saturation);
     }
 }
