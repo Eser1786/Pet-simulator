@@ -1,6 +1,7 @@
 package Item.Accessory;
 import Item.Item;
 
+
 public class Accessory extends Item {
     private int stylePoint;    
 
@@ -16,4 +17,5 @@ public class Accessory extends Item {
         setStylePoint(stylePoint);
     }
     
+   
 }

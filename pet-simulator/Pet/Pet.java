@@ -72,7 +72,9 @@ public abstract class Pet{
 
     public Pet(){}
 
+    // public boolean isAccessoryEquip(){
 
+    // }
 
 
 

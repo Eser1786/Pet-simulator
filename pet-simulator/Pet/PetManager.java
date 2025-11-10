@@ -6,8 +6,13 @@ import java.util.*;
 
 public class PetManager {
 
+    public static final String PET_PATH = "pet-simulator\\Pet\\species\\species.txt";
+    public static final String OWNED_PETS_PATH = "pet-simulator\\Pet\\ownedPets.txt";
+
+
+
     //  Hàm tạo id riêng cho pet nếu sở hữu
-    public int generatePetID(String species){
+    private int generatePetID(String species){
         int speciesID;
         switch (species){
             case "dog":
@@ -33,13 +38,13 @@ public class PetManager {
     }
 
     //  tung xúc xắc để quyết định dựa theo 1 -> 100
-    public int rollTheDice(){
+    private int rollTheDice(){
         Random random = new Random();
         return random.nextInt(100) + 1;
     }
 
     //  Lưu các thông tin của pet vào 1 file riêng 
-    public void savePetToFile(Pet pet, String filePath){
+    private void savePetToFile(Pet pet, String filePath){
         try( BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))){
             String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem() + "|" + pet.getFavoriteDish() ;
             bw.write(line);
@@ -50,7 +55,7 @@ public class PetManager {
     }
 
     // Đọc lại danh sách pets đã sỡ hữu
-    public void loadPetFromFile(String filePath){
+    private void loadPetFromFile(String filePath){
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             
@@ -97,13 +102,13 @@ public class PetManager {
     //  tạo danh sách để lưu trữ các pets
     ArrayList<Pet> ownedPet = new ArrayList<>();
 
-    public void AddPet(String filePath, int petID){
+    public void AddPet(int petID){      // them vao danh sach chi su dung id 
 
         Scanner scan = new Scanner(System.in);
 
-        loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
+        loadPetFromFile(OWNED_PETS_PATH);
         
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+        try(BufferedReader br = new BufferedReader(new FileReader(PET_PATH))){
             String line;
 
             while( (line = br.readLine()) != null){
@@ -149,7 +154,7 @@ public class PetManager {
                             pet.setFavoriteDish(null);  // mốt thêm sau dựa theo species
                             
                             ownedPet.add(pet);
-                            savePetToFile(pet, "C:\\Users\\ACER\\Documents\\GitHub\\Pet-simulator\\pet-simulator\\Pet\\ownedPets.txt");
+                            savePetToFile(pet, OWNED_PETS_PATH);
 
                         }
                     }

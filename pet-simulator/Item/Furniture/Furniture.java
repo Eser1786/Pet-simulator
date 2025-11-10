@@ -1,5 +1,6 @@
 package Item.Furniture;
 import Item.Item;
+
 public class Furniture extends Item {
     private int comfort;
 
@@ -13,4 +14,6 @@ public class Furniture extends Item {
         super(id,name,quantity);
         setComfort(comfort);
     }
+
+    
 }

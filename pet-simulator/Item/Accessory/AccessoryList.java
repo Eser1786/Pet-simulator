@@ -1,5 +1,10 @@
 package Item.Accessory;
 import java.util.*;
+
+
+import Utils.textColor;
+import Utils.typeWriter;
+
 import java.io.*;
 
 public class AccessoryList {
@@ -88,6 +93,14 @@ public class AccessoryList {
         return null;
     }
 
+    public String findAccessoryNameByID(int id){
+        for(Accessory a : ownedAccessory){
+            if(a.getItemID() == id * 100){
+                return a.getItemName();
+            }
+        }
+        return null;
+    }
 
 
     
@@ -143,4 +156,72 @@ public class AccessoryList {
     
 
 
+
+
+
+
+
+
+
+    public int findStylePoint(int id){
+        try(BufferedReader br = new BufferedReader(new FileReader(ACCESSORY_PATH))){
+            String line;
+
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    int AccessoryID = Integer.parseInt(parts[0].trim());
+                    int Sat = Integer.parseInt(parts[2].trim());
+
+                    if(id == AccessoryID){
+                        return Sat;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+    public void printListAccessory() throws InterruptedException{
+        System.out.println();
+        typeWriter.write("======= ACCESSORY SECTION =======", 50, 300);
+        loadAccessory(OWNED_ACCESSORY_PATH);
+
+        int j = 0;
+
+        for(Accessory a : ownedAccessory){
+            a.setStylePoint(findStylePoint(a.getItemID()/100));
+
+            typeWriter.write("Name: ", 50);
+            textColor.yellowText(a.getItemName());
+            System.out.print("    ");
+
+            typeWriter.write(" | Quantity: ", 50);
+            typeWriter.write(""+a.getQuantity(),50);
+
+            System.out.print("    ");
+
+            typeWriter.write(" | Style Points: ", 50);
+            textColor.orangeText(a.getStylePoint());
+
+            j++;
+            if(j % 4 == 0){
+                    System.out.println();
+                    j = 0;
+            }
+        }
+
+        if(j%4 != 0){
+            System.out.println();
+        }
+
+    }
 }

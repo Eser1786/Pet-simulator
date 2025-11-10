@@ -1,1 +1,5 @@
+200|cape|63
+100|hat|3
+300|collar|3
 400|crown|3
+500|backpack|3

@@ -1,6 +1,10 @@
 package Item.Food;
 
 import java.util.*;
+
+import Utils.textColor;
+import Utils.typeWriter;
+
 import java.io.*;
 
 public class FoodList {
@@ -59,6 +63,7 @@ public class FoodList {
                             food.setItemID(FoodID);
                             food.setItemName(name);
                             food.setQuantity(quantity);
+                            food.setSat(quantity);
                             break;
                     }
                     if(food != null){
@@ -84,13 +89,22 @@ public class FoodList {
         return null;
     }
 
+    public String findFoodNameByID(int id){
+        loadFood(OWNED_FOOD_PATH);
+        for(Food a : ownedFood){
+            if(a.getItemID() == id*100){
+                return a.getItemName();
+            }
+        }
+        return null;
+    }
 
+    
 
     
     ArrayList<Food> ownedFood = new ArrayList<>();
 
 
-    
     public void addFood(int FoodID, int quantity){      
         loadFood(OWNED_FOOD_PATH);
         try(BufferedReader br = new BufferedReader(new FileReader(FOOD_PATH))){
@@ -137,4 +151,86 @@ public class FoodList {
             e.getMessage();
         }
     }
+
+
+
+
+    // public void itemDetails() throws InterruptedException{
+    //     typeWriter.write("[" + getItemName() + "]" , 50, 300);
+    //     typeWriter.write(" - Quantity: " + getQuantity(), 50, 300);
+    // }
+
+
+
+
+
+    // @Override
+    // public void itemDetails() throws InterruptedException{
+    //     super.itemDetails();
+    //     typeWriter.write(" - Saturation Points: ", 50);
+    //     textColor.blueText(getSat());
+    // }
+
+    public int findSat(int id){
+        try(BufferedReader br = new BufferedReader(new FileReader(FOOD_PATH))){
+            String line;
+
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    int foodID = Integer.parseInt(parts[0].trim());
+                    int Sat = Integer.parseInt(parts[2].trim());
+
+                    if(id == foodID){
+                        return Sat;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+    public void printListFood() throws InterruptedException{
+        System.out.println();
+        typeWriter.write("======= FOOD SECTION =======", 50, 300);
+        loadFood(OWNED_FOOD_PATH);
+
+        int j = 0;
+
+        for(Food a : ownedFood){
+            a.setSat(findSat(a.getItemID()/100));
+
+            typeWriter.write("Name: ", 50);
+            textColor.yellowText(a.getItemName());
+            System.out.print("    ");
+
+            typeWriter.write(" | Quantity: ", 50);
+            typeWriter.write(""+a.getQuantity(),50);
+
+            System.out.print("    ");
+
+            typeWriter.write(" | Saturation Points: ", 50);
+            textColor.orangeText(a.getSat());
+
+            j++;
+            if(j % 4 == 0){
+                    System.out.println();
+                    j = 0;
+            }
+        }
+
+        if(j%4 != 0){
+            System.out.println();
+        }
+
+    }
+
 }

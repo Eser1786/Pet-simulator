@@ -1,5 +1,7 @@
 package Item;
 
+
+
 public class Item {
     private int id;     
     private String name;
@@ -19,5 +21,7 @@ public class Item {
         setItemName(name);
         setQuantity(quantity);
     }
+
+    
 
 }

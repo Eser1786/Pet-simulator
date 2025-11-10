@@ -9,5 +9,14 @@ public class Player {
 
     public void setName(String name){this.name = name;}
     public void setCoin(int coins){this.coins = coins;}
+
+    public Player(){
+        setCoin(10000);
+    }
+
+    public Player(String name, int coins){
+        setName(name);
+        setCoin(coins);
+    }
     
 }

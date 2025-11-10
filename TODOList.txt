@@ -1,0 +1,15 @@
+hoàn thành shop 
+ -> có thể mua trứng và sinh ra pet
+
+Player
+ -> hoàn thiện nhân vật
+-> thêm các phương thức tương tác với nhân vật
+
+Event
+ -> tạo event 
+ -> tham số truyền vào 
+ -> thời gian tiêu hao
+
+Egg
+ -> tạo các interface common, rare , legend -> tạo ra danh sách tỉ lệ cho các pet
+ 

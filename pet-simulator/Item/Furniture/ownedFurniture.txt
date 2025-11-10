@@ -1,1 +1,4 @@
-400|TV|3
+500|radio|8
+100|chair|4
+200|table|4
+300|sofa|4
