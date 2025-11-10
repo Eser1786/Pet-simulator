@@ -233,4 +233,27 @@ public class FoodList {
 
     }
 
+    public void removeFood(int foodID, int quantity) throws InterruptedException{
+        loadFood(OWNED_FOOD_PATH);
+        Food target = findFoodByID(foodID * 100);
+        if(target == null){
+            typeWriter.write("This item doesn't exist...?", 50,300);
+            return;
+        }
+
+        if(target.getQuantity() < quantity ){
+            typeWriter.write("You don't have enough item to remove...", 50,300);
+            return; 
+        }   
+
+        target.setQuantity(target.getQuantity() - quantity);
+
+        if(target.getQuantity() == 0){
+            ownedFood.remove(target);
+            saveFood(OWNED_FOOD_PATH);
+        }else{
+            saveFood(OWNED_FOOD_PATH);
+        }
+    }
+
 }

@@ -1,0 +1,1 @@
+ID house | ID pet | id fur 1 | id fur 2 | id fur 3 

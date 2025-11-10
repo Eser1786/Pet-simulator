@@ -1,6 +1,6 @@
 package EXECUTE;
 
-// import Item.Accessory.*;
+import Item.Accessory.*;
 // import Item.Food.*;
 // import Item.Furniture.*;
 
@@ -14,10 +14,11 @@ public class Launcher {
 
   public static void main(String[] args) throws InterruptedException{
     // FoodList food = new FoodList();
-    // AccessoryList accessory = new AccessoryList();
+    AccessoryList accessory = new AccessoryList();
     // FurnitureList furniture = new FurnitureList();
+
     // food.addFood( 3, 10);
-    // accessory.addAccessory( 4, 3);
+    accessory.removeAccessory( 5, 3);
     // a.addFurniture(4, 3);
 
     // typeWriter.write("Tran sieu ngau dep trai so 1", 30,10);
@@ -52,8 +53,8 @@ public class Launcher {
     // furniture.printListFurniture();
 
 
-    Inventory inv = new Inventory();
-    inv.openInventory();
+    // Inventory inv = new Inventory();
+    // inv.openInventory();
 
   }
 }

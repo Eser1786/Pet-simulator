@@ -153,14 +153,59 @@ public class AccessoryList {
             e.printStackTrace();
         }
     }
+
+
+
+    public void removeAccessory(int accessoryID, int quantity) throws InterruptedException{
+        loadAccessory(OWNED_ACCESSORY_PATH);
+        Accessory target = findAccessoryByID(accessoryID * 100);
+        if(target == null){
+            typeWriter.write("This item doesn't exist...?", 50,300);
+            return;
+        }
+
+        if(target.getQuantity() < quantity ){
+            typeWriter.write("You don't have enough item to remove...", 50,300);
+            return; 
+        }   
+
+        target.setQuantity(target.getQuantity() - quantity);
+
+        if(target.getQuantity() == 0){
+            ownedAccessory.remove(target);
+            saveAccessory(OWNED_ACCESSORY_PATH);
+        }else{
+            saveAccessory(OWNED_ACCESSORY_PATH);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-
-
-
-
-
-
-
 
 
     public int findStylePoint(int id){

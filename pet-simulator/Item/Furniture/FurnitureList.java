@@ -3,7 +3,7 @@ package Item.Furniture;
 import java.io.*;
 import java.util.*;
 
-
+import Item.Accessory.Accessory;
 import Utils.textColor;
 import Utils.typeWriter;
 
@@ -218,5 +218,27 @@ public class FurnitureList {
     }
 
 
+    public void removeFurniture(int FurnitureID, int quantity) throws InterruptedException{
+        loadFur(OWNED_FURNITURE_PATH);
+        Furniture target = findfurByID(FurnitureID * 100);
+        if(target == null){
+            typeWriter.write("This item doesn't exist...?", 50,300);
+            return;
+        }
+
+        if(target.getQuantity() < quantity ){
+            typeWriter.write("You don't have enough item to remove...", 50,300);
+            return; 
+        }   
+
+        target.setQuantity(target.getQuantity() - quantity);
+
+        if(target.getQuantity() == 0){
+            ownedFur.remove(target);
+            saveFur(OWNED_FURNITURE_PATH);
+        }else{
+            saveFur(OWNED_FURNITURE_PATH);
+        }
+    }
 
 }
