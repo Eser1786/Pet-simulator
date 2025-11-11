@@ -81,10 +81,10 @@ public class FurnitureList {
     }
 
 
-
     public Furniture findFurByID(int id){
+        loadFur(OWNED_FURNITURE_PATH);
         for(Furniture a : ownedFur){
-            if(a.getItemID() == id){
+            if(a.getItemID() == id*100){
                 return a;
             }
         }
@@ -92,8 +92,9 @@ public class FurnitureList {
     }
 
     public String findFurnitureNameByID(int id){
+        loadFur(OWNED_FURNITURE_PATH);
         for(Furniture a : ownedFur){
-            if(a.getItemID() == id * 100){
+            if(a.getItemID() == id*100){
                 return a.getItemName();
             }
         }

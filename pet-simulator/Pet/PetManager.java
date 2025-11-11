@@ -1,6 +1,10 @@
 package Pet;
 import java.io.*;
 import Pet.species.*;
+import Player.Player;
+import Utils.typeWriter;
+import House.House;
+import House.HouseList;
 
 import java.util.*;
 
@@ -55,7 +59,7 @@ public class PetManager {
     }
 
     // Đọc lại danh sách pets đã sỡ hữu
-    private void loadPetFromFile(String filePath){
+    public void loadPetFromFile(String filePath){
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             
@@ -78,11 +82,14 @@ public class PetManager {
                     switch (species.toLowerCase()){
                         case "dog":
                             pet = new Dog(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+                            break;
                         case "cat":
                             pet = new Cat(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+                            break;
                         case "parrot":
                             pet = new Parrot(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
-                        }
+                            break;
+                    }
                     if( pet != null){
                         ownedPet.add(pet);
                     }
@@ -98,8 +105,22 @@ public class PetManager {
 
     public Pet findPetByID(int petID){
         for(Pet pet : ownedPet){
-            if(pet.getPetID() == petID){
-                return pet;
+            switch(pet.getSpecies()){
+                case "dog":
+                    if(pet.getPetID() == 100 + petID){
+                        return pet;
+                    }
+                    break;
+                case "cat":
+                    if(pet.getPetID() == 200 + petID){
+                        return pet;
+                    }
+                    break;
+                case "parrot":
+                    if(pet.getPetID() == 300 + petID){
+                        return pet;
+                    }
+                    break;
             }
         }
         return null;
@@ -108,11 +129,10 @@ public class PetManager {
 
 
 
-
     //  tạo danh sách để lưu trữ các pets
     ArrayList<Pet> ownedPet = new ArrayList<>();
 
-    public void AddPet(int petID){      // them vao danh sach chi su dung id 
+    public void AddPet(int petID) throws InterruptedException{      // them vao danh sach chi su dung id 
 
         Scanner scan = new Scanner(System.in);
 
@@ -154,7 +174,8 @@ public class PetManager {
                                 pet.setSex("female");
                             }
 
-                            System.out.println("Hãy đặt tên cho chú " + pet.getSpecies() +": ");
+                            typeWriter.write("What will be the " + pet.getSpecies() + " name?", 50, 150);
+                            typeWriter.write("-> ", 50, 150);
                             pet.setName(scan.nextLine());
                             pet.setHealth(100);
                             pet.setHunger(0);
@@ -174,4 +195,70 @@ public class PetManager {
             e.getMessage();
         }
     }
+
+    public void buyEgg(Player player, int cost) throws InterruptedException{
+
+        if(player.getCoin() < cost){
+            typeWriter.write(player.getName() + " doesn't have enough coin for this item", 50, 150);
+            typeWriter.write("Come back when you have enough coin!", 50, 150);
+            return;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        player.setCoin(player.getCoin() - cost);
+        typeWriter.write("You bought an egg!", 50, 150);
+        typeWriter.write("The egg is hatching!", 50, 150);
+        typeWriter.write("............", 50, 150);
+        
+        Random rd = new Random();
+        int petID = rd.nextInt(3)+1;
+        this.AddPet(petID);
+
+        
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

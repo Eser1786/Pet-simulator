@@ -1,24 +1,29 @@
 package EXECUTE;
 
-import Item.Accessory.*;
+// import Item.Accessory.*;
 // import Item.Food.*;
 // import Item.Furniture.*;
 
 // // import Utils.typeWriter;
 // import Shop.Shop;
 // import Player.Player;
-import Player.Inventory.*;
+// import Player.Inventory.*;
+
+import House.House;
+import House.HouseList;
+import Pet.PetManager;
+
 
 public class Launcher {
 
 
   public static void main(String[] args) throws InterruptedException{
     // FoodList food = new FoodList();
-    AccessoryList accessory = new AccessoryList();
+    // AccessoryList accessory = new AccessoryList();
     // FurnitureList furniture = new FurnitureList();
 
     // food.addFood( 3, 10);
-    accessory.removeAccessory( 5, 3);
+    // accessory.removeAccessory( 5, 3);
     // a.addFurniture(4, 3);
 
     // typeWriter.write("Tran sieu ngau dep trai so 1", 30,10);
@@ -55,6 +60,12 @@ public class Launcher {
 
     // Inventory inv = new Inventory();
     // inv.openInventory();
+    // PetManager petManager = new PetManager();
+    // HouseList h = new HouseList(petManager);
+    // h.addHouse();
+    // h.assignPetToHouse(1, 1);
+
+
 
   }
 }

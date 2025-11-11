@@ -27,6 +27,7 @@ public class House {
             return false;
         }
         furnitureList.add(furniture);
+        typeWriter.write("This furniture has been added!", 50, 150);
         return true;
     }
 
