@@ -3,7 +3,7 @@ package Item.Furniture;
 import java.io.*;
 import java.util.*;
 
-import Item.Accessory.Accessory;
+
 import Utils.textColor;
 import Utils.typeWriter;
 
@@ -82,7 +82,7 @@ public class FurnitureList {
 
 
 
-    public Furniture findfurByID(int id){
+    public Furniture findFurByID(int id){
         for(Furniture a : ownedFur){
             if(a.getItemID() == id){
                 return a;
@@ -123,7 +123,7 @@ public class FurnitureList {
                     
                     if(furID == id){
                         int fixedID = generateID(name);
-                        Furniture existed = findfurByID(fixedID);
+                        Furniture existed = findFurByID(fixedID);
                         
                         boolean updated = false;
 
@@ -220,7 +220,7 @@ public class FurnitureList {
 
     public void removeFurniture(int FurnitureID, int quantity) throws InterruptedException{
         loadFur(OWNED_FURNITURE_PATH);
-        Furniture target = findfurByID(FurnitureID * 100);
+        Furniture target = findFurByID(FurnitureID * 100);
         if(target == null){
             typeWriter.write("This item doesn't exist...?", 50,300);
             return;

@@ -96,6 +96,16 @@ public class PetManager {
     // PetManager manager = new PetManage();
     // manager.loadPetFromFile("C:\Users\ACER\Documents\GitHub\Pet-simulator\pet-simulator\Pet\ownedPets.txt") để tải lại các pets đã có
 
+    public Pet findPetByID(int petID){
+        for(Pet pet : ownedPet){
+            if(pet.getPetID() == petID){
+                return pet;
+            }
+        }
+        return null;
+    }
+
+
 
 
 

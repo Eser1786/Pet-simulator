@@ -105,8 +105,6 @@ public class AccessoryList {
 
     
     ArrayList<Accessory> ownedAccessory = new ArrayList<>();
-
-
     
     public void addAccessory(int accessoryID, int quantity){      // đọc file từ Accessory.txt rồi lưu vào ownedAccessory.txt
         loadAccessory(OWNED_ACCESSORY_PATH);

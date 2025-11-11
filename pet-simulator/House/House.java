@@ -49,6 +49,10 @@ public class House {
         return sum;
     }
 
+    public ArrayList<Furniture> getFurnitureList(){
+        return furnitureList;
+    }
+
 
     // public void getTotalComfort() throws InterruptedException{
     //     int sumComfort = 0;

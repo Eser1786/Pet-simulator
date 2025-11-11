@@ -1,5 +1,8 @@
 package Pet;
 
+import Item.Accessory.*;
+import Utils.typeWriter;
+
 public abstract class Pet{
     private int petID;       // bao gồm 3 chữ số
     private String species;
@@ -75,7 +78,33 @@ public abstract class Pet{
     // public boolean isAccessoryEquip(){
 
     // }
+    private Accessory accessory;
+    public Accessory getAccessory(){
+        return accessory;
+    }
+    public void setAccessory(Accessory accessory){
+        this.accessory = accessory;
+        setItem(accessory.getItemName());
+    }
 
+    public boolean equipAccessory(Accessory accessory) throws InterruptedException{
+        if(this.accessory != null){
+            typeWriter.write("This pet already has an accessory...", 50,150);
+            typeWriter.write("Please remove the previous accessory before adding a new one to the pet!", 50, 150);
+            System.out.println();
+            return false;
+        }
+        this.accessory = accessory;
+        typeWriter.write("The pet has equipped the accessory!", 50, 150);
+        System.out.println();
+        return true;
+    }
+
+    public void unequipAccessory() throws InterruptedException{
+        this.accessory = null;
+        typeWriter.write("The pet is no longer equip the accessory!", 50, 150);
+        System.out.println();
+    }
 
 
 
