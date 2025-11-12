@@ -5,13 +5,13 @@ package EXECUTE;
 // import Item.Furniture.*;
 
 // // import Utils.typeWriter;
-// import Shop.Shop;
-// import Player.Player;
+import Shop.Shop;
+import Player.Player;
 // import Player.Inventory.*;
 
 // import House.House;
 // import House.HouseList;
-import Pet.PetManager;
+// import Pet.PetManager;
 
 
 public class Launcher {
@@ -28,7 +28,7 @@ public class Launcher {
 
     // typeWriter.write("Tran sieu ngau dep trai so 1", 30,10);
     // typeWriter.write("System writing testing.............................",30);    30 la con so tot nhat de print
-    PetManager petManager = new PetManager();
+    // PetManager petManager = new PetManager();
     // HouseList h = new HouseList(petManager);
     // Player player = new Player();
 
@@ -65,10 +65,16 @@ public class Launcher {
     // inv.openInventory();
     // h.addHouse();
     // h.assignPetToHouse(1, 1);
+    // PetManager petManager = new PetManager();
+    // petManager.AddPet(1);
+
 
     // player.playerMenu();
 
-    petManager.viewAllPets(petManager);
+    // petManager.viewAllPets(petManager);
+    Player player = new Player("Eser",9999);
 
+    Shop shop = new Shop();
+    shop.menuShop(player);
   }
 }

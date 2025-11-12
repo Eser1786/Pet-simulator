@@ -2,3 +2,10 @@
 2 | beef | 25
 3 | pate | 20
 4 | seeds | 5
+5 | fruit bowl | 15
+6 | rice ball | 8
+7 | honey treat | 14
+8 | egg roll | 17
+9 | shrimp snack | 28
+10 | lamb chop| 26
+11 | yogurt | 13

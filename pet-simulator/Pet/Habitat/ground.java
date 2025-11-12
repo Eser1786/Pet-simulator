@@ -1,5 +1,5 @@
 package Pet.Habitat;
 
 public interface ground {
-    void run();
+    public void walkAroundThePark() throws InterruptedException;
 }

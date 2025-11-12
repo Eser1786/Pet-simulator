@@ -154,12 +154,10 @@ public class FoodList {
     }
 
 
-
-
     // public void itemDetails() throws InterruptedException{
     //     typeWriter.write("[" + getItemName() + "]" , 50, 300);
     //     typeWriter.write(" - Quantity: " + getQuantity(), 50, 300);
-    // }
+    // }                            
 
 
 
@@ -262,37 +260,37 @@ public class FoodList {
         try(BufferedReader br = new BufferedReader(new FileReader(FOOD_PATH))){
             String line;
 
-            Food Food = new Food();
+     
             while( (line = br.readLine()) != null){
                 String[] parts = line.split("\\|");
-
+                Food food = new Food();
                 if(parts.length == 3){
-                    
+                    int foodID = Integer.parseInt(parts[0].trim());
                     String name = parts[1].trim();
                     int Sat = Integer.parseInt(parts[2].trim());
-
+                    food.setItemID(foodID);
+                    food.setItemName(name);
+                    food.setSat(Sat);
                         
-                        Food.setItemName(name);
-                        Food.setSat(Sat);
-                        
-                        ownedFood.add(Food);
-                    }
+                    ownedFood.add(food);
+                }
             }
         } catch(IOException e){
             e.getMessage();
         }
 
         typeWriter.write("==== FOOD ====", 50, 150);
-
-        for(Food Food : ownedFood){
-            textColor.blueText(Food.getItemName());
+        int index = 0;
+        
+        for(Food food : ownedFood){
+            typeWriter.write(index + 1 + ". ", 50);
+            textColor.blueText( food.getItemName());
             typeWriter.write(" | Sat points: ",  50);
-            textColor.orangeText(Food.getSat()); 
+            textColor.orangeText(food.getSat()); 
             typeWriter.write("Cost: ", 50);
             textColor.yellowText("20 coins");
             System.out.println();
-            System.out.println();
-
+            index++;
         }
     }
 

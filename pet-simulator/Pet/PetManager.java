@@ -175,7 +175,7 @@ public class PetManager {
                             }
 
                             typeWriter.write("What will be the " + pet.getSpecies() + " name?", 50, 150);
-                            typeWriter.write("-> ", 50, 150);
+                            typeWriter.write("-> ",50);
                             pet.setName(scan.nextLine());
                             pet.setHealth(100);
                             pet.setHunger(0);

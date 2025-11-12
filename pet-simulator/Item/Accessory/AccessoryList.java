@@ -1,7 +1,7 @@
 package Item.Accessory;
 import java.util.*;
 
-import Item.Accessory.Accessory;
+
 import Utils.textColor;
 import Utils.typeWriter;
 

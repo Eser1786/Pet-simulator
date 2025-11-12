@@ -108,9 +108,44 @@ public abstract class Pet{
 
 
 
+    public void gainedMentalHealth(int mentalHealth) throws InterruptedException{
+        typeWriter.write( this.name + " gained " + mentalHealth +" mental health!", 50, 150);
+        this.setMentalHealth(this.getMentalHealth() + mentalHealth);
+        typeWriter.write(this.getMentalHealth() + "/100 mental health",50,150);
+        System.out.println();
+    }
+
+    public void showLevelBar(int currentLevel) {
+        int maxLevel = 100;
+        int barLength = 30;
+        int filledLength = (int) ((double) currentLevel / maxLevel * barLength);
+
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < barLength; i++) {
+            if (i < filledLength) {
+                bar.append("=");
+            } else {
+                bar.append("-");
+            }
+        }
+        bar.append("] Level ").append(currentLevel).append("/").append(maxLevel);
+
+        try {
+            typeWriter.write(bar.toString(), 30, 150);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void gainedLevel(int levelAdded) throws InterruptedException{
+        this.setLevel(this.getLevel() + levelAdded);
+        typeWriter.write(this.getName() + " has gained " + levelAdded + " level!", 50, 150);
+
+        showLevelBar(this.getLevel());
+    }
 
 
-
+    
 
 
 
