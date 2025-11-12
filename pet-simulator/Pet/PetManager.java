@@ -2,9 +2,9 @@ package Pet;
 import java.io.*;
 import Pet.species.*;
 import Player.Player;
+import Utils.textColor;
 import Utils.typeWriter;
-import House.House;
-import House.HouseList;
+
 
 import java.util.*;
 
@@ -204,16 +204,6 @@ public class PetManager {
             return;
         }
 
-
-
-
-
-
-
-
-
-
-
         player.setCoin(player.getCoin() - cost);
         typeWriter.write("You bought an egg!", 50, 150);
         typeWriter.write("The egg is hatching!", 50, 150);
@@ -223,11 +213,38 @@ public class PetManager {
         int petID = rd.nextInt(3)+1;
         this.AddPet(petID);
 
-        
-    
     }
 
+    public void viewAllPets(PetManager petManager) throws InterruptedException{
+        System.out.println();
+        loadPetFromFile(OWNED_PETS_PATH);
+        typeWriter.write("====== PETS ======", 50, 150);
+        System.out.println();
+        for(Pet pet : ownedPet){
+            typeWriter.write(pet.getName(), 50, 150);
+            typeWriter.write(" | Species: " + pet.getSpecies(), 50);
 
+            typeWriter.write(" | Gender: " + pet.getSex() , 50,150);
+
+            typeWriter.write(" | Level: " , 50);
+            textColor.yellowText(pet.getLevel());
+
+            typeWriter.write(" | HP: " , 50);
+            textColor.greenText(pet.getHealth());
+
+            typeWriter.write(" | Hunger: " ,50 );
+            textColor.orangeText(pet.getHunger());
+
+            if(pet.getItem() == "null"){
+                typeWriter.write(" | Accessory: none" , 50);
+            }
+            else{
+                typeWriter.write(" | Accessory: " + pet.getItem() , 50);
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
 
 
 

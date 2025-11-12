@@ -12,23 +12,23 @@ import Utils.*;
 
 public class Shop {
 
-    public void buyPet(Player player, int petID, int cost) throws InterruptedException{
+    // public void buyPet(Player player, int petID, int cost) throws InterruptedException{
 
-        if(player.getCoin() >= cost){
-            player.setCoin(player.getCoin() - cost);
+    //     if(player.getCoin() >= cost){
+    //         player.setCoin(player.getCoin() - cost);
             
-            PetManager petManager = new PetManager();
-            petManager.AddPet(petID);
+    //         PetManager petManager = new PetManager();
+    //         petManager.AddPet(petID);
 
-            typeWriter.write("You just bought a new pet! ", 50,150);
-            typeWriter.write("Coins left: ", 50);
-            textColor.yellowText(player.getCoin() + " coins");
-        }
-        else{
-            typeWriter.write(player.getName() + " doesn't have enough money...", 50,50) ;
-            typeWriter.write("Please come back later...", 50, 150);
-        }
-    }
+    //         typeWriter.write("You just bought a new pet! ", 50,150);
+    //         typeWriter.write("Coins left: ", 50);
+    //         textColor.yellowText(player.getCoin() + " coins");
+    //     }
+    //     else{
+    //         typeWriter.write(player.getName() + " doesn't have enough money...", 50,50) ;
+    //         typeWriter.write("Please come back later...", 50, 150);
+    //     }
+    // }
     
     public void buyFood(Player player, int foodID, int quantity, int cost) throws InterruptedException{
 
@@ -90,7 +90,9 @@ public class Shop {
     }
 
 
-
+    public void menuShop(Player player){
+          
+    }
 
 
 

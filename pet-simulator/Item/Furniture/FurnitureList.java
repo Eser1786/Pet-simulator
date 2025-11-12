@@ -182,7 +182,7 @@ public class FurnitureList {
 
 
 
-    public void printListFurniture() throws InterruptedException{
+    public void printListFurniture() throws InterruptedException{       //for inventory
         System.out.println();
         typeWriter.write("======= FURNITURE SECTION =======", 50, 300);
         loadFur(OWNED_FURNITURE_PATH);
@@ -242,4 +242,47 @@ public class FurnitureList {
         }
     }
 
+
+    public void printFurForShop() throws InterruptedException{
+        ownedFur.clear();
+        try(BufferedReader br = new BufferedReader(new FileReader(FURNITURE_PATH))){
+            String line;
+
+            Furniture fur = new Furniture();
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    
+                    String name = parts[1].trim();
+                    int comfort = Integer.parseInt(parts[2].trim());
+
+                        fur.setItemName(name);
+                        fur.setComfort(comfort);
+                        
+                        ownedFur.add(fur);
+                    }
+            }
+        } catch(IOException e){
+            e.getMessage();
+        }
+
+        typeWriter.write("==== FURNITURE ====", 50, 150);
+
+        for(Furniture fur : ownedFur){
+            textColor.blueText(fur.getItemName());
+            typeWriter.write(" | Comfort points: ",  50);
+            textColor.orangeText(fur.getComfort()); 
+            typeWriter.write("Cost: ", 50);
+            textColor.yellowText("30 coins");
+
+            System.out.println();
+            System.out.println();
+
+        }
+    }
+    
 }
+    
+
+

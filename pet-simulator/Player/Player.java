@@ -1,7 +1,9 @@
 package Player;
 
-import java.io.*;
+
 import java.util.*;
+
+import Player.Inventory.*;
 
 import Utils.textColor;
 import Utils.typeWriter;
@@ -26,7 +28,7 @@ public class Player {
     }
 
     public void seeCoin() throws InterruptedException{
-        typeWriter.write("Coins left", 50, 150);
+        typeWriter.write("Coins left: ", 50);
         textColor.yellowText(getCoin());    
         System.out.println();
     }
@@ -38,16 +40,17 @@ public class Player {
         Scanner scan = new Scanner(System.in);
 
         typeWriter.write("What is your name?", 50, 150);
-        typeWriter.write("-> ", 50, 150);
+        typeWriter.write("-> ", 50);
         setName(scan.nextLine());
         setCoin(100);
         
         System.out.println();
         textColor.yellowText(getName());
-        typeWriter.write(" let's start your journey!", 50, 150);
+        typeWriter.write("Let's start your journey!", 50, 150);
         seeCoin();
 
-        
+        // Inventory inventory = new Inventory();
+        // inventory.openInventory();
 
 
 

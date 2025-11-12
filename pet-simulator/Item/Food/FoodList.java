@@ -2,6 +2,7 @@ package Item.Food;
 
 import java.util.*;
 
+
 import Utils.textColor;
 import Utils.typeWriter;
 
@@ -255,5 +256,46 @@ public class FoodList {
             saveFood(OWNED_FOOD_PATH);
         }
     }
+
+    public void printFoodForShop() throws InterruptedException{
+        ownedFood.clear();
+        try(BufferedReader br = new BufferedReader(new FileReader(FOOD_PATH))){
+            String line;
+
+            Food Food = new Food();
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    
+                    String name = parts[1].trim();
+                    int Sat = Integer.parseInt(parts[2].trim());
+
+                        
+                        Food.setItemName(name);
+                        Food.setSat(Sat);
+                        
+                        ownedFood.add(Food);
+                    }
+            }
+        } catch(IOException e){
+            e.getMessage();
+        }
+
+        typeWriter.write("==== FOOD ====", 50, 150);
+
+        for(Food Food : ownedFood){
+            textColor.blueText(Food.getItemName());
+            typeWriter.write(" | Sat points: ",  50);
+            textColor.orangeText(Food.getSat()); 
+            typeWriter.write("Cost: ", 50);
+            textColor.yellowText("20 coins");
+            System.out.println();
+            System.out.println();
+
+        }
+    }
+
+
 
 }

@@ -1,7 +1,7 @@
 package Item.Accessory;
 import java.util.*;
 
-
+import Item.Accessory.Accessory;
 import Utils.textColor;
 import Utils.typeWriter;
 
@@ -179,33 +179,6 @@ public class AccessoryList {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
     public int findStylePoint(int id){
         try(BufferedReader br = new BufferedReader(new FileReader(ACCESSORY_PATH))){
             String line;
@@ -266,5 +239,44 @@ public class AccessoryList {
             System.out.println();
         }
 
+    }
+
+    public void printAccessoryForShop() throws InterruptedException{
+        ownedAccessory.clear();
+        try(BufferedReader br = new BufferedReader(new FileReader(ACCESSORY_PATH))){
+            String line;
+
+            Accessory Accessory = new Accessory();
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    
+                    String name = parts[1].trim();
+                    int Sat = Integer.parseInt(parts[2].trim());
+
+                        
+                        Accessory.setItemName(name);
+                        Accessory.setStylePoint(Sat);
+                        
+                        ownedAccessory.add(Accessory);
+                    }
+            }
+        } catch(IOException e){
+            e.getMessage();
+        }
+
+        typeWriter.write("==== ACCESSORY ====", 50, 150);
+
+        for(Accessory Accessory : ownedAccessory){
+            textColor.blueText(Accessory.getItemName());
+            typeWriter.write(" | Sat points: ",  50);
+            textColor.orangeText(Accessory.getStylePoint()); 
+            typeWriter.write("Cost: ", 50);
+            textColor.yellowText("25 coins");
+            System.out.println();
+            System.out.println();
+
+        }
     }
 }

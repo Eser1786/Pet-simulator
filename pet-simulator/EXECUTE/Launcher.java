@@ -9,8 +9,8 @@ package EXECUTE;
 // import Player.Player;
 // import Player.Inventory.*;
 
-import House.House;
-import House.HouseList;
+// import House.House;
+// import House.HouseList;
 import Pet.PetManager;
 
 
@@ -28,6 +28,9 @@ public class Launcher {
 
     // typeWriter.write("Tran sieu ngau dep trai so 1", 30,10);
     // typeWriter.write("System writing testing.............................",30);    30 la con so tot nhat de print
+    PetManager petManager = new PetManager();
+    // HouseList h = new HouseList(petManager);
+    // Player player = new Player();
 
     // typeWriter.writeWord("Woof! Woof! Woof...", 30, 300);  300 - 500 la khoang thoi gian tot nhat de ngung giua tung chu
 
@@ -60,12 +63,12 @@ public class Launcher {
 
     // Inventory inv = new Inventory();
     // inv.openInventory();
-    // PetManager petManager = new PetManager();
-    // HouseList h = new HouseList(petManager);
     // h.addHouse();
     // h.assignPetToHouse(1, 1);
 
+    // player.playerMenu();
 
+    petManager.viewAllPets(petManager);
 
   }
 }
