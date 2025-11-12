@@ -20,6 +20,10 @@ public class FurnitureList {
             case "sofa":  return 300;
             case "TV":  return 400;
             case "radio": return 500;
+            case "bookshelf": return 600;
+            case "lamp": return 700;
+            case "bed": return 800;
+            case "rug": return 900;
             default: return 1000;
         }
     }
@@ -62,6 +66,10 @@ public class FurnitureList {
                         case "sofa": 
                         case "TV":
                         case "radio": 
+                        case "bookshelf":
+                        case "lamp":
+                        case "bed": 
+                        case "rug": 
                             fur = new Furniture();
                             fur.setItemID(furID);
                             fur.setItemName(name);
@@ -82,9 +90,8 @@ public class FurnitureList {
 
 
     public Furniture findFurByID(int id){
-        loadFur(OWNED_FURNITURE_PATH);
         for(Furniture a : ownedFur){
-            if(a.getItemID() == id*100){
+            if(a.getItemID() == id){
                 return a;
             }
         }
@@ -248,10 +255,10 @@ public class FurnitureList {
         try(BufferedReader br = new BufferedReader(new FileReader(FURNITURE_PATH))){
             String line;
 
-            Furniture fur = new Furniture();
             while( (line = br.readLine()) != null){
                 String[] parts = line.split("\\|");
-
+                
+                Furniture fur = new Furniture();
                 if(parts.length == 3){
                     
                     String name = parts[1].trim();
@@ -269,7 +276,9 @@ public class FurnitureList {
 
         typeWriter.write("==== FURNITURE ====", 50, 150);
 
+        int index = 0;
         for(Furniture fur : ownedFur){
+            typeWriter.write(index+1 + ". ", 10);
             textColor.blueText(fur.getItemName());
             typeWriter.write(" | Comfort points: ",  50);
             textColor.orangeText(fur.getComfort()); 
@@ -277,11 +286,17 @@ public class FurnitureList {
             textColor.yellowText("30 coins");
 
             System.out.println();
-            System.out.println();
-
+            index++;
         }
     }
-    
+    public Furniture findFurnitureByName(String name){
+        for(Furniture furniture : ownedFur){
+            if(furniture.getItemName().toLowerCase() == name.toLowerCase()){
+                return furniture;
+            }
+        }
+        return null;
+    }
 }
     
 

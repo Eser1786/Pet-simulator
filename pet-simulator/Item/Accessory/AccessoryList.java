@@ -20,6 +20,10 @@ public class AccessoryList {
             case "collar": return 300;
             case "crown": return 400;
             case "backpack":  return 500;
+            case "gloves": return 600;
+            case "belt": return 700;
+            case "boots": return 800;
+            case "mask": return 900;
             default: return 1000;
             }
     }
@@ -64,6 +68,10 @@ public class AccessoryList {
                         case "collar": 
                         case "crown": 
                         case "backpack": 
+                        case "gloves":
+                        case "belt":
+                        case "boots":
+                        case "mask":
                             accessory = new Accessory();
                             accessory.setItemID(accessoryID);
                             accessory.setItemName(name);
@@ -98,6 +106,16 @@ public class AccessoryList {
             if(a.getItemID() == id * 100){
                 return a.getItemName();
             }
+        }
+        return null;
+    }
+
+    public Accessory findAccessoryByName(String name){
+        for(Accessory accessory : ownedAccessory){
+            if(accessory.getItemName().toLowerCase() == name.toLowerCase()){
+                return accessory;
+            }
+            
         }
         return null;
     }
@@ -245,17 +263,17 @@ public class AccessoryList {
         ownedAccessory.clear();
         try(BufferedReader br = new BufferedReader(new FileReader(ACCESSORY_PATH))){
             String line;
-
-            Accessory Accessory = new Accessory();
+            
             while( (line = br.readLine()) != null){
                 String[] parts = line.split("\\|");
-
+                
+                Accessory Accessory = new Accessory();
                 if(parts.length == 3){
-                    
+                    int accessoryID = Integer.parseInt(parts[0].trim());
                     String name = parts[1].trim();
                     int Sat = Integer.parseInt(parts[2].trim());
 
-                        
+                        Accessory.setItemID(accessoryID);
                         Accessory.setItemName(name);
                         Accessory.setStylePoint(Sat);
                         
@@ -266,17 +284,18 @@ public class AccessoryList {
             e.getMessage();
         }
 
-        typeWriter.write("==== ACCESSORY ====", 50, 150);
+        typeWriter.write("==== ACCESSORY ====", 10, 110);
+        int index = 0;
 
         for(Accessory Accessory : ownedAccessory){
+            typeWriter.write(index + 1 +". ", 10);
             textColor.blueText(Accessory.getItemName());
-            typeWriter.write(" | Sat points: ",  50);
+            typeWriter.write(" | Style points: ",  10);
             textColor.orangeText(Accessory.getStylePoint()); 
-            typeWriter.write("Cost: ", 50);
+            typeWriter.write("Cost: ", 10);
             textColor.yellowText("25 coins");
             System.out.println();
-            System.out.println();
-
+            index++;
         }
     }
 }

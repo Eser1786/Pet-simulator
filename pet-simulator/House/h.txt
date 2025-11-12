@@ -1,1 +1,0 @@
-ID nha | ten nha | id pet | fur1 | fur2 | fur3 | sum of comfort

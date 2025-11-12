@@ -2,6 +2,7 @@ package Pet;
 
 import Item.Accessory.*;
 import Utils.typeWriter;
+import House.House;
 
 public abstract class Pet{
     private int petID;       // bao gồm 3 chữ số
@@ -13,7 +14,6 @@ public abstract class Pet{
     private int mentalHealth; 
     private String sex;     // ĐÂY LÀ GIỚI TÍNH
     private String item;
-    private String favoriteDish;
 
 
     public int getPetID(){return petID;}
@@ -25,7 +25,6 @@ public abstract class Pet{
     public int getMentalHealth(){return mentalHealth;}
     public String getSex(){return sex;}
     public String getItem(){return item;}
-    public String getFavoriteDish(){return favoriteDish;}
 
 
 
@@ -38,15 +37,16 @@ public abstract class Pet{
     public void setMentalHealth(int mentalHealth){this.mentalHealth = mentalHealth;}
     public void setSex(String sex){this.sex = sex;}
     public void setItem(String item){this.item = item;}
-    public void setFavoriteDish(String favoriteDish){this.favoriteDish = favoriteDish;}
+  
 
 
     public abstract void sound();
     public abstract void feeling();
+    
 
-    public Pet(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item, String favoriteDish){
+    public Pet(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
         
-        if(petID >= 100 && petID <= 999){
+        if(petID >= 100 && petID <= 9999){
             setPetID(petID);
         }
         else{
@@ -68,7 +68,7 @@ public abstract class Pet{
         }
 
         setItem(item);
-        setFavoriteDish(favoriteDish);
+        
 
     }
 
@@ -82,6 +82,7 @@ public abstract class Pet{
     public Accessory getAccessory(){
         return accessory;
     }
+
     public void setAccessory(Accessory accessory){
         this.accessory = accessory;
         setItem(accessory.getItemName());
@@ -96,12 +97,18 @@ public abstract class Pet{
         }
         this.accessory = accessory;
         typeWriter.write("The pet has equipped the accessory!", 50, 150);
+        typeWriter.write("+"+accessory.getStylePoint()+" style point!", 50, 150);
+        setItem(accessory.getItemName());
         System.out.println();
         return true;
     }
 
     public void unequipAccessory() throws InterruptedException{
+        if(accessory == null){
+            typeWriter.write("this pet doesn't have any accessory on", 50, 150);
+        }
         this.accessory = null;
+        setItem(null);
         typeWriter.write("The pet is no longer equip the accessory!", 50, 150);
         System.out.println();
     }
@@ -144,7 +151,16 @@ public abstract class Pet{
         showLevelBar(this.getLevel());
     }
 
+    private House house;
 
+    public void setHouse(House house) throws InterruptedException{
+        if(this.house != null){
+            typeWriter.write("this house already has a pet", 50, 150);
+        }
+        else{
+            this.house = house;
+        }
+    }
     
 
 

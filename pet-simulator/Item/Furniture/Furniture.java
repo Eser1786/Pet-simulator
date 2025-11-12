@@ -7,10 +7,10 @@ public class Furniture extends Item {
     public int getComfort(){return comfort;}
     public void setComfort(int comfort){this.comfort = comfort;}
 
-    Furniture(){
+    public Furniture(){
         super();
     }
-    Furniture(int id, String name,int quantity, int comfort){
+    public Furniture(int id, String name,int quantity, int comfort){
         super(id,name,quantity);
         setComfort(comfort);
     }

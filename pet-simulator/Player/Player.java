@@ -3,6 +3,8 @@ package Player;
 
 import java.util.*;
 
+import Utils.clearScreen;
+
 // import Player.Inventory.*;
 
 import Utils.textColor;
@@ -52,12 +54,48 @@ public class Player {
         // Inventory inventory = new Inventory();
         // inventory.openInventory();
 
-
-
     }
 
 
+    public void mySelf(Player player) throws InterruptedException{
+        Scanner scan = new Scanner(System.in);
+        typeWriter.write("==== MYSELF ====", 50, 150);
+        System.out.println();
+        typeWriter.write("Name: ", 50);
+        textColor.yellowText(player.getName());
+        typeWriter.write("Coins: ", 50);
+        textColor.yellowText(player.getCoin() + " Coins");
+        typeWriter.write("'despite everything, it's still you...'", 50, 150);
 
+        System.out.println();
+        typeWriter.write("What do you want to do?", 50, 150);
+        typeWriter.write("1. Change my name", 50, 150);
+        typeWriter.write("2. Exit", 50, 150);
+        System.out.println();
+        typeWriter.write("What will be your choice?", 50, 150);
+        typeWriter.write("-> ", 50);
+        int choice = 0;
+        choice = scan.nextInt();
+        scan.nextLine();
+        
+        if(choice == 2){
+            typeWriter.write("Exiting...", 50, 150);
+            Thread.sleep(250);
+            clearScreen.clear();
+            return;
+        }
+        else if(choice == 1){
+            typeWriter.write("Please input your name below...", 50, 150);
+            typeWriter.write("->", 50);
+            String name = scan.nextLine();
+            player.setName(name);
+            typeWriter.write(name +"! What a nice name!", 50, 150);
+            Thread.sleep(250);
+            clearScreen.clear();
+            return;
+        }
+        
+    }
 
 
 

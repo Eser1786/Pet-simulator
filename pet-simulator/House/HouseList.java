@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import Pet.PetManager;
+import Utils.textColor;
 import Utils.typeWriter;
 import Pet.Pet;
 import Item.Furniture.*;
@@ -15,6 +16,8 @@ public class HouseList {
     ArrayList<House> ownedHouse = new ArrayList<>();
 
     PetManager petManager = new PetManager();
+
+    public HouseList(){}
 
     public HouseList(PetManager petManager){
         this.petManager = petManager;
@@ -169,5 +172,36 @@ public class HouseList {
         }
     }
 
+    public void printHouseForShop() throws InterruptedException{
 
+        typeWriter.write("==== HOUSE ====", 50, 150);
+        System.out.println();
+        
+        typeWriter.write("1. ", 30);
+        textColor.orangeText(" House");
+        typeWriter.write(" | cost: ", 10);
+        textColor.yellowText("50 coins");
+        typeWriter.write("- Buying a house will add a slot to contain your pet", 50, 150);
+        System.out.println();
+        
+    }
+
+    public void printHouse() throws InterruptedException{
+        loadHouse();
+        PetManager pm = new PetManager();
+        int index = 1;
+        for(House house : ownedHouse){
+            typeWriter.write("House " + index, 50, 150);
+            
+            if(house.hasPet()){
+                typeWriter.write(" | Pet: " + house.getPet().getName(), 50, 150);
+            }
+            else{
+                typeWriter.write(" | Pet: none", 50, 150);      
+            }
+            house.seeFurniture();
+            System.out.println();
+            index++;
+        }
+    }
 }

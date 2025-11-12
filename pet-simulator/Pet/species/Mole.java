@@ -1,18 +1,22 @@
 package Pet.species;
+
+
+import Pet.Habitat.*;
+import Player.Player;
+import Utils.textColor;
+import Utils.typeWriter;
+
 import java.util.Random;
 
 import Pet.Pet;
-import Utils.textColor;
-import Utils.typeWriter;
-import Pet.Habitat.*;
-import Player.Player;
 
-public class Parrot extends Pet implements aerial {
-    public Parrot(){
+
+public class Mole extends Pet implements underground {
+    public Mole(){
         super();
     }
 
-    public Parrot(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
+    public Mole(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
         super( petID, species, name, health, level, hunger, mentalHealth, sex, item);
     }
 
@@ -28,7 +32,7 @@ public class Parrot extends Pet implements aerial {
         }
         else if(this.getMentalHealth() < 50){
             try{
-                typeWriter.write("Squawkk? ...",50,150);
+                typeWriter.write("*sniff*? ...",50,150);
                 typeWriter.write("(" + this.getName() + " is scared being around you... you should take " + this.getName() + " on a walk!)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -36,7 +40,7 @@ public class Parrot extends Pet implements aerial {
         }
         else if(this.getMentalHealth() < 75){
             try{
-                typeWriter.write("Squawkk... Squawkk...",50,150);
+                typeWriter.write("*sniff*... *sniff*...",50,150);
                 typeWriter.write("(Even though you gained its trust, its still being distance...)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -44,7 +48,7 @@ public class Parrot extends Pet implements aerial {
         }
         else{
             try{
-                typeWriter.write("Squawkk! Squawkk! Squawkk!...",50,150);
+                typeWriter.write("*sniff*! *sniff*! *sniff*!...",50,150);
                 typeWriter.write("(" + this.getName() + " has completely trust you)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -84,7 +88,7 @@ public class Parrot extends Pet implements aerial {
         }
         else{
             try {
-                typeWriter.write(this.getName() + " is repeating what you said to it. ", 50, 150);
+                typeWriter.write(this.getName() + " is sleeping peacefully besides you. ", 50, 150);
                 typeWriter.write("maybe you should take " + this.getName() +" on a walk...?", 50, 150);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -94,23 +98,25 @@ public class Parrot extends Pet implements aerial {
         System.out.println();
     }
 
-    public void flyYouAround(Player player) throws InterruptedException{
+    public void digSomethingForYou(Player player) throws InterruptedException{
         Random random = new Random();
-        this.setHunger(this.getHunger()-20);
-        typeWriter.write("you go for a walk with " + this.getName(), 50);
-        typeWriter.write(this.getName() + " flies around, bringing you things ", 50, 150);
-        typeWriter.write("...", 450, 150);
-        typeWriter.write("what is this...?  " + this.getName() + " brought you ", 50);
+        typeWriter.write(this.getName() + " and you go to its backyard", 50);
+        typeWriter.write(this.getName() + " proceed to dig down where you are standing... ", 50, 150);
         
-        int unExpectedCoin = random.nextInt(20) + 1;
-        textColor.yellowText(unExpectedCoin +" coins"); 
-        player.setCoin(player.getCoin() + unExpectedCoin);
+        int unexpectedCoin = random.nextInt(20)+1;
+
+        typeWriter.write("...", 450, 150);
+        typeWriter.write("what is this?... " + this.getName() +" come back with ", 50);
+        textColor.yellowText(unexpectedCoin + " coins");
+
+        player.setCoin(player.getCoin() + unexpectedCoin);
         typeWriter.write("Coins left: ", 50);
         textColor.yellowText(player.getCoin() + " coins");
-        System.out.println();
+
 
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);
         this.gainedLevel(2);
         this.gainedMentalHealth(10);
+        this.setHunger(this.getHunger()-20);
     }
 }

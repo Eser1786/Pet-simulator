@@ -1,80 +1,229 @@
 package EXECUTE;
 
-// import Item.Accessory.*;
-// import Item.Food.*;
-// import Item.Furniture.*;
-
-// // import Utils.typeWriter;
-import Shop.Shop;
 import Player.Player;
-// import Player.Inventory.*;
+import Pet.PetManager;
+import Pet.Pet;
 
-// import House.House;
-// import House.HouseList;
-// import Pet.PetManager;
+import java.util.Scanner;
+
+import House.HouseList;
+import Item.Accessory.*;
+import Item.Food.*;
+import Item.Furniture.*;
+import Minigame.*;
+import Utils.*;
+
+import Minigame.AniQuiz.AnimalQuiz;;
+
+
+
+
+
+
+
+
+
+
+
 
 
 public class Launcher {
+    public void Start() throws InterruptedException{
+        Player player = new Player();
+        PetManager petManager = new PetManager();
+        FoodList foodList = new FoodList();
+        AccessoryList accessoryList = new AccessoryList();
+        FurnitureList furnitureList = new FurnitureList();
+        HouseList houseList = new HouseList();
+        
+        Scanner scan = new Scanner(System.in);
+
+        Thread.sleep(250);
+        clearScreen.clear();
 
 
-  public static void main(String[] args) throws InterruptedException{
-    // FoodList food = new FoodList();
-    // AccessoryList accessory = new AccessoryList();
-    // FurnitureList furniture = new FurnitureList();
+        typeWriter.write("===== WELCOME =====", 50, 150);
+        System.out.println();
+        typeWriter.write("This will be the beginning of your journey! Let's start!", 50 , 150);
 
-    // food.addFood( 3, 10);
-    // accessory.removeAccessory( 5, 3);
-    // a.addFurniture(4, 3);
+        player.playerMenu();
+        petManager.buyEgg(player, 0);
 
-    // typeWriter.write("Tran sieu ngau dep trai so 1", 30,10);
-    // typeWriter.write("System writing testing.............................",30);    30 la con so tot nhat de print
-    // PetManager petManager = new PetManager();
-    // HouseList h = new HouseList(petManager);
-    // Player player = new Player();
+        Thread.sleep(250);
+        clearScreen.clear();
 
-    // typeWriter.writeWord("Woof! Woof! Woof...", 30, 300);  300 - 500 la khoang thoi gian tot nhat de ngung giua tung chu
+        int choice = 999;
 
-    // Player player = new Player("eser",9999);
-    
+        while(choice != 0){
+            typeWriter.write("=== WHAT DO YOU WANT TO DO ===", 50, 150);
+            System.out.println();
 
-    // Shop shop = new Shop();
-    // shop.buyFood(player, 1, 2, 10);
-    // shop.buyFood(player, 2, 4, 10);
-    // shop.buyFood(player, 3, 9, 10);
-    // shop.buyFood(player, 4, 10, 10);
+            typeWriter.write("1. Interact with pet", 50, 150);
+            typeWriter.write("2. Go to shop", 50, 150);
+            typeWriter.write("3. Open inventory", 50, 150);
+            typeWriter.write("4. Play minigame (to get coins)", 50, 150);
+            System.out.println();
+            typeWriter.write("0. Exit from the game", 50, 150);
+            
+            choice = scan.nextInt();
 
-    // shop.buyAccessory(player, 1, 3, 5);
-    // shop.buyAccessory(player, 2, 3, 5);
-    // shop.buyAccessory(player, 3, 3, 5);
-    // shop.buyAccessory(player, 4, 3, 5);
-    // shop.buyAccessory(player, 5, 3, 5);
-    
-    // shop.buyFurniture(player, 1, 4, 2);
-    // shop.buyFurniture(player, 2, 4, 2);
-    // shop.buyFurniture(player, 3, 4, 2);
-    // shop.buyFurniture(player, 4, 4, 2);
-    // shop.buyFurniture(player, 5, 4, 2);
+            Thread.sleep(250);
+            clearScreen.clear();
 
-    
-    // food.printListFood();
-    // accessory.printListAccessory();
-    // furniture.printListFurniture();
+            if(choice == 0){
+                typeWriter.write("Thank you for playing our game!", 50, 150);
+                return;
+            }
+
+            switch(choice){
+                case 1:
+                    petManager.viewAllPets(petManager);
+                    System.out.println();
+                    String petName;
+                    typeWriter.write("Which pet do you want to interact with", 50, 150);
+                    typeWriter.write("-> ", 50, 150);
+                    petName = scan.nextLine();
+                    scan.nextLine();
+                    Pet pet = petManager.findPetByName(petName);
+                    petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
+
+                    int petChoice = 999;
+                    while(petChoice != 0){
+                        typeWriter.write("1. See pet feeling.", 50, 150);
+                        typeWriter.write("2. Hear pet sound.", 50, 150);
+                        typeWriter.write("3. Interact with pet", 50, 150);
+                        System.out.println();
+                        typeWriter.write("0. Exit from interact with pet", 50, 150);
+                        System.out.println();
+                        typeWriter.write("What will be your choice?", 50, 150);
+                        typeWriter.write("-> ", 50);
+                        petChoice = scan.nextInt();
+
+                        if(petChoice == 0){
+                            typeWriter.write("Exiting...", 50);
+                            Thread.sleep(250);
+                            clearScreen.clear();
+                            return;
+                        }
+
+                        switch(petChoice){
+                            case 1:
+                                int escape;
+                                pet.feeling();
+                                System.out.println();
+                                typeWriter.write("(press 0 to escape) -> ", 50);
+                                break;
+                            case 2:
+                                pet.sound();
+                                System.out.println();
+                                typeWriter.write("(press 0 to escape) -> ", 50);
+                                break;
+                            case 3:
+                                switch(pet.getSpecies()){
+                                    case "Dog":
+                                }
+                        }
+        
 
 
-    // Inventory inv = new Inventory();
-    // inv.openInventory();
-    // h.addHouse();
-    // h.assignPetToHouse(1, 1);
-    // PetManager petManager = new PetManager();
-    // petManager.AddPet(1);
 
 
-    // player.playerMenu();
 
-    // petManager.viewAllPets(petManager);
-    Player player = new Player("Eser",9999);
 
-    Shop shop = new Shop();
-    shop.menuShop(player);
-  }
+
+
+
+
+                        
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                case 2:
+
+                case 3:
+
+                case 4:
+                    int minigameChoice;
+                    typeWriter.write("==== MINIGAME ====", 50, 150);
+                    System.out.println();
+                    typeWriter.write("1. AniQuiz", 50, 150);
+                    typeWriter.write("2. SpedMath", 50, 150);
+                    System.out.println();
+                    typeWriter.write("0. Exit from minigame", 50, 150);
+                    System.out.println();
+                    typeWriter.write("What will be your choice?", 50, 150);
+                    typeWriter.write("-> ", 50);
+
+                    minigameChoice = scan.nextInt();
+
+                    switch(minigameChoice){
+                        case 1:
+                            
+                            
+                            petManager.viewAllPets(petManager);
+                            System.out.println();
+                            
+                            typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
+                            typeWriter.write("-> ", 50, 150);
+                            petName = scan.nextLine();
+                            pet = petManager.findPetByName(petName);
+                            AniQuiz game = new AniQuiz();
+                            
+                            
+                            
+                           
+                    }
+
+
+                    if(minigameChoice == 0){
+                        return;
+                    }
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        
+        
+
+
+
+
+
+
+
+    }
 }

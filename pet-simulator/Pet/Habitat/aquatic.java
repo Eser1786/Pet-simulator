@@ -1,5 +1,7 @@
 package Pet.Habitat;
 
+import Player.Player;
+
 public interface aquatic {
-    void swim();
+    public void takeYouToSwimming(Player player) throws InterruptedException ;
 }

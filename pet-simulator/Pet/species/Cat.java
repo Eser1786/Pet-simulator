@@ -3,19 +3,19 @@ import Pet.Pet;
 import Utils.typeWriter;
 
 import Pet.Habitat.*;
+import Player.Player;
 
 public class Cat extends Pet implements ground {
     public Cat(){
         super();
     }
 
-    public Cat(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item, String favoriteDish){
-        super( petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+    public Cat(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
+        super( petID, species, name, health, level, hunger, mentalHealth, sex, item);
     }
 
     @Override
     public void sound(){
-
         if(this.getMentalHealth() < 25){
             try{
                 typeWriter.write("... ... ...?",50,150);
@@ -82,7 +82,7 @@ public class Cat extends Pet implements ground {
         }
         else{
             try {
-                typeWriter.write(this.getName() + " is hugging you with its small body. ", 50, 150);
+                typeWriter.write(this.getName() + " is sleeping on your laps like it's its pillow. ", 50, 150);
                 typeWriter.write("maybe you should take " + this.getName() +" on a walk...?", 50, 150);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -93,16 +93,14 @@ public class Cat extends Pet implements ground {
     }
 
 
-    @Override
-    public void walkAroundThePark() {
-        try {
-            typeWriter.write("you take " + this.getName() +" on a walk around the park", 50, 150);
-            typeWriter.write(".....", 500, 150);
-            typeWriter.write(this.getName() + " has a great walk with you!", 50, 150);
-            typeWriter.write(this.getName() + " has a great walk with you!", 50, 150);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+   public void walkAroundThePark(Player player) throws InterruptedException{
+        typeWriter.write("you go for a walk with " + this.getName(), 50);
+        typeWriter.write( this.getName() + " walking in the park making everybody looks cause of its soft fur...", 50, 150);
+        typeWriter.write("...", 450, 150);
+        typeWriter.write( this.getName() + " and you have a great time!", 50, 150);
+        this.gainedLevel(2);
+        this.gainedMentalHealth(10);
+        this.setHunger(this.getHunger()-20);
     }
 
 }

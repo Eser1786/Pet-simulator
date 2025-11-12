@@ -8,11 +8,15 @@ import Utils.typeWriter;
 
 import java.util.*;
 
+import Item.Food.Food;
+import Item.Food.FoodList;
+
 public class PetManager {
 
     public static final String PET_PATH = "pet-simulator\\Pet\\species\\species.txt";
     public static final String OWNED_PETS_PATH = "pet-simulator\\Pet\\ownedPets.txt";
 
+    
 
 
     //  Hàm tạo id riêng cho pet nếu sở hữu
@@ -27,6 +31,24 @@ public class PetManager {
                 break;
             case "parrot":
                 speciesID = 3;
+                break;
+            case "shark":
+                speciesID = 4 ;
+                break;
+            case "frog":
+                speciesID = 5;
+                break;
+            case "dragon":
+                speciesID = 6;
+                break;
+            case "mole":
+                speciesID = 7;
+                break;
+            case "axolotl":
+                speciesID = 8;
+                break;
+            case "T-rex":
+                speciesID = 9;
                 break;
             default:
                 speciesID = 10;    
@@ -50,7 +72,7 @@ public class PetManager {
     //  Lưu các thông tin của pet vào 1 file riêng 
     private void savePetToFile(Pet pet, String filePath){
         try( BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))){
-            String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem() + "|" + pet.getFavoriteDish() ;
+            String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
             bw.write(line);
             bw.newLine();
         } catch (IOException e){
@@ -60,13 +82,14 @@ public class PetManager {
 
     // Đọc lại danh sách pets đã sỡ hữu
     public void loadPetFromFile(String filePath){
+        ownedPet.clear();
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             
             while((line = br.readLine()) != null){
                 String parts[] = line.split("\\|");
 
-                if(parts.length == 10){
+                if(parts.length == 9){
                     int petID = Integer.parseInt(parts[0]);
                     String species = parts[1];
                     String name = parts[2];
@@ -76,18 +99,36 @@ public class PetManager {
                     int mentalHealth = Integer.parseInt(parts[6]);
                     String sex = parts[7];
                     String item = parts[8];
-                    String favoriteDish = parts[9];
+                    
 
                     Pet pet = null;
                     switch (species.toLowerCase()){
                         case "dog":
-                            pet = new Dog(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+                            pet = new Dog(petID, species, name, health, level, hunger, mentalHealth, sex, item);
                             break;
                         case "cat":
-                            pet = new Cat(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+                            pet = new Cat(petID, species, name, health, level, hunger, mentalHealth, sex, item);
                             break;
                         case "parrot":
-                            pet = new Parrot(petID, species, name, health, level, hunger, mentalHealth, sex, item, favoriteDish);
+                            pet = new Parrot(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "shark":
+                            pet = new Shark(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "frog":
+                            pet = new Frog(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "dragon":
+                            pet = new Dragon(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "mole":
+                            pet = new Mole(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "axolotl": 
+                            pet = new Axolotl(petID, species, name, health, level, hunger, mentalHealth, sex, item);
+                            break;
+                        case "t-rex":
+                            pet = new T_rex(petID, species, name, health, level, hunger, mentalHealth, sex, item);
                             break;
                     }
                     if( pet != null){
@@ -105,7 +146,7 @@ public class PetManager {
 
     public Pet findPetByID(int petID){
         for(Pet pet : ownedPet){
-            switch(pet.getSpecies()){
+            switch(pet.getSpecies().toLowerCase()){
                 case "dog":
                     if(pet.getPetID() == 100 + petID){
                         return pet;
@@ -121,13 +162,52 @@ public class PetManager {
                         return pet;
                     }
                     break;
+                case "shark":
+                    if(pet.getPetID() == 400 + petID){
+                        return pet;
+                    }
+                    break;
+                case "frog":
+                    if(pet.getPetID() == 500 + petID){
+                        return pet;
+                    }
+                    break;
+                case "dragon":
+                    if(pet.getPetID() == 600 + petID){
+                        return pet;
+                    }
+                    break;
+                case "mole":
+                    if(pet.getPetID() == 700 + petID){
+                        return pet;
+                    }
+                    break;
+                case "axolotl":
+                    if(pet.getPetID() == 800 + petID){
+                        return pet;
+                    }
+                    break;
+                case "t-rex":
+                    if(pet.getPetID() == 900 + petID){
+                        return pet;
+                    }
+                    break;
             }
         }
         return null;
     }
 
+    public Pet findPetByName(String name){
+        loadPetFromFile(OWNED_PETS_PATH);
+        for(Pet pet : ownedPet){
+            if(pet.getName() != null && pet.getName().equalsIgnoreCase(name)){
+                return pet;
+            }
+        }
+        return null;
+    }
 
-
+    
 
     //  tạo danh sách để lưu trữ các pets
     ArrayList<Pet> ownedPet = new ArrayList<>();
@@ -161,6 +241,24 @@ public class PetManager {
                             case "parrot":
                                 pet = new Parrot();
                                 break;
+                            case "shark":
+                                pet = new Shark();
+                                break;
+                            case "frog":
+                                pet = new Frog();
+                                break;
+                            case "dragon":
+                                pet = new Dragon();
+                                break;
+                            case "mole":
+                                pet = new Mole();
+                                break;
+                            case "axolotl":
+                                pet = new Axolotl();
+                                break;
+                            case "t-rex":
+                                pet = new T_rex();
+                                break;
                         }
 
                         if(pet != null){
@@ -182,7 +280,7 @@ public class PetManager {
                             pet.setLevel(0);
                             pet.setMentalHealth(100);
                             pet.setItem(null);
-                            pet.setFavoriteDish(null);  // mốt thêm sau dựa theo species
+                            
                             
                             ownedPet.add(pet);
                             savePetToFile(pet, OWNED_PETS_PATH);
@@ -207,12 +305,11 @@ public class PetManager {
         player.setCoin(player.getCoin() - cost);
         typeWriter.write("You bought an egg!", 50, 150);
         typeWriter.write("The egg is hatching!", 50, 150);
-        typeWriter.write("............", 50, 150);
+        typeWriter.write("............", 450, 150);
         
         Random rd = new Random();
-        int petID = rd.nextInt(3)+1;
+        int petID = rd.nextInt(9)+1;
         this.AddPet(petID);
-
     }
 
     public void viewAllPets(PetManager petManager) throws InterruptedException{
@@ -235,44 +332,140 @@ public class PetManager {
             typeWriter.write(" | Hunger: " ,50 );
             textColor.orangeText(pet.getHunger());
 
-            if(pet.getItem() == "null"){
+            if("null".equals(pet.getItem())){
                 typeWriter.write(" | Accessory: none" , 50);
             }
             else{
                 typeWriter.write(" | Accessory: " + pet.getItem() , 50);
             }
             System.out.println();
-            System.out.println();
+             System.out.println();
         }
     }
 
+    public void printPetForShop() throws InterruptedException{
+       
+        PetManager pm = new PetManager();
+        try(BufferedReader br = new BufferedReader(new FileReader("pet-simulator\\Pet\\species\\species.txt"))){
+            String line;
+           
+            while((line = br.readLine())!= null){
+                
+                String[] parts = line.split("\\|");
+                Pet pet = null;
+                if(parts.length == 2){
+                    int id = Integer.parseInt(parts[0].trim());
+                    String species = parts[1].trim().toLowerCase();   
+                    
+                    switch(species){
+                        case "dog":
+                                pet = new Dog();
+                                pet.setSpecies(species);
+                                break;
+                            case "cat":
+                                pet = new Cat();
+                                pet.setSpecies(species);
+                                break;
+                            case "parrot":
+                                pet = new Parrot();
+                                pet.setSpecies(species);
+                                break;
+                            case "shark":
+                                pet = new Shark();
+                                pet.setSpecies(species);
+                                break;
+                            case "frog":
+                                pet = new Frog();
+                                pet.setSpecies(species);
+                                break;
+                            case "dragon":
+                                pet = new Dragon();
+                                pet.setSpecies(species);
+                                break;
+                            case "mole":
+                                pet = new Mole();
+                                pet.setSpecies(species);
+                                break;
+                            case "axolotl":
+                                pet = new Axolotl();
+                                pet.setSpecies(species);
+                                break;
+                            case "t-rex":
+                                pet = new T_rex();
+                                pet.setSpecies(species);
+                                break;
+                    }
+                    if(pet!=null){
+                        pet.setSpecies(species);
+                        ownedPet.add(pet);
+                    }
+                }
+               
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
+        typeWriter.write("==== PET ====", 50, 150);
+        
+        int index=0;
+        for(Pet pet : ownedPet){
+            typeWriter.write(index + 1 + ". ", 50);
+            textColor.orangeText(pet.getSpecies());
+            typeWriter.write(" | cost: ", 50);
+            textColor.yellowText(30 + " coins");
+            System.out.println();
+            index++;
+        }
+        typeWriter.write("The chances of having any pet are equal!", 50, 150);
+    }
 
+    public void feedPet(String petName, String foodName) throws InterruptedException{    // find pet by name
+        PetManager petManager = new PetManager();
+        Pet pet = petManager.findPetByName(petName.toLowerCase());
+        FoodList fl = new FoodList();
+        Food food = fl.findFoodByName(foodName);
+        if(food==null){
+            typeWriter.write("you don't have this food", 50, 150);
+            return;
+        }
+        if(pet==null){
+            typeWriter.write("you don't have this pet", 0, 0);
+        }
 
+        typeWriter.write(pet.getName() + " has eaten the " + food.getItemName(), 50, 150);
+        pet.setHunger(pet.getHunger() - food.getSat());
+        typeWriter.write(pet.getName() + " hunger: " + pet.getHunger(), 50, 150);
+        food.setQuantity(food.getQuantity()-1);
+    }
 
+    
+    public void viewOnePet(Pet pet) throws InterruptedException{
+        typeWriter.write("=== PET ===", 50, 150);
+        System.out.println();
+        typeWriter.write(pet.getName(), 50, 150);
+        typeWriter.write(" | Species: " + pet.getSpecies(), 50);
 
+        typeWriter.write(" | Gender: " + pet.getSex() , 50,150);
 
+        typeWriter.write(" | Level: " , 50);
+        textColor.yellowText(pet.getLevel());
 
+        typeWriter.write(" | HP: " , 50);
+        textColor.greenText(pet.getHealth());
 
+        typeWriter.write(" | Hunger: " ,50 );
+        textColor.orangeText(pet.getHunger());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if(pet.getItem().equals("null")){
+            typeWriter.write(" | Accessory: none" , 50);
+        }
+        else{
+            typeWriter.write(" | Accessory: " + pet.getItem() , 50);
+        }
+        System.out.println();
+        System.out.println();
+    }
 
 
 

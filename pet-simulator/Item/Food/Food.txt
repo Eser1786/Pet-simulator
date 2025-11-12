@@ -7,5 +7,3 @@
 7 | honey treat | 14
 8 | egg roll | 17
 9 | shrimp snack | 28
-10 | lamb chop| 26
-11 | yogurt | 13

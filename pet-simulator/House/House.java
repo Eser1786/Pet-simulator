@@ -32,6 +32,8 @@ public class House {
     }
 
     public void seeFurniture() throws InterruptedException{
+        typeWriter.write("=== FURNITURE OF THIS HOUSE ===", id, id);
+        System.out.println();
         
         for(Furniture furniture : furnitureList){
             textColor.yellowText(furniture.getItemName());
@@ -73,6 +75,7 @@ public class House {
         else{
             this.pet = pet;
             typeWriter.write( pet.getName() + " is now the owner of this house!", 50, 150);
+            pet.setHouse(this);
         }
     }
 

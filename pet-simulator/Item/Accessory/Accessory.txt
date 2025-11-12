@@ -3,3 +3,7 @@
 3 | collar | 5
 4 | crown | 9
 5 | backpack | 7
+6 | gloves | 6
+7 | belt | 5
+8 | boots | 7
+9 | mask | 8

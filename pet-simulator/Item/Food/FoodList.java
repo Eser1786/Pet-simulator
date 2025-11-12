@@ -19,6 +19,11 @@ public class FoodList {
             case "beef": return 200;
             case "pate":  return 300;
             case "seeds":  return 400;
+            case "fruit bowl": return 500;
+            case "rice ball": return 600;
+            case "honey treat": return 700;
+            case "egg roll": return 800;
+            case "shrimp snack": return 900;
             default: return 1000;
         }
     }
@@ -60,11 +65,15 @@ public class FoodList {
                         case "beef":
                         case "pate": 
                         case "seeds": 
+                        case "fruit bowl":
+                        case "rice ball":
+                        case "honey treat":
+                        case "egg roll":
+                        case "shrimp snack":
                             food = new Food();
                             food.setItemID(FoodID);
                             food.setItemName(name);
                             food.setQuantity(quantity);
-                            food.setSat(quantity);
                             break;
                     }
                     if(food != null){
@@ -95,6 +104,16 @@ public class FoodList {
         for(Food a : ownedFood){
             if(a.getItemID() == id*100){
                 return a.getItemName();
+            }
+        }
+        return null;
+    }
+
+    public Food findFoodByName(String name){
+        loadFood(OWNED_FOOD_PATH);
+        for(Food food : ownedFood){
+            if(food.getItemName().toLowerCase() == name.toLowerCase()){
+                return food;
             }
         }
         return null;
@@ -279,15 +298,15 @@ public class FoodList {
             e.getMessage();
         }
 
-        typeWriter.write("==== FOOD ====", 50, 150);
+        typeWriter.write("==== FOOD ====", 10, 150);
         int index = 0;
         
         for(Food food : ownedFood){
-            typeWriter.write(index + 1 + ". ", 50);
+            typeWriter.write(index + 1 + ". ", 10);
             textColor.blueText( food.getItemName());
-            typeWriter.write(" | Sat points: ",  50);
+            typeWriter.write(" | Saturation points: ",  10);
             textColor.orangeText(food.getSat()); 
-            typeWriter.write("Cost: ", 50);
+            typeWriter.write("Cost: ", 10);
             textColor.yellowText("20 coins");
             System.out.println();
             index++;

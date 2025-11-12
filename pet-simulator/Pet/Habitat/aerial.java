@@ -1,5 +1,7 @@
 package Pet.Habitat;
 
+import Player.Player;
+
 public interface aerial {
-    void fly();
+    public void flyYouAround(Player player) throws InterruptedException;
 }

@@ -1,15 +1,20 @@
-hoàn thành shop 
- -> có thể mua trứng và sinh ra pet
-
-Player
- -> hoàn thiện nhân vật
--> thêm các phương thức tương tác với nhân vật
-
-Event
- -> tạo event 
- -> tham số truyền vào 
- -> thời gian tiêu hao
-
-Egg
- -> tạo các interface common, rare , legend -> tạo ra danh sách tỉ lệ cho các pet
- 
+// hoan thanh print house
+        /* hoan thanh shop
+            mua duoc pet
+         * hoan thanh menu nguoi choi
+         * hoan thanh menu tong quat
+         * them minigame de tang tien cho nhan vat
+         * them co che interact voi pet de tang cam xuc
+         * tim ra ly do de tru diem mental health cua pet
+         * va tru hp cua pet
+         * 
+         * thêm pet vào căn nhà
+         * thêm accessory cho pet
+         * thêm fur vào căn nhà
+         * 
+         * kiểm tra và xuất các tính năng trên
+         * 
+         * co the noi la da hoan thanh neu nhu xong cai dong nay !
+         * moi lan dùng menu nhớ clear màn hình
+         * thêm nhạc nền vào game
+         */

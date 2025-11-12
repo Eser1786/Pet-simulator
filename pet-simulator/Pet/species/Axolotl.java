@@ -1,18 +1,17 @@
 package Pet.species;
-import java.util.Random;
 
 import Pet.Pet;
-import Utils.textColor;
-import Utils.typeWriter;
 import Pet.Habitat.*;
 import Player.Player;
+import Utils.typeWriter;
 
-public class Parrot extends Pet implements aerial {
-    public Parrot(){
+
+public class Axolotl extends Pet implements aquatic {
+    public Axolotl(){
         super();
     }
 
-    public Parrot(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
+    public Axolotl(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){
         super( petID, species, name, health, level, hunger, mentalHealth, sex, item);
     }
 
@@ -28,7 +27,7 @@ public class Parrot extends Pet implements aerial {
         }
         else if(this.getMentalHealth() < 50){
             try{
-                typeWriter.write("Squawkk? ...",50,150);
+                typeWriter.write("Squeee? ...",50,150);
                 typeWriter.write("(" + this.getName() + " is scared being around you... you should take " + this.getName() + " on a walk!)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -36,7 +35,7 @@ public class Parrot extends Pet implements aerial {
         }
         else if(this.getMentalHealth() < 75){
             try{
-                typeWriter.write("Squawkk... Squawkk...",50,150);
+                typeWriter.write("Squeee... Squeee...",50,150);
                 typeWriter.write("(Even though you gained its trust, its still being distance...)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -44,7 +43,7 @@ public class Parrot extends Pet implements aerial {
         }
         else{
             try{
-                typeWriter.write("Squawkk! Squawkk! Squawkk!...",50,150);
+                typeWriter.write("Squeee! Squeee! Squeee!...",50,150);
                 typeWriter.write("(" + this.getName() + " has completely trust you)",50,150);
             }catch (InterruptedException e){
                 e.printStackTrace();
@@ -84,7 +83,7 @@ public class Parrot extends Pet implements aerial {
         }
         else{
             try {
-                typeWriter.write(this.getName() + " is repeating what you said to it. ", 50, 150);
+                typeWriter.write(this.getName() + " is swimming around you making small happy bubbles. ", 50, 150);
                 typeWriter.write("maybe you should take " + this.getName() +" on a walk...?", 50, 150);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -94,23 +93,15 @@ public class Parrot extends Pet implements aerial {
         System.out.println();
     }
 
-    public void flyYouAround(Player player) throws InterruptedException{
-        Random random = new Random();
-        this.setHunger(this.getHunger()-20);
-        typeWriter.write("you go for a walk with " + this.getName(), 50);
-        typeWriter.write(this.getName() + " flies around, bringing you things ", 50, 150);
+    public void takeYouToSwimming(Player player) throws InterruptedException{
+        typeWriter.write("you go for a swim with " + this.getName(), 50);
+        typeWriter.write("you swimming with " + this.getName() + " in the ocean", 50, 150);
         typeWriter.write("...", 450, 150);
-        typeWriter.write("what is this...?  " + this.getName() + " brought you ", 50);
-        
-        int unExpectedCoin = random.nextInt(20) + 1;
-        textColor.yellowText(unExpectedCoin +" coins"); 
-        player.setCoin(player.getCoin() + unExpectedCoin);
-        typeWriter.write("Coins left: ", 50);
-        textColor.yellowText(player.getCoin() + " coins");
-        System.out.println();
-
+        typeWriter.write(this.getName() + "brought you to a family of axololt, they are all adorable", 50, 150);
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);
         this.gainedLevel(2);
         this.gainedMentalHealth(10);
+        this.setHunger(this.getHunger()-20);
     }
+
 }

@@ -1,3 +1,9 @@
 1 | dog 
 2 | cat 
 3 | parrot 
+4 | shark
+5 | frog
+6 | dragon
+7 | mole
+8 | axolotl 
+9 | T-rex

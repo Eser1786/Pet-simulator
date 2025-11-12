@@ -3,3 +3,7 @@
 3 | sofa | 9
 4 | TV | 6
 5 | radio | 4
+6 | bookshelf | 7
+7 | lamp | 3
+8 | bed | 8
+9 | rug | 5
