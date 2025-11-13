@@ -148,6 +148,7 @@ public class Inventory {
 
                     break;
                 case 4: 
+                    accessoryList.loadAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
                     accessoryList.printListAccessory();
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);
@@ -219,7 +220,10 @@ public class Inventory {
                     }
                     break;
                 case 5:
+                    
                     HouseList hl = new HouseList();
+                    hl.loadHouse();
+                    furnitureList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
                     furnitureList.printListFurniture();
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);
