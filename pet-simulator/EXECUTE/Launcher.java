@@ -110,13 +110,13 @@ public class Launcher {
                                 pet.feeling();
                                 System.out.println();
                                 typeWriter.write("(press any number key to escape) -> ", 50);
-                                scan.nextInt();
+                                scan.nextLine();
                                 break;
                             case 2:
                                 pet.sound();
                                 System.out.println();
                                 typeWriter.write("(press any number key to escape) -> ", 50);
-                                scan.nextInt();
+                                scan.nextLine();
                                 break;
                             case 3:
                                 interactWithPet(pet, player);

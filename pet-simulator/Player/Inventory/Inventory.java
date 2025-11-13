@@ -105,6 +105,7 @@ public class Inventory {
                     this.openInventory(player);
                     break;
                 case 3:
+                    food.loadFood("pet-simulator\\Item\\Food\\ownedFood.txt");
                     food.printListFood();
 
                     System.out.println();

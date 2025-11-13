@@ -126,7 +126,7 @@ public abstract class Pet{
         System.out.println();
     }
 
-    public void showLevelBar(int currentLevel) {
+    public void showLevelBar(int currentLevel) {  
         int maxLevel = 100;
         int barLength = 30;
         int filledLength = (int) ((double) currentLevel / maxLevel * barLength);

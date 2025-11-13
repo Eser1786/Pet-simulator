@@ -3,3 +3,5 @@
 901|T-rex|kjbh|0|100|0|100|female|null
 801|axolotl|rae|0|100|0|100|male|null
 702|mole|rabboto|0|100|0|100|female|null
+101|dog|mlmlm|0|100|0|100|female|null
+401|shark|beam|0|100|0|100|female|null
