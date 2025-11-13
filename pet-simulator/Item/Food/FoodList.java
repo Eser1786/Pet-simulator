@@ -112,7 +112,8 @@ public class FoodList {
     public Food findFoodByName(String name){
         loadFood(OWNED_FOOD_PATH);
         for(Food food : ownedFood){
-            if(food.getItemName().toLowerCase() == name.toLowerCase()){
+            // pet.getName() != null && pet.getName().equalsIgnoreCase(name)
+            if(food.getItemName() != null && food.getItemName().equalsIgnoreCase(name)){
                 return food;
             }
         }

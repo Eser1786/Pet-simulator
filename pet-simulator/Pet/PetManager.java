@@ -424,17 +424,21 @@ public class PetManager {
         PetManager petManager = new PetManager();
         Pet pet = petManager.findPetByName(petName.toLowerCase());
         FoodList fl = new FoodList();
-        Food food = fl.findFoodByName(foodName);
+        Food food = fl.findFoodByName(foodName.toLowerCase());
         if(food==null){
             typeWriter.write("you don't have this food", 50, 150);
             return;
         }
         if(pet==null){
             typeWriter.write("you don't have this pet", 0, 0);
+            return;
         }
 
         typeWriter.write(pet.getName() + " has eaten the " + food.getItemName(), 50, 150);
         pet.setHunger(pet.getHunger() - food.getSat());
+        if(pet.getHunger() < 0){
+            pet.setHunger(0);
+        }
         typeWriter.write(pet.getName() + " hunger: " + pet.getHunger(), 50, 150);
         food.setQuantity(food.getQuantity()-1);
     }
