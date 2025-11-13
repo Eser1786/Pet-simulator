@@ -20,7 +20,7 @@ public class Inventory {
         pm.loadPetFromFile(OWNED_PETS_PATH);
         typeWriter.write("==== PETS WITHOUT ACCESSORY ====", 0, 0);
         for(Pet pet : ownedPet){
-            if(pet.getItem() == "null"){
+            if(pet.getItem() != null && pet.getItem().equals("null")){
                 typeWriter.write(pet.getName() + "|" + pet.getSpecies() , 50, 150);
                 System.out.println();
             }
@@ -56,37 +56,46 @@ public class Inventory {
         FurnitureList furnitureList = new FurnitureList();
 
         while(firstChoice!=0){
-            typeWriter.write("===== INVENTORY =====", 50, 150);
-            System.out.println();
-            typeWriter.write("What do you want to do?", 50, 150);
-            System.out.println();
-            typeWriter.write("1. Myself", 50, 150);
-            typeWriter.write("2. Open all inventory", 50, 150);
-            typeWriter.write("3. Open food section", 50, 150);
-            typeWriter.write("4. Open accessory section", 50, 150);
-            typeWriter.write("5. Open furniture section", 50, 150);
-            typeWriter.write("6. Your pets", 50, 150);
-            System.out.println();
-            typeWriter.write("0. Exit from your inventory", 50, 150);
-            System.out.println();
-            typeWriter.write("What is your choice?", 50, 150);
-            typeWriter.write("-> ", 50);
-            firstChoice = scan.nextInt();
-            scan.nextLine();
+            try {
+                typeWriter.write("===== INVENTORY =====", 50, 150);
+                System.out.println();
+                typeWriter.write("What do you want to do?", 50, 150);
+                System.out.println();
+                typeWriter.write("1. Myself", 50, 150);
+                typeWriter.write("2. Open all inventory", 50, 150);
+                typeWriter.write("3. Open food section", 50, 150);
+                typeWriter.write("4. Open accessory section", 50, 150);
+                typeWriter.write("5. Open furniture section", 50, 150);
+                typeWriter.write("6. Your pets", 50, 150);
+                System.out.println();
+                typeWriter.write("0. Exit from your inventory", 50, 150);
+                System.out.println();
+                typeWriter.write("What is your choice?", 50, 150);
+                typeWriter.write("-> ", 50);
+                
+                if (!scan.hasNextInt()) {
+                    typeWriter.write("Invalid input! Please enter a number.", 50, 150);
+                    scan.nextLine();
+                    Thread.sleep(250);
+                    clearScreen.clear();
+                    continue;
+                }
+                
+                firstChoice = scan.nextInt();
+                scan.nextLine();
 
-            Thread.sleep(250);
-            clearScreen.clear();
-            if(firstChoice == 0){
-                Thread.sleep(250);
-                typeWriter.write("Exiting...!", 50, 150);
                 Thread.sleep(250);
                 clearScreen.clear();
-                return;
-            }
+                
+                if(firstChoice == 0){
+                    Thread.sleep(250);
+                    typeWriter.write("Exiting...!", 50, 150);
+                    Thread.sleep(250);
+                    clearScreen.clear();
+                    return;
+                }
 
-            int secondChoice;
-            // Thread.sleep(250);
-            // clearScreen.clear();
+                int secondChoice;
 
             switch(firstChoice){
                 case 1:
@@ -107,14 +116,16 @@ public class Inventory {
                     typeWriter.write("What is your choice?", 50, 150);
                     typeWriter.write("-> ", 50);
                     secondChoice = scan.nextInt();
-                    scan.nextLine();
+                    scan.nextLine(); 
+                    
                     if(secondChoice == 2){
                         typeWriter.write("Exiting...", 50, 150);
                         Thread.sleep(250);
                         clearScreen.clear();
-                        return;
+                        break;
                     }
                     else if(secondChoice == 1){
+                        petManager.loadPetFromFile(OWNED_PETS_PATH);
                         petManager.viewAllPets(petManager);
                         System.out.println();
                         String petName;
@@ -123,6 +134,7 @@ public class Inventory {
                         typeWriter.write("What food are you going to choose? (write the name of the food you want to choose)", 50, 150);
                         typeWriter.write("-> ", 50);
                         foodName = scan.nextLine();
+                        
                         typeWriter.write("which pet are you going to choose? (write the name of the pet you want to choose)", 50, 150);
                         typeWriter.write("-> ", 50);
                         petName = scan.nextLine();
@@ -146,14 +158,16 @@ public class Inventory {
                     typeWriter.write("What is your choice?", 50, 150);
                     typeWriter.write("-> ", 50);
                     secondChoice = scan.nextInt();
-                    scan.nextLine();
+                    scan.nextLine(); 
+                    
                     if(secondChoice == 3){
                         typeWriter.write("Exiting...", 50, 150);
                         Thread.sleep(250);
                         clearScreen.clear();
-                        return;
+                        break;
                     }
                     else if(secondChoice == 1){
+                        petManager.loadPetFromFile(OWNED_PETS_PATH);
                         petManager.viewAllPets(petManager);
                         System.out.println();
                         String petName;
@@ -162,18 +176,27 @@ public class Inventory {
                         typeWriter.write("What accessory are you going to choose? (write the name of the accessory you want to choose)", 50, 150);
                         typeWriter.write("-> ", 50);
                         accessoryName = scan.nextLine();
+                        
                         typeWriter.write("which pet are you going to choose? (write the name of the pet you want to choose)", 50, 150);
                         typeWriter.write("-> ", 50);
                         petName = scan.nextLine();
 
                         Pet pet = petManager.findPetByName(petName);
                         Accessory accessory = accessoryList.findAccessoryByName(accessoryName);
-                        pet.equipAccessory(accessory);
+                        
+                        if(pet != null && accessory != null){
+                            pet.equipAccessory(accessory);
+                        }
+                        else{
+                            if(pet == null) typeWriter.write("Pet not found!", 50, 150);
+                            if(accessory == null) typeWriter.write("Accessory not found!", 50, 150);
+                        }
 
                         Thread.sleep(250);
                         clearScreen.clear();
                     }
                     else if(secondChoice == 2){
+                        petManager.loadPetFromFile(OWNED_PETS_PATH);
                         petManager.viewAllPets(petManager);
                         System.out.println();
                         String petName;
@@ -183,7 +206,12 @@ public class Inventory {
                         petName = scan.nextLine();
 
                         Pet pet = petManager.findPetByName(petName);
-                        pet.unequipAccessory();
+                        if(pet != null){
+                            pet.unequipAccessory();
+                        }
+                        else{
+                            typeWriter.write("Pet not found!", 50, 150);
+                        }
 
                         Thread.sleep(250);
                         clearScreen.clear();
@@ -202,13 +230,13 @@ public class Inventory {
                     typeWriter.write("What is your choice?", 50, 150);
                     typeWriter.write("-> ", 50);
                     secondChoice = scan.nextInt();
-                    scan.nextLine();
+                    scan.nextLine(); 
 
                     if(secondChoice == 3){
                         typeWriter.write("Exiting...", 50, 150);
                         Thread.sleep(250);
                         clearScreen.clear();
-                        return;
+                        break;
                     }
 
                     switch(secondChoice){
@@ -219,21 +247,30 @@ public class Inventory {
                             typeWriter.write("-> ", 50);
                             int index ;
                             index = scan.nextInt();
-                            scan.nextLine();
+                            scan.nextLine(); 
                             House house = hl.findHouseByID(index);
                             
                             if(house!=null){
                                 if(house.hasPet()){
                                     typeWriter.write("This house already has a pet!", 50, 150);
                                 }
-                                petManager.viewAllPets(petManager);
-                                System.out.println();
-                                String petName;
-                                typeWriter.write("Which pet are you going to choose for this house (use the number of the house)", 50, 150);
-                                typeWriter.write("-> ", 50);
-                                petName = scan.nextLine();
-                                Pet pet = petManager.findPetByName(petName);
-                                house.setPet(pet);
+                                else{
+                                    petManager.loadPetFromFile(OWNED_PETS_PATH);
+                                    petManager.viewAllPets(petManager);
+                                    System.out.println();
+                                    String petName;
+                                    typeWriter.write("Which pet are you going to choose for this house (write the name)", 50, 150);
+                                    typeWriter.write("-> ", 50);
+                                    petName = scan.nextLine();
+                                    Pet pet = petManager.findPetByName(petName);
+                                    
+                                    if(pet != null){
+                                        house.setPet(pet);
+                                    }
+                                    else{
+                                        typeWriter.write("Pet not found!", 50, 150);
+                                    }
+                                }
                                 Thread.sleep(250);
                                 clearScreen.clear();
                                 break;
@@ -250,7 +287,7 @@ public class Inventory {
                             typeWriter.write("Choose the house you want to add the furniture to (use the number of the house)", 50, 150);
                             typeWriter.write("-> ", 50);
                             index = scan.nextInt();
-                            scan.nextLine();
+                            scan.nextLine(); // Clear newline
                             house = hl.findHouseByID(index);
 
                             if(house!=null){
@@ -260,7 +297,14 @@ public class Inventory {
                                 typeWriter.write("-> ", 50);
                                 furName = scan.nextLine().toLowerCase();
                                 Furniture furniture = furnitureList.findFurnitureByName(furName);
-                                house.addFurniture(furniture);
+                                
+                                if(furniture != null){
+                                    house.addFurniture(furniture);
+                                }
+                                else{
+                                    typeWriter.write("Furniture not found!", 50, 150);
+                                }
+                                
                                 Thread.sleep(250);
                                 clearScreen.clear();
                             }
@@ -270,10 +314,10 @@ public class Inventory {
                                 clearScreen.clear();
                             }
                             break;
-                       
-                        
                     }
+                    break;
                 case 6:
+                    petManager.loadPetFromFile(OWNED_PETS_PATH);
                     petManager.viewAllPets(petManager);
                     System.out.println();
                     typeWriter.write("0. To exit", 50, 150);
@@ -283,14 +327,20 @@ public class Inventory {
                     input = scan.nextInt();
                     if(input == 0){
                         Thread.sleep(250);
-                                clearScreen.clear();
+                        clearScreen.clear();
                     }
                     else{
                         typeWriter.write("input isn't appropriate", 50, 150);
                         Thread.sleep(250);
-                                clearScreen.clear();
+                        clearScreen.clear();
                     }
                     break;
+            }
+            } catch (Exception e) {
+                typeWriter.write("An error occurred: " + e.getMessage(), 50, 150);
+                scan.nextLine();
+                Thread.sleep(250);
+                clearScreen.clear();
             }
         }
     }

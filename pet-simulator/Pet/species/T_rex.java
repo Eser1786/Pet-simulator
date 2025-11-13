@@ -101,5 +101,10 @@ public class T_rex extends Pet implements ground {
         this.gainedLevel(2);
         this.gainedMentalHealth(10);
     }
+    
+    @Override
+    public void interact(Player player) throws InterruptedException {
+        walkAroundThePark(player);
+    }
 
 }

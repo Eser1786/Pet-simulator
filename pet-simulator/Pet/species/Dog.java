@@ -100,4 +100,9 @@ public class Dog extends Pet implements ground {
         this.gainedMentalHealth(10);
         this.setHunger(this.getHunger()-20);
     }
+    
+    @Override
+    public void interact(Player player) throws InterruptedException {
+        walkAroundThePark(player);
+    }
 }

@@ -11,7 +11,7 @@ import Utils.textColor;
 import Utils.typeWriter;
 
 public class AniQuiz {
-    public class AnimalQuiz {
+    // Lớp nội (inner class) để lưu trữ câu hỏi
 
     // Lớp nội (inner class) để lưu trữ câu hỏi
     private static class Question {
@@ -30,7 +30,7 @@ public class AniQuiz {
     private final int NUM_QUESTIONS = 5; // Sẽ luôn hỏi 5 câu
     private final int REWARD_PER_QUESTION = 10;
 
-    public AnimalQuiz() {
+    public AniQuiz() {
         // CẬP NHẬT: Mở rộng ngân hàng câu hỏi
         questionBank = new ArrayList<>();
         // 7 câu cũ
@@ -127,5 +127,4 @@ public class AniQuiz {
 
 
     
-}
 }

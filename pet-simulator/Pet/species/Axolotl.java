@@ -103,5 +103,10 @@ public class Axolotl extends Pet implements aquatic {
         this.gainedMentalHealth(10);
         this.setHunger(this.getHunger()-20);
     }
+    
+    @Override
+    public void interact(Player player) throws InterruptedException {
+        takeYouToSwimming(player);
+    }
 
 }

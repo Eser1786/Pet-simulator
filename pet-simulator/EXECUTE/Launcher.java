@@ -1,6 +1,8 @@
 package EXECUTE;
 
 import Player.Player;
+import Player.Inventory.Inventory;
+import Shop.Shop;
 import Pet.PetManager;
 import Pet.Pet;
 
@@ -12,20 +14,6 @@ import Item.Food.*;
 import Item.Furniture.*;
 import Minigame.*;
 import Utils.*;
-
-import Minigame.AniQuiz.AnimalQuiz;;
-
-
-
-
-
-
-
-
-
-
-
-
 
 public class Launcher {
     public void Start() throws InterruptedException{
@@ -64,7 +52,9 @@ public class Launcher {
             typeWriter.write("4. Play minigame (to get coins)", 50, 150);
             System.out.println();
             typeWriter.write("0. Exit from the game", 50, 150);
-            
+            System.out.println();
+            typeWriter.write("What will you choose?", 50, 150);
+            typeWriter.write("-> ", 50);
             choice = scan.nextInt();
 
             Thread.sleep(250);
@@ -77,15 +67,22 @@ public class Launcher {
 
             switch(choice){
                 case 1:
+                    petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
                     petManager.viewAllPets(petManager);
                     System.out.println();
                     String petName;
                     typeWriter.write("Which pet do you want to interact with", 50, 150);
-                    typeWriter.write("-> ", 50, 150);
+                    typeWriter.write("-> ", 50);
+                    scan.nextLine(); 
                     petName = scan.nextLine();
-                    scan.nextLine();
                     Pet pet = petManager.findPetByName(petName);
-                    petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
+                    
+                    if (pet == null) {
+                        typeWriter.write("Pet not found! Please try again.", 50, 150);
+                        Thread.sleep(250);
+                        clearScreen.clear();
+                        break;
+                    }
 
                     int petChoice = 999;
                     while(petChoice != 0){
@@ -108,61 +105,37 @@ public class Launcher {
 
                         switch(petChoice){
                             case 1:
-                                int escape;
                                 pet.feeling();
                                 System.out.println();
                                 typeWriter.write("(press 0 to escape) -> ", 50);
+                                scan.nextInt();
                                 break;
                             case 2:
                                 pet.sound();
                                 System.out.println();
                                 typeWriter.write("(press 0 to escape) -> ", 50);
+                                scan.nextInt();
                                 break;
                             case 3:
-                                switch(pet.getSpecies()){
-                                    case "Dog":
-                                }
+                                interactWithPet(pet, player);
+                                break;
                         }
-        
-
-
-
-
-
-
-
-
-
-
-                        
+     
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 case 2:
-
+                    Shop shop = new Shop();
+                    shop.menuShop(player);
+                    break;
                 case 3:
-
+                    Inventory inventory = new Inventory();
+                    inventory.menuInventory(player, petManager);
+                    break;
                 case 4:
                     int minigameChoice;
                     typeWriter.write("==== MINIGAME ====", 50, 150);
                     System.out.println();
                     typeWriter.write("1. AniQuiz", 50, 150);
-                    typeWriter.write("2. SpedMath", 50, 150);
+                    typeWriter.write("2. SpeedMath", 50, 150);
                     System.out.println();
                     typeWriter.write("0. Exit from minigame", 50, 150);
                     System.out.println();
@@ -171,28 +144,82 @@ public class Launcher {
 
                     minigameChoice = scan.nextInt();
 
+                    if(minigameChoice == 0){
+                        Thread.sleep(250);
+                        clearScreen.clear();
+                        break;
+                    }
+
                     switch(minigameChoice){
                         case 1:
+                            try {
+                                petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
+                                petManager.viewAllPets(petManager);
+                                System.out.println();
+                                
+                                typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
+                                typeWriter.write("-> ", 50, 150);
+                                scan.nextLine();
+                                String gamePetName = scan.nextLine();
+                                Pet gamePet = petManager.findPetByName(gamePetName);
+                                
+                                if (gamePet == null) {
+                                    typeWriter.write("Pet not found! Please try again.", 50, 150);
+                                    Thread.sleep(250);
+                                    clearScreen.clear();
+                                    break;
+                                }
+                                
+                                AniQuiz aniQuiz = new AniQuiz();
+                                aniQuiz.playAniQuiz(player, gamePet);
+                                
+                                Thread.sleep(250);
+                                clearScreen.clear();
+                            } catch (Exception e) {
+                                typeWriter.write("An error occurred: " + e.getMessage(), 50, 150);
+                                Thread.sleep(250);
+                                clearScreen.clear();
+                            }
+                            break;
                             
+                        case 2:
+                            try {
+                                petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
+                                petManager.viewAllPets(petManager);
+                                System.out.println();
+                                
+                                typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
+                                typeWriter.write("-> ", 50, 150);
+                                scan.nextLine(); // Clear newline
+                                String gamePetName2 = scan.nextLine();
+                                Pet gamePet2 = petManager.findPetByName(gamePetName2);
+                                
+                                if (gamePet2 == null) {
+                                    typeWriter.write("Pet not found! Please try again.", 50, 150);
+                                    Thread.sleep(250);
+                                    clearScreen.clear();
+                                    break;
+                                }
+                                
+                                SpeedMath speedMath = new SpeedMath();
+                                speedMath.playSpeedMath(player, gamePet2);
+                                
+                                Thread.sleep(250);
+                                clearScreen.clear();
+                            } catch (Exception e) {
+                                typeWriter.write("An error occurred: " + e.getMessage(), 50, 150);
+                                Thread.sleep(250);
+                                clearScreen.clear();
+                            }
+                            break;
                             
-                            petManager.viewAllPets(petManager);
-                            System.out.println();
-                            
-                            typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
-                            typeWriter.write("-> ", 50, 150);
-                            petName = scan.nextLine();
-                            pet = petManager.findPetByName(petName);
-                            AniQuiz game = new AniQuiz();
-                            
-                            
-                            
-                           
+                        default:
+                            typeWriter.write("Choice not appropriate!", 50, 150);
+                            Thread.sleep(250);
+                            clearScreen.clear();
+                            break;
                     }
-
-
-                    if(minigameChoice == 0){
-                        return;
-                    }
+                    break;
 
 
 
@@ -216,14 +243,20 @@ public class Launcher {
 
 
         }
-        
-        
-
-
-
-
-
-
-
     }
+    
+    
+    private void interactWithPet(Pet pet, Player player) throws InterruptedException {
+        // Đơn giản hơn: gọi phương thức interact() đã được định nghĩa trong mỗi species
+        pet.interact(player);
+    }
+        
+
+
+
+
+
+
+
 }
+

@@ -3,6 +3,7 @@ package Pet;
 import Item.Accessory.*;
 import Utils.typeWriter;
 import House.House;
+import Player.Player;
 
 public abstract class Pet{
     private int petID;       // bao gồm 3 chữ số
@@ -42,6 +43,9 @@ public abstract class Pet{
 
     public abstract void sound();
     public abstract void feeling();
+    
+    
+    public abstract void interact(Player player) throws InterruptedException;
     
 
     public Pet(int petID, String species, String name, int health, int level, int hunger, int mentalHealth, String sex, String item){

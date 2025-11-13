@@ -131,37 +131,47 @@ public class Shop {
         int choice = 9999;
 
         while(choice != 0){
-            typeWriter.write("===== SHOP =====", 50, 150);
-            System.out.println();
-            typeWriter.write("What do you want to buy?", 50, 150);
-            System.out.println();
-            typeWriter.write("1. Food?", 50, 150);
-            typeWriter.write("2. Accessory?", 50, 150);
-            typeWriter.write("3. Furniture?", 50, 150);
-            typeWriter.write("4. House?", 50, 150);
-            typeWriter.write("5. Pet?", 50, 150);
-            System.out.println();
-            typeWriter.write("0. Exit from the shop!", 50, 150);
-            System.out.println();   
+            try {
+                typeWriter.write("===== SHOP =====", 50, 150);
+                System.out.println();
+                typeWriter.write("What do you want to buy?", 50, 150);
+                System.out.println();
+                typeWriter.write("1. Food?", 50, 150);
+                typeWriter.write("2. Accessory?", 50, 150);
+                typeWriter.write("3. Furniture?", 50, 150);
+                typeWriter.write("4. House?", 50, 150);
+                typeWriter.write("5. Pet?", 50, 150);
+                System.out.println();
+                typeWriter.write("0. Exit from the shop!", 50, 150);
+                System.out.println();   
 
-            typeWriter.write("Choose the number of which item you want to buy!", 50, 150);
-            typeWriter.write("-> ", 0);
-            choice = scan.nextInt();
-            
-            if(choice == 0){
-                Thread.sleep(250);
-                typeWriter.write("See you again!", 50, 150);
+                typeWriter.write("Choose the number of which item you want to buy!", 50, 150);
+                typeWriter.write("-> ", 0);
+                
+                if (!scan.hasNextInt()) {
+                    typeWriter.write("Invalid input! Please enter a number.", 50, 150);
+                    scan.nextLine(); // Clear invalid input
+                    Thread.sleep(250);
+                    clearScreen.clear();
+                    continue;
+                }
+                
+                choice = scan.nextInt();
+                
+                if(choice == 0){
+                    Thread.sleep(250);
+                    typeWriter.write("See you again!", 50, 150);
+                    Thread.sleep(250);
+                    clearScreen.clear();
+                    return;
+                }
+
                 Thread.sleep(250);
                 clearScreen.clear();
-                return;
-            }
 
-            Thread.sleep(250);
-            clearScreen.clear();
-
-            int buyOption;
-            int quantity;
-            String confirm;
+                int buyOption;
+                int quantity;
+                String confirm;
 
             switch(choice){
                 case 1:
@@ -310,7 +320,7 @@ public class Shop {
                     
                     typeWriter.write("Would you like to buy a house? (Y/N)", 30, 100);
                     typeWriter.write("-> ", 50);
-                    scan.nextLine();
+                    scan.nextLine(); // Clear newline từ nextInt()
                     confirm = scan.nextLine().toLowerCase().trim();
                     
                     
@@ -332,7 +342,7 @@ public class Shop {
                     System.out.println();
                     typeWriter.write("Would you want to buy an Egg? (Y/N)", 50,150);
                     typeWriter.write("-> ", 50);
-                    scan.nextLine();
+                    scan.nextLine(); // Clear newline từ nextInt()
                     confirm = scan.nextLine().toLowerCase().trim();
 
                     if(confirm.equals("y") || confirm.equals("yes") || confirm.equals("true")){
@@ -353,6 +363,12 @@ public class Shop {
                     clearScreen.clear();
 
                     break;
+            }
+            } catch (Exception e) {
+                typeWriter.write("An error occurred: " + e.getMessage(), 50, 150);
+                scan.nextLine(); // Clear invalid input if any
+                Thread.sleep(250);
+                clearScreen.clear();
             }
         }
     }

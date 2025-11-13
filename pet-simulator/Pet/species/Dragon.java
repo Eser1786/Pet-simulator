@@ -101,4 +101,9 @@ public class Dragon extends Pet implements aerial {
         this.gainedLevel(2);
         this.gainedMentalHealth(10);
     }
+    
+    @Override
+    public void interact(Player player) throws InterruptedException {
+        flyYouAround(player);
+    }
 }
