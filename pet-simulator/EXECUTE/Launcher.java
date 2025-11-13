@@ -62,6 +62,8 @@ public class Launcher {
 
             if(choice == 0){
                 typeWriter.write("Thank you for playing our game!", 50, 150);
+                Thread.sleep(250);
+                clearScreen.clear();
                 return;
             }
 
@@ -107,13 +109,13 @@ public class Launcher {
                             case 1:
                                 pet.feeling();
                                 System.out.println();
-                                typeWriter.write("(press 0 to escape) -> ", 50);
+                                typeWriter.write("(press any number key to escape) -> ", 50);
                                 scan.nextInt();
                                 break;
                             case 2:
                                 pet.sound();
                                 System.out.println();
-                                typeWriter.write("(press 0 to escape) -> ", 50);
+                                typeWriter.write("(press any number key to escape) -> ", 50);
                                 scan.nextInt();
                                 break;
                             case 3:
@@ -158,7 +160,7 @@ public class Launcher {
                                 System.out.println();
                                 
                                 typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
-                                typeWriter.write("-> ", 50, 150);
+                                typeWriter.write("-> ", 50);
                                 scan.nextLine();
                                 String gamePetName = scan.nextLine();
                                 Pet gamePet = petManager.findPetByName(gamePetName);
@@ -189,8 +191,8 @@ public class Launcher {
                                 System.out.println();
                                 
                                 typeWriter.write("Which pet do you want to play with during this minigame", 50, 150);
-                                typeWriter.write("-> ", 50, 150);
-                                scan.nextLine(); // Clear newline
+                                typeWriter.write("-> ", 50);
+                                scan.nextLine(); 
                                 String gamePetName2 = scan.nextLine();
                                 Pet gamePet2 = petManager.findPetByName(gamePetName2);
                                 
