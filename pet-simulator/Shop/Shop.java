@@ -179,7 +179,7 @@ public class Shop {
 
                     foodList.printFoodForShop();
                     
-                    typeWriter.write("Which food do you want to buy?", 10 , 150);
+                    typeWriter.write("Which food do you want to buy? (input the number of the item you want to buy)", 10 , 150);
                     typeWriter.write("-> ", 50 );
                     
                     buyOption = scan.nextInt();

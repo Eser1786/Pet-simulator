@@ -57,7 +57,7 @@ public class Player {
     }
 
 
-    public void mySelf(Player player) throws InterruptedException{
+    public void profile(Player player) throws InterruptedException{
         Scanner scan = new Scanner(System.in);
         typeWriter.write("==== MYSELF ====", 50, 150);
         System.out.println();

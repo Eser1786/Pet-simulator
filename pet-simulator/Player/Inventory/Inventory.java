@@ -99,7 +99,7 @@ public class Inventory {
 
             switch(firstChoice){
                 case 1:
-                    player.mySelf(player);
+                    player.profile(player);
                     break;
                 case 2:
                     this.openInventory(player);
