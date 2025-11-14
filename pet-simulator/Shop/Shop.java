@@ -150,7 +150,7 @@ public class Shop {
                 
                 if (!scan.hasNextInt()) {
                     typeWriter.write("Invalid input! Please enter a number.", 50, 150);
-                    scan.nextLine(); // Clear invalid input
+                    scan.nextLine(); 
                     Thread.sleep(250);
                     clearScreen.clear();
                     continue;
@@ -240,7 +240,7 @@ public class Shop {
                         quantity = scan.nextInt();
                         scan.nextLine();
                         typeWriter.write("That will be ", 50);
-                        textColor.yellowText(quantity * 20 +" coins");
+                        textColor.yellowText(quantity * 25 +" coins");
                         
                         typeWriter.write("Do you sure you want to buy " + quantity + " " + accessory.getItemName() +"? (Y/N)",10,150);
                         typeWriter.write("-> ", 50);
@@ -320,7 +320,7 @@ public class Shop {
                     
                     typeWriter.write("Would you like to buy a house? (Y/N)", 30, 100);
                     typeWriter.write("-> ", 50);
-                    scan.nextLine(); // Clear newline từ nextInt()
+                    scan.nextLine();
                     confirm = scan.nextLine().toLowerCase().trim();
                     
                     
@@ -342,7 +342,7 @@ public class Shop {
                     System.out.println();
                     typeWriter.write("Would you want to buy an Egg? (Y/N)", 50,150);
                     typeWriter.write("-> ", 50);
-                    scan.nextLine(); // Clear newline từ nextInt()
+                    scan.nextLine(); 
                     confirm = scan.nextLine().toLowerCase().trim();
 
                     if(confirm.equals("y") || confirm.equals("yes") || confirm.equals("true")){

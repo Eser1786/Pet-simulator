@@ -229,7 +229,6 @@ public class Inventory {
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);
                     System.out.println();
-                    // typeWriter.write("1. Set house for pet", 50, 150);
                     typeWriter.write("1. Add furniture to house", 50, 150);
                     typeWriter.write("2. Exit", 50, 150);
                     System.out.println();
@@ -246,47 +245,7 @@ public class Inventory {
                     }
 
                     switch(secondChoice){
-                        // case 1:
-                        //     hl.printHouse();
-                        //     System.out.println();
-                        //     typeWriter.write("Choose the house you want to set the pet (use the number of the house)", 50, 150);
-                        //     typeWriter.write("-> ", 50);
-                        //     int index ;
-                        //     index = scan.nextInt();
-                        //     scan.nextLine(); 
-                        //     House house = hl.findHouseByID(index);
-                            
-                        //     if(house!=null){
-                        //         if(house.hasPet()){
-                        //             typeWriter.write("This house already has a pet!", 50, 150);
-                        //         }
-                        //         else{
-                        //             petManager.loadPetFromFile(OWNED_PETS_PATH);
-                        //             petManager.viewAllPets(petManager);
-                        //             System.out.println();
-                        //             String petName;
-                        //             typeWriter.write("Which pet are you going to choose for this house (write the name)", 50, 150);
-                        //             typeWriter.write("-> ", 50);
-                        //             petName = scan.nextLine();
-                        //             Pet pet = petManager.findPetByName(petName);
-                                    
-                        //             if(pet != null){
-                        //                 house.setPet(pet);
-                        //             }
-                        //             else{
-                        //                 typeWriter.write("Pet not found!", 50, 150);
-                        //             }
-                        //         }
-                        //         Thread.sleep(250);
-                        //         clearScreen.clear();
-                        //         break;
-                        //     }
-                        //     else{
-                        //         typeWriter.write("house not found...", 50, 150);
-                        //         Thread.sleep(250);
-                        //         clearScreen.clear();
-                        //         break;
-                        //     }
+                        
                         case 1:
                             hl.printHouse();
                             System.out.println();
@@ -327,21 +286,14 @@ public class Inventory {
                     petManager.loadPetFromFile(OWNED_PETS_PATH);
                     petManager.viewAllPets(petManager);
                     System.out.println();
-                    typeWriter.write("0. To exit", 50, 150);
-                    System.out.println();
-                    typeWriter.write("-> ", 50, 150);
-                    int input;
-                    input = scan.nextInt();
-                    if(input == 0){
-                        Thread.sleep(250);
-                        clearScreen.clear();
-                    }
-                    else{
-                        typeWriter.write("input isn't appropriate", 50, 150);
-                        Thread.sleep(250);
-                        clearScreen.clear();
-                    }
+                    typeWriter.write("Press any key to continue!", 50, 150);
+                    typeWriter.write("-> ", 50);
+                    
+                    scan.nextLine();
+                    Thread.sleep(250);
+                    clearScreen.clear();
                     break;
+                    
 
                 case 7:
                     HouseList houseList = new HouseList();

@@ -18,6 +18,8 @@ import Utils.*;
 public class Launcher {
     public void Start() throws InterruptedException{
         Player player = new Player();
+        player = player.loadPlayer("pet-simulator\\Player\\player.txt");
+        
         PetManager petManager = new PetManager();
         FoodList foodList = new FoodList();
         AccessoryList accessoryList = new AccessoryList();
@@ -32,13 +34,27 @@ public class Launcher {
 
         typeWriter.write("===== WELCOME =====", 50, 150);
         System.out.println();
-        typeWriter.write("This will be the beginning of your journey! Let's start!", 50 , 150);
 
-        player.playerMenu();
-        petManager.buyEgg(player, 0);
-
-        Thread.sleep(250);
-        clearScreen.clear();
+        if(player != null){
+            typeWriter.write("Welcome back " + player.getName() + "!" , 30, 150);
+            typeWriter.write("Let's get started", 30, 150);
+            System.out.println();
+            typeWriter.write("Press any key to continue!", 30, 150);
+            typeWriter.write("-> ",30);
+            scan.nextLine();
+            Thread.sleep(250);
+            clearScreen.clear();
+        }
+        else{
+            player = new Player();
+            typeWriter.write("This will be the beginning of your journey! Let's start!", 50 , 150);
+    
+            player.playerMenu();
+            petManager.buyEgg(player, 0);
+    
+            Thread.sleep(250);
+            clearScreen.clear();
+        }
 
         int choice = 999;
 
@@ -61,6 +77,7 @@ public class Launcher {
             clearScreen.clear();
 
             if(choice == 0){
+                player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                 typeWriter.write("Thank you for playing our game!", 50, 150);
                 Thread.sleep(250);
                 clearScreen.clear();
@@ -94,7 +111,7 @@ public class Launcher {
                         System.out.println();
                         typeWriter.write("0. Exit from interact with pet", 50, 150);
                         System.out.println();
-                        typeWriter.write("What will be your choice?", 50, 150);
+                        typeWriter.write("What will be your choice? (input the number of the choice you want to make)", 50, 150);
                         typeWriter.write("-> ", 50);
                         petChoice = scan.nextInt();
 
@@ -109,17 +126,18 @@ public class Launcher {
                             case 1:
                                 pet.feeling();
                                 System.out.println();
-                                typeWriter.write("(press any number key to escape) -> ", 50);
+                                typeWriter.write("(press any key to escape) -> ", 50);
                                 scan.nextLine();
                                 break;
                             case 2:
                                 pet.sound();
                                 System.out.println();
-                                typeWriter.write("(press any number key to escape) -> ", 50);
+                                typeWriter.write("(press any key to escape) -> ", 50);
                                 scan.nextLine();
                                 break;
                             case 3:
                                 interactWithPet(pet, player);
+                                player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                                 break;
                         }
      
@@ -127,6 +145,7 @@ public class Launcher {
                 case 2:
                     Shop shop = new Shop();
                     shop.menuShop(player);
+                    player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                     break;
                 case 3:
                     Inventory inventory = new Inventory();
@@ -149,6 +168,7 @@ public class Launcher {
                     if(minigameChoice == 0){
                         Thread.sleep(250);
                         clearScreen.clear();
+                        
                         break;
                     }
 
@@ -174,6 +194,7 @@ public class Launcher {
                                 
                                 AniQuiz aniQuiz = new AniQuiz();
                                 aniQuiz.playAniQuiz(player, gamePet);
+                                player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                                 
                                 Thread.sleep(250);
                                 clearScreen.clear();
@@ -205,6 +226,7 @@ public class Launcher {
                                 
                                 SpeedMath speedMath = new SpeedMath();
                                 speedMath.playSpeedMath(player, gamePet2);
+                                player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                                 
                                 Thread.sleep(250);
                                 clearScreen.clear();
@@ -223,33 +245,13 @@ public class Launcher {
                     }
                     break;
 
-
-
-
-
-
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
     }
     
     
     private void interactWithPet(Pet pet, Player player) throws InterruptedException {
-        // Đơn giản hơn: gọi phương thức interact() đã được định nghĩa trong mỗi species
         pet.interact(player);
     }
         

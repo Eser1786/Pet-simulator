@@ -1,6 +1,7 @@
 package Player;
 
 
+import java.io.*;
 import java.util.*;
 
 import Utils.clearScreen;
@@ -98,15 +99,32 @@ public class Player {
     }
 
 
+    public Player loadPlayer(String filePath){
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+            String line;
+            if((line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+                if(parts.length == 2){
+                    String name = parts[0].trim();
+                    int coin = Integer.parseInt(parts[1].trim());
+                    Player player = new Player(name, coin);
+                    return player;
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
-
-
-
-
-
-
-
-
+    public void savePlayer(Player player,String filePath){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
+            String line = player.getName() + "|" + player.getCoin();
+            bw.write(line);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
 }

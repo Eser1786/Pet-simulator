@@ -13,6 +13,7 @@ public class textColor {
     public static final String ORANGE = "\u001B[38;5;208m";
 
 
+    
 
     public static void redText(String line) throws InterruptedException{
         typeWriter.write(RED + line + RESET, 50,150);

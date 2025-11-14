@@ -30,10 +30,5 @@ public class typeWriter {
                 Thread.sleep(timeWaitTillNextWord);
             }
         }
-
-
-
-
-
     }
 }

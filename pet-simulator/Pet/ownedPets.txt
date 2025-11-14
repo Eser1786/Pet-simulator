@@ -1,4 +1,1 @@
-901|T-rex|rarh|0|100|0|100|female|null
-301|parrot|rober|0|100|0|100|male|null
-601|dragon|rahtel|0|100|0|100|male|null
-101|dog|87|0|100|0|100|male|null
+901|T-rex|mortal|0|100|0|100|female|null

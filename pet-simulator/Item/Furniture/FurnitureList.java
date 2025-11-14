@@ -14,17 +14,17 @@ public class FurnitureList {
 
     
     private int generateID(String name){   
-        switch(name){
-            case "chair": return 100;
-            case "table": return 200;
-            case "sofa":  return 300;
-            case "TV":  return 400;
-            case "radio": return 500;
-            case "bookshelf": return 600;
-            case "lamp": return 700;
-            case "bed": return 800;
-            case "rug": return 900;
-            default: return 1000;
+        switch(name.toLowerCase()){
+            case "chair": return 1;
+            case "table": return 2;
+            case "sofa":  return 3;
+            case "TV":  return 4;
+            case "radio": return 5;
+            case "bookshelf": return 6;
+            case "lamp": return 7;
+            case "bed": return 8;
+            case "rug": return 9;
+            default: return 10;
         }
     }
         
@@ -355,7 +355,7 @@ public class FurnitureList {
     }
     public Furniture findFurnitureByName(String name){
         for(Furniture furniture : ownedFur){
-            if(furniture.getItemName().toLowerCase() == name.toLowerCase()){
+            if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name)){
                 return furniture;
             }
         }

@@ -252,6 +252,11 @@ public class PetManager {
 
     public void buyEgg(Player player, int cost) throws InterruptedException{
 
+        if(cost == 0){
+            typeWriter.write("You have received an egg! \n", 30, 150);
+
+        }
+
         if(player.getCoin() < cost){
             typeWriter.write(player.getName() + " doesn't have enough coin for this item", 50, 150);
             typeWriter.write("Come back when you have enough coin!", 50, 150);
@@ -259,7 +264,9 @@ public class PetManager {
         }
 
         player.setCoin(player.getCoin() - cost);
-        typeWriter.write("You bought an egg!", 50, 150);
+        if(cost > 0){
+            typeWriter.write("You bought an egg! \n", 50, 150);
+        }
         typeWriter.write("The egg is hatching!", 50, 150);
         typeWriter.write("............", 450, 150);
         
@@ -274,8 +281,8 @@ public class PetManager {
         typeWriter.write("====== PETS ======", 50, 150);
         System.out.println();
         for(Pet pet : ownedPet){
-            typeWriter.write(pet.getName(), 50, 150);
-            typeWriter.write(" | Species: " + pet.getSpecies(), 50);
+            typeWriter.write( textColor.PURPLE + pet.getName() + textColor.RESET, 50, 150);
+            typeWriter.write(" | Species: " + textColor.RED + pet.getSpecies() + textColor.RESET, 50);
 
             typeWriter.write(" | Gender: " + pet.getSex() , 50,150);
 
@@ -292,10 +299,10 @@ public class PetManager {
                 typeWriter.write(" | Accessory: none" , 50);
             }
             else{
-                typeWriter.write(" | Accessory: " + pet.getItem() , 50);
+                typeWriter.write(" | Accessory: " + textColor.BLUE + pet.getItem() +textColor.RESET, 50);
             }
             System.out.println();
-             System.out.println();
+            System.out.println();
         }
     }
 
@@ -403,8 +410,8 @@ public class PetManager {
     public void viewOnePet(Pet pet) throws InterruptedException{
         typeWriter.write("=== PET ===", 50, 150);
         System.out.println();
-        typeWriter.write(pet.getName(), 50, 150);
-        typeWriter.write(" | Species: " + pet.getSpecies(), 50);
+        typeWriter.write( textColor.PURPLE +  pet.getName() + textColor.RESET , 50, 150);
+        typeWriter.write(" | Species: " + textColor.RED + pet.getSpecies() + textColor.RESET, 50);
 
         typeWriter.write(" | Gender: " + pet.getSex() , 50,150);
 
@@ -421,7 +428,7 @@ public class PetManager {
             typeWriter.write(" | Accessory: none" , 50);
         }
         else{
-            typeWriter.write(" | Accessory: " + pet.getItem() , 50);
+            typeWriter.write(" | Accessory: " + textColor.ORANGE + pet.getItem() + textColor.RESET , 50);
         }
         System.out.println();
         System.out.println();
