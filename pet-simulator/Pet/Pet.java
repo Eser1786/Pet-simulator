@@ -126,7 +126,7 @@ public abstract class Pet{
         if(this.getMentalHealth() >100){
             this.setMentalHealth(100);
         }
-        else if(this.getMentalHealth() < 100){
+        else if(this.getMentalHealth() < 0){
             this.setMentalHealth(0);
         }
 
@@ -137,7 +137,7 @@ public abstract class Pet{
 
     public void showLevelBar(int currentLevel) {  
         int maxLevel = 100;
-        int barLength = 10;
+        int barLength = 30;
         int filledLength = (int) ((double) currentLevel / maxLevel * barLength);
 
         StringBuilder bar = new StringBuilder("[");
