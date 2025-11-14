@@ -136,8 +136,8 @@ public abstract class Pet{
     }
 
     public void showLevelBar(int currentLevel) {  
-        int maxLevel = 100;
-        int barLength = 30;
+        int maxLevel = 10;
+        int barLength = 50;
         int filledLength = (int) ((double) currentLevel / maxLevel * barLength);
 
         StringBuilder bar = new StringBuilder("[");
@@ -148,7 +148,7 @@ public abstract class Pet{
                 bar.append("-");
             }
         }
-        bar.append("] Level ").append(currentLevel).append("/").append(maxLevel);
+        bar.append("] \nLevel ").append(currentLevel).append("/").append(100);
 
         try {
             typeWriter.write(bar.toString(), 30, 150);
@@ -180,7 +180,7 @@ public abstract class Pet{
 
 
 
-
+THÁI ANH ĐẸP TRAI
 
 
 
