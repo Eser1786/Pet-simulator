@@ -118,6 +118,10 @@ public class HouseList {
         return ownedHouse.size()+1;
     }
 
+    public int getHouseCount(){
+        return ownedHouse.size();
+    }
+
     
     public void addHouse(){
         int newHouseID = generateHouseID();

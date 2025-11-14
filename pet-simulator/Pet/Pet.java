@@ -122,13 +122,22 @@ public abstract class Pet{
     public void gainedMentalHealth(int mentalHealth) throws InterruptedException{
         typeWriter.write( this.name + " gained " + mentalHealth +" mental health!", 50, 150);
         this.setMentalHealth(this.getMentalHealth() + mentalHealth);
+
+        if(this.getMentalHealth() >100){
+            this.setMentalHealth(100);
+        }
+        else if(this.getMentalHealth() < 100){
+            this.setMentalHealth(0);
+        }
+
+
         typeWriter.write(this.getMentalHealth() + "/100 mental health",50,150);
         System.out.println();
     }
 
     public void showLevelBar(int currentLevel) {  
         int maxLevel = 100;
-        int barLength = 30;
+        int barLength = 10;
         int filledLength = (int) ((double) currentLevel / maxLevel * barLength);
 
         StringBuilder bar = new StringBuilder("[");

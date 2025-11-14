@@ -225,7 +225,20 @@ public class Inventory {
                     HouseList hl = new HouseList();
                     hl.loadHouse();
                     furnitureList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
+
+                    if(hl.findHouseByID(1) == null){
+                        typeWriter.write("You don't have any house... please buy one before checking?", 30, 150);
+                        System.out.println();
+                        typeWriter.write("Press any key to continue", 30, 150);
+                        typeWriter.write("-> ", 30);
+                        scan.nextLine();
+                        break;
+                    }
+
+
+
                     furnitureList.printListFurniture();
+
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);
                     System.out.println();
@@ -298,6 +311,14 @@ public class Inventory {
                 case 7:
                     HouseList houseList = new HouseList();
                     houseList.loadHouse();
+                    
+                    if(houseList.getHouseCount() == 0){
+                        typeWriter.write("You don't have any house yet! Please buy a house from the shop.", 50, 150);
+                        Thread.sleep(250);
+                        clearScreen.clear();
+                        break;
+                    }
+                    
                     houseList.printHouse();
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);

@@ -58,7 +58,7 @@ public class House {
 
         for(Furniture furniture : furnitureList){
             if(furniture.getComfort() == 0){
-                // Lookup comfort from FurnitureList if not set
+                
                 FurnitureList furList = new FurnitureList();
                 int comfort = furList.findComfortByName(furniture.getItemName());
                 furniture.setComfort(comfort);

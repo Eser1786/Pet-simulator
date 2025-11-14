@@ -374,7 +374,7 @@ public class PetManager {
         int index=0;
         for(Pet pet : ownedPet){
             typeWriter.write(index + 1 + ". ", 50);
-            textColor.orangeText(pet.getSpecies());
+            textColor.orangeText( textColor.RED + pet.getSpecies() + textColor.RESET);
             typeWriter.write(" | cost: ", 50);
             textColor.yellowText(30 + " coins");
             System.out.println();
@@ -397,12 +397,23 @@ public class PetManager {
             return;
         }
 
-        typeWriter.write(pet.getName() + " has eaten the " + food.getItemName(), 50, 150);
+        typeWriter.write(textColor.PURPLE + pet.getName()  + textColor.RESET + " has eaten the " + food.getItemName(), 50, 150);
         pet.setHunger(pet.getHunger() - food.getSat());
+        pet.setHealth(pet.getHealth() + 20);
+        if(pet.getHealth() > 100){
+            pet.setHealth(100);
+        }
+        
+
+
         if(pet.getHunger() < 0){
             pet.setHunger(0);
         }
-        typeWriter.write(pet.getName() + " hunger: " + pet.getHunger(), 50, 150);
+        else if(pet.getHunger() > 100){
+            pet.setHunger(100);
+        }
+        typeWriter.write( textColor.PURPLE + pet.getName()  + textColor.RESET + " hunger: " + textColor.ORANGE +pet.getHunger() + textColor.RESET, 50, 150);
+        typeWriter.write( textColor.PURPLE +   pet.getName() + textColor.RESET +" health: " + textColor.GREEN  + pet.getHealth()  + textColor.RESET , 50, 150);
         food.setQuantity(food.getQuantity()-1);
     }
 
