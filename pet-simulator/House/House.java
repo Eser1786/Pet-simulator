@@ -55,8 +55,15 @@ public class House {
             System.out.println();
             return;
         }
-            
+
         for(Furniture furniture : furnitureList){
+            if(furniture.getComfort() == 0){
+                // Lookup comfort from FurnitureList if not set
+                FurnitureList furList = new FurnitureList();
+                int comfort = furList.findComfortByName(furniture.getItemName());
+                furniture.setComfort(comfort);
+            }
+            
             typeWriter.write("- ", 50);
             textColor.yellowText(furniture.getItemName());
             typeWriter.write(" | Comfort: ", 50);
