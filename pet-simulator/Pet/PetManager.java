@@ -72,7 +72,7 @@ public class PetManager {
     //  Lưu các thông tin của pet vào 1 file riêng 
     private void savePetToFile(Pet pet, String filePath){
         try( BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))){
-            String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
+            String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getHealth() + "|" + pet.getLevel() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
             bw.write(line);
             bw.newLine();
         } catch (IOException e){
@@ -83,7 +83,7 @@ public class PetManager {
     public void saveAllPets(String filePath){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
             for(Pet pet : ownedPet){
-                String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
+                String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getHealth() + "|" + pet.getLevel() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
                 bw.write(line);
                 bw.newLine();
             }
@@ -105,8 +105,8 @@ public class PetManager {
                     int petID = Integer.parseInt(parts[0]);
                     String species = parts[1];
                     String name = parts[2];
-                    int level = Integer.parseInt(parts[3]);
-                    int health = Integer.parseInt(parts[4]);
+                    int health = Integer.parseInt(parts[3]);
+                    int level = Integer.parseInt(parts[4]);
                     int hunger = Integer.parseInt(parts[5]);
                     int mentalHealth = Integer.parseInt(parts[6]);
                     String sex = parts[7];

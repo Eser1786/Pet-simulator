@@ -81,7 +81,7 @@ public class Launcher {
                 typeWriter.write("Thank you for playing our game!", 50, 150);
                 Thread.sleep(250);
                 clearScreen.clear();
-                return;
+                break;
             }
 
             switch(choice){

@@ -130,7 +130,6 @@ public abstract class Pet{
             this.setMentalHealth(0);
         }
 
-
         typeWriter.write(this.getMentalHealth() + "/100 mental health",50,150);
         System.out.println();
     }

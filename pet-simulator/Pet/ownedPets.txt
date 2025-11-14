@@ -1,1 +1,0 @@
-901|T-rex|mortal|0|100|0|100|female|null
