@@ -308,6 +308,9 @@ public class PetManager {
             typeWriter.write(" | Hunger: " ,50 );
             textColor.orangeText(pet.getHunger());
 
+            typeWriter.write(" | Mental health: " ,50 );
+            textColor.blueText(pet.getMentalHealth());
+
             if("null".equals(pet.getItem())){
                 typeWriter.write(" | Accessory: none" , 50);
             }
@@ -447,6 +450,9 @@ public class PetManager {
 
         typeWriter.write(" | Hunger: " ,50 );
         textColor.orangeText(pet.getHunger());
+
+        typeWriter.write(" | Mental health: " ,50 );
+        textColor.blueText(pet.getMentalHealth());
 
         if(pet.getItem().equals("null")){
             typeWriter.write(" | Accessory: none" , 50);
