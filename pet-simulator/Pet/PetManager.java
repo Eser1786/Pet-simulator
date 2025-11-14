@@ -417,8 +417,6 @@ public class PetManager {
         pet.setHunger(pet.getHunger() - food.getSat());
         
        
-
-
         if(pet.getHunger() < 0){
             pet.setHunger(0);
         }

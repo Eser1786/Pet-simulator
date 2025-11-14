@@ -111,7 +111,7 @@ public class Shark extends Pet implements aquatic {
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);
         this.gainedLevel(2);
         this.gainedMentalHealth(10);
-        this.setHunger(this.getHunger()-20);
+        this.addHunger(20);
     }
     
     @Override
