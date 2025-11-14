@@ -31,7 +31,7 @@ public class Player {
 
     public void seeCoin() throws InterruptedException{
         typeWriter.write("Coins left: ", 50);
-        textColor.yellowText(getCoin());    
+        textColor.yellowText(getCoin() + " coins");    
         System.out.println();
     }
 

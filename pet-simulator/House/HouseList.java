@@ -54,7 +54,7 @@ public class HouseList {
                     if(petID != -999){
                         Pet pet = petManager.findPetByID(petID);
                         if(pet!=null){
-                            house.setPet(pet);
+                            house.setPetSilent(pet);
                         }
                     }
 
@@ -64,7 +64,7 @@ public class HouseList {
                             furList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
                             Furniture furniture = furList.findFurByID(furID);
                             if(furniture != null){
-                                house.addFurniture(furniture);
+                                house.addFurnitureSilent(furniture);
                             }
                         }
                     }
@@ -88,8 +88,8 @@ public class HouseList {
 
                     ArrayList<Furniture> furnitures = house.getFurnitureList();
                     int fur1ID = furnitures.size() > 0 ? furnitures.get(0).getItemID() : -999;
-                    int fur2ID = furnitures.size() > 0 ? furnitures.get(1).getItemID() : -999;
-                    int fur3ID = furnitures.size() > 0 ? furnitures.get(2).getItemID() : -999;
+                    int fur2ID = furnitures.size() > 1 ? furnitures.get(1).getItemID() : -999;
+                    int fur3ID = furnitures.size() > 2 ? furnitures.get(2).getItemID() : -999;
 
                     String line = houseID + "|" + petID + "|" + fur1ID + "|" + fur2ID + "|" + fur3ID;
                     bw.write(line);
@@ -160,6 +160,7 @@ public class HouseList {
             }  
             
             FurnitureList furList = new FurnitureList();
+            furList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
             Furniture furniture = furList.findFurByID(furID);
             if(furniture!=null){
                 target.addFurniture(furniture);
@@ -189,7 +190,9 @@ public class HouseList {
     }
 
     public void printHouse() throws InterruptedException{
-        loadHouse();
+        if(ownedHouse.isEmpty()){
+            loadHouse();
+        }
         PetManager pm = new PetManager();
         int index = 1;
         for(House house : ownedHouse){

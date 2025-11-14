@@ -146,52 +146,8 @@ public class PetManager {
 
     public Pet findPetByID(int petID){
         for(Pet pet : ownedPet){
-            switch(pet.getSpecies().toLowerCase()){
-                case "dog":
-                    if(pet.getPetID() == 100 + petID){
-                        return pet;
-                    }
-                    break;
-                case "cat":
-                    if(pet.getPetID() == 200 + petID){
-                        return pet;
-                    }
-                    break;
-                case "parrot":
-                    if(pet.getPetID() == 300 + petID){
-                        return pet;
-                    }
-                    break;
-                case "shark":
-                    if(pet.getPetID() == 400 + petID){
-                        return pet;
-                    }
-                    break;
-                case "frog":
-                    if(pet.getPetID() == 500 + petID){
-                        return pet;
-                    }
-                    break;
-                case "dragon":
-                    if(pet.getPetID() == 600 + petID){
-                        return pet;
-                    }
-                    break;
-                case "mole":
-                    if(pet.getPetID() == 700 + petID){
-                        return pet;
-                    }
-                    break;
-                case "axolotl":
-                    if(pet.getPetID() == 800 + petID){
-                        return pet;
-                    }
-                    break;
-                case "t-rex":
-                    if(pet.getPetID() == 900 + petID){
-                        return pet;
-                    }
-                    break;
+            if(pet.getPetID() == petID){
+                return pet;
             }
         }
         return null;

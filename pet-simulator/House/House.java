@@ -35,6 +35,17 @@ public class House {
         return true;
     }
 
+    public boolean addFurnitureSilent(Furniture furniture){
+        if(furniture == null){
+            return false;
+        }
+        if(furnitureList.size() >= 3){
+            return false;
+        }
+        furnitureList.add(furniture);
+        return true;
+    }
+
     public void seeFurniture() throws InterruptedException{
         typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 50, 150);
         System.out.println();
@@ -91,6 +102,17 @@ public class House {
         }
         this.pet = pet;
         typeWriter.write(pet.getName() + " is now the owner of this house!", 50, 150);
+        pet.setHouse(this);
+    }
+
+    public void setPetSilent(Pet pet) throws InterruptedException{
+        if(pet == null){
+            return;
+        }
+        if(this.pet != null){
+            return;
+        }
+        this.pet = pet;
         pet.setHouse(this);
     }
 

@@ -425,6 +425,7 @@ public class Inventory {
                             house = houseList.findHouseByID(index);
                             
                             if(house!=null){
+                                furnitureList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
                                 furnitureList.printListFurniture();
                                 String furName;
                                 typeWriter.write("Type the name of the furniture you want to add (type the name)", 50, 150);

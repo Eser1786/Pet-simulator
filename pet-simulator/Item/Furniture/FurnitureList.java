@@ -226,17 +226,42 @@ public class FurnitureList {
         return 0;
     }
 
+    public int findComfortByName(String name){
+        try(BufferedReader br = new BufferedReader(new FileReader(FURNITURE_PATH))){
+            String line;
+
+            while( (line = br.readLine()) != null){
+                String[] parts = line.split("\\|");
+
+                if(parts.length == 3){
+                    String furName = parts[1].trim();
+                    int comfort = Integer.parseInt(parts[2].trim());
+
+                    if(furName.toLowerCase().equals(name.toLowerCase())){
+                        return comfort;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
 
     public void printListFurniture() throws InterruptedException{       //for inventory
         System.out.println();
         typeWriter.write("======= FURNITURE SECTION =======", 50, 300);
+        ownedFur.clear();
         loadFur(OWNED_FURNITURE_PATH);
 
         int j = 0;
 
         for(Furniture a : ownedFur){
-            a.setComfort(findComfort(a.getItemID()/100));
+            if(a.getComfort() == 0){
+                a.setComfort(findComfortByName(a.getItemName()));
+            }
 
             typeWriter.write("Name: ", 50);
             textColor.yellowText(a.getItemName());
