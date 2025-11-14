@@ -113,7 +113,7 @@ public class FoodList {
         loadFood(OWNED_FOOD_PATH);
         for(Food food : ownedFood){
             // pet.getName() != null && pet.getName().equalsIgnoreCase(name)
-            if(food.getItemName() != null && food.getItemName().equalsIgnoreCase(name)){
+            if(food.getItemName() != null && food.getItemName().equalsIgnoreCase(name) && food.getQuantity() > 0){
                 return food;
             }
         }

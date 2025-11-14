@@ -355,7 +355,7 @@ public class FurnitureList {
     }
     public Furniture findFurnitureByName(String name){
         for(Furniture furniture : ownedFur){
-            if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name)){
+            if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name) && furniture.getQuantity() > 0){
                 return furniture;
             }
         }

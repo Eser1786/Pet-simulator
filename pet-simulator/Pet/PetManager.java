@@ -80,6 +80,18 @@ public class PetManager {
         }
     }
 
+    public void saveAllPets(String filePath){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
+            for(Pet pet : ownedPet){
+                String line = pet.getPetID() + "|" + pet.getSpecies() + "|" + pet.getName() + "|" + pet.getLevel() + "|" + pet.getHealth() + "|" + pet.getHunger() + "|" + pet.getMentalHealth() + "|" + pet.getSex() +"|" + pet.getItem();
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     // Đọc lại danh sách pets đã sỡ hữu
     public void loadPetFromFile(String filePath){
         ownedPet.clear();
@@ -228,7 +240,7 @@ public class PetManager {
                                 pet.setSex("female");
                             }
 
-                            typeWriter.write("What will be the " + pet.getSpecies() + " name?", 50, 150);
+                            typeWriter.write("What will be the " + textColor.RED+  pet.getSpecies() + textColor.RESET + " name?", 50, 150);
                             typeWriter.write("-> ",50);
                             pet.setName(scan.nextLine());
                             pet.setHealth(100);

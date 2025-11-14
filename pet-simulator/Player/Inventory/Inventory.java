@@ -150,6 +150,20 @@ public class Inventory {
                     break;
                 case 4: 
                     accessoryList.loadAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+
+                    if(accessoryList.findAccessoryByID(1) == null){
+                        typeWriter.write("You don't have any accessory....Please buy any in the shop", 30, 150);
+                        System.out.println();
+                        typeWriter.write("Press any key to continue", 30, 150);
+                        typeWriter.write("-> ", 30);
+                        scan.nextLine();
+                        Thread.sleep(250);
+                        clearScreen.clear();
+                        break;
+                    }
+
+
+
                     accessoryList.printListAccessory();
                     System.out.println();
                     typeWriter.write("What do you want to do?", 50, 150);
@@ -189,6 +203,7 @@ public class Inventory {
                         
                         if(pet != null && accessory != null){
                             pet.equipAccessory(accessory);
+                            petManager.saveAllPets(OWNED_PETS_PATH);
                         }
                         else{
                             if(pet == null) typeWriter.write("Pet not found!", 50, 150);
@@ -211,6 +226,7 @@ public class Inventory {
                         Pet pet = petManager.findPetByName(petName);
                         if(pet != null){
                             pet.unequipAccessory();
+                            petManager.saveAllPets(OWNED_PETS_PATH);
                         }
                         else{
                             typeWriter.write("Pet not found!", 50, 150);
@@ -225,18 +241,17 @@ public class Inventory {
                     HouseList hl = new HouseList();
                     hl.loadHouse();
                     furnitureList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
-
-                    if(hl.findHouseByID(1) == null){
-                        typeWriter.write("You don't have any house... please buy one before checking?", 30, 150);
+                    if(furnitureList.findFurByID(1) == null){
+                        typeWriter.write("You don't have any furniture... please buy one before checking?", 30, 150);
                         System.out.println();
                         typeWriter.write("Press any key to continue", 30, 150);
                         typeWriter.write("-> ", 30);
                         scan.nextLine();
+                        Thread.sleep(250);
+                        clearScreen.clear();
                         break;
                     }
-
-
-
+                    
                     furnitureList.printListFurniture();
 
                     System.out.println();

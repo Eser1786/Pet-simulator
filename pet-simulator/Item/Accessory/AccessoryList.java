@@ -113,7 +113,7 @@ public class AccessoryList {
     public Accessory findAccessoryByName(String name){
         for(Accessory accessory : ownedAccessory){
             // pet.getName() != null && pet.getName().equalsIgnoreCase(name)
-            if(accessory.getItemName()!= null && accessory.getItemName().equalsIgnoreCase(name)){
+            if(accessory.getItemName()!= null && accessory.getItemName().equalsIgnoreCase(name) && accessory.getQuantity() > 0){
                 return accessory;
             }
             
