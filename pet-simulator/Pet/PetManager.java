@@ -242,11 +242,12 @@ public class PetManager {
 
                             typeWriter.write("What will be the " + textColor.RED+  pet.getSpecies() + textColor.RESET + " name?", 50, 150);
                             typeWriter.write("-> ",50);
+                            Random rd = new Random();
                             pet.setName(scan.nextLine());
-                            pet.setHealth(100);
-                            pet.setHunger(0);
+                            pet.setHealth(rd.nextInt(100) + 1);
+                            pet.setHunger(rd.nextInt(100) + 1);
                             pet.setLevel(0);
-                            pet.setMentalHealth(100);
+                            pet.setMentalHealth(rd.nextInt(100) + 1);
                             pet.setItem(null);
                             
                             
