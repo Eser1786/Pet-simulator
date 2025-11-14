@@ -34,6 +34,7 @@ public class HouseList {
 
 
     public void loadHouse() throws InterruptedException{
+        petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
         try( BufferedReader br = new BufferedReader(new FileReader(OWNED_HOUSE_PATH))){
             String line;
 
@@ -60,6 +61,7 @@ public class HouseList {
                     for(int furID : new int[]{fur1ID, fur2ID, fur3ID}){
                         if(furID != -999){
                             FurnitureList furList = new FurnitureList();
+                            furList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
                             Furniture furniture = furList.findFurByID(furID);
                             if(furniture != null){
                                 house.addFurniture(furniture);

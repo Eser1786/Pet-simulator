@@ -225,7 +225,7 @@ public class Shop {
                     AccessoryList al = new AccessoryList();
                     al.printAccessoryForShop();
 
-                    typeWriter.write("Which accessory do you want to buy?", 10 , 150);
+                    typeWriter.write("Which accessory do you want to buy? (input the number of the item you want to buy)", 10 , 150);
                     typeWriter.write("-> ", 50 );
                     
                     buyOption = scan.nextInt();
@@ -273,14 +273,14 @@ public class Shop {
                     FurnitureList fl = new FurnitureList();
                     fl.printFurForShop();
 
-                    typeWriter.write("Which furniture do you want to buy?", 10 , 150);
+                    typeWriter.write("Which furniture do you want to buy? (input the number of the item you want to buy)", 10 , 150);
                     typeWriter.write("-> ", 50 );
                     
                     buyOption = scan.nextInt();
                     scan.nextLine();
                     
                     Furniture fur = new Furniture();
-                    fur = fl.findFurByID(buyOption);
+                    fur = fl.findFurByIndex(buyOption);
                     
                     if(fur!=null){
                         typeWriter.write("how many item do you want to buy? ", 10, 150);
@@ -288,14 +288,14 @@ public class Shop {
                         quantity = scan.nextInt();
                         scan.nextLine();
                         typeWriter.write("That will be ", 50);
-                        textColor.yellowText(quantity * 20 +" coins");
+                        textColor.yellowText(quantity * 30 +" coins");
                         
                         typeWriter.write("Do you sure you want to buy " + quantity + " " + fur.getItemName() +"? (Y/N)",10,150);
                         typeWriter.write("-> ", 50);
                         confirm = scan.nextLine().toLowerCase();
                         
                         if(confirm.equals("y") || confirm.equals("yes") || confirm.equals("true")){
-                            buyFurniture(player,buyOption,quantity,25);
+                            buyFurniture(player,buyOption,quantity,30);
                         }
                         else if(confirm.equals("no") || confirm.equals("false")|| confirm.equals("n")){
                             typeWriter.write("Thank you for checking by!", 50   , 150);

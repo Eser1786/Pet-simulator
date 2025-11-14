@@ -33,9 +33,11 @@ public class FurnitureList {
     public void saveFur(String filePath){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
             for(Furniture fur : ownedFur){
-                String line = fur.getItemID() + "|" + fur.getItemName() + "|" + fur.getQuantity();
-                bw.write(line);
-                bw.newLine();
+                if(fur.getQuantity() > 0){
+                    String line = fur.getItemID() + "|" + fur.getItemName() + "|" + fur.getQuantity();
+                    bw.write(line);
+                    bw.newLine();
+                }
             }
             }catch (IOException e){
             e.getMessage();
@@ -90,6 +92,7 @@ public class FurnitureList {
 
 
     public Furniture findFurByID(int id){
+        loadFur(OWNED_FURNITURE_PATH);
         for(Furniture a : ownedFur){
             if(a.getItemID() == id){
                 return a;
@@ -98,12 +101,48 @@ public class FurnitureList {
         return null;
     }
 
-    public String findFurnitureNameByID(int id){
-        loadFur(OWNED_FURNITURE_PATH);
-        for(Furniture a : ownedFur){
-            if(a.getItemID() == id*100){
-                return a.getItemName();
+    public Furniture findFurByIndex(int index){
+        try(BufferedReader br = new BufferedReader(new FileReader(FURNITURE_PATH))){
+            String line;
+            int count = 0;
+            while( (line = br.readLine())!=null){
+                String[] parts = line.split("\\|");
+                if(parts.length == 3){
+                    count++;
+                    if(count == index){
+                        int furID = Integer.parseInt(parts[0].trim());
+                        String furName = parts[1].trim();
+                        int Comfort = Integer.parseInt(parts[2].trim());
+                        Furniture fur = new Furniture();
+                        fur.setItemID(generateID(furName));
+                        fur.setItemName(furName);
+                        fur.setComfort(Comfort);
+                        return fur;
+                    }
+                }
             }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String findFurnitureNameByID(int index){
+        try(BufferedReader br = new BufferedReader(new FileReader(FURNITURE_PATH))){
+            String line;
+            int count = 0;
+            while( (line = br.readLine())!=null){
+                String[] parts = line.split("\\|");
+                if(parts.length == 3){
+                    count++;
+                    if(count == index){
+                        String furName = parts[1].trim();
+                        return furName;
+                    }
+                }
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
         return null;
     }
@@ -228,7 +267,7 @@ public class FurnitureList {
 
     public void removeFurniture(int FurnitureID, int quantity) throws InterruptedException{
         loadFur(OWNED_FURNITURE_PATH);
-        Furniture target = findFurByID(FurnitureID * 100);
+        Furniture target = findFurByID(FurnitureID);
         if(target == null){
             typeWriter.write("This item doesn't exist...?", 50,300);
             return;

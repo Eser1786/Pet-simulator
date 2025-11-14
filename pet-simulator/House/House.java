@@ -22,8 +22,12 @@ public class House {
     private ArrayList<Furniture> furnitureList = new ArrayList<>();
 
     public boolean addFurniture(Furniture furniture) throws InterruptedException{
+        if(furniture == null){
+            typeWriter.write("Furniture cannot be null!", 50, 150);
+            return false;
+        }
         if(furnitureList.size() >= 3){
-            typeWriter.write("This house already has enough furnitures!", 500,1000);
+            typeWriter.write("This house already has enough furnitures!", 50, 150);
             return false;
         }
         furnitureList.add(furniture);
@@ -32,16 +36,25 @@ public class House {
     }
 
     public void seeFurniture() throws InterruptedException{
-        typeWriter.write("=== FURNITURE OF THIS HOUSE ===", id, id);
+        typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 50, 150);
         System.out.println();
         
+        if(furnitureList.isEmpty()){
+            typeWriter.write("This house has no furniture yet.", 50, 150);
+            System.out.println();
+            return;
+        }
+        
         for(Furniture furniture : furnitureList){
+            typeWriter.write("- ", 50);
             textColor.yellowText(furniture.getItemName());
-            typeWriter.write(" | " , 50);
-            textColor.blueText(furniture.getComfort());
+            typeWriter.write(" | Comfort: ", 50);
+            textColor.blueText(String.valueOf(furniture.getComfort()));
             System.out.println();
         }
-        typeWriter.write("Total comfort of this house is " + sumOfComfort(), 50, 300);
+        typeWriter.write("Total comfort of this house: ", 50);
+        textColor.orangeText(String.valueOf(sumOfComfort()));
+        System.out.println();
     }
 
     public int sumOfComfort(){
@@ -68,22 +81,21 @@ public class House {
     private Pet pet;
 
     public void setPet(Pet pet) throws InterruptedException{
-        if(this.pet != null){
-            typeWriter.write("This house already has a pet !", 50, 150);
+        if(pet == null){
+            typeWriter.write("Pet cannot be null!", 50, 150);
             return;
         }
-        else{
-            this.pet = pet;
-            typeWriter.write( pet.getName() + " is now the owner of this house!", 50, 150);
-            pet.setHouse(this);
+        if(this.pet != null){
+            typeWriter.write("This house already has a pet!", 50, 150);
+            return;
         }
+        this.pet = pet;
+        typeWriter.write(pet.getName() + " is now the owner of this house!", 50, 150);
+        pet.setHouse(this);
     }
 
     public boolean hasPet(){
-        if(this.pet != null){
-            return true;
-        }
-        return false;
+        return this.pet != null;
     }
 
     public Pet getPet(){
