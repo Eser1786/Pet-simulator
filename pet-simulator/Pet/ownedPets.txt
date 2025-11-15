@@ -1,1 +1,1 @@
-601|dragon|rumble|1|4|75|41|female|null
+601|dragon|rumble|26|4|50|41|female|null
