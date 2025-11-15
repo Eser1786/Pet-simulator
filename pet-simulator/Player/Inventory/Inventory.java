@@ -306,7 +306,11 @@ public class Inventory {
                                 Furniture furniture = furnitureList.findFurnitureByName(furName);
                                 
                                 if(furniture != null){
-                                    house.addFurniture(furniture);
+                                    boolean added = house.addFurniture(furniture);
+                                    if(added){
+                                        
+                                        furnitureList.removeFurniture(furniture.getItemID()/100, 1);
+                                    }
                                 }
                                 else{
                                     typeWriter.write("Furniture not found!", 50, 150);
@@ -354,6 +358,7 @@ public class Inventory {
                     typeWriter.write("1. Add a pet to this house.", 50, 150);
                     typeWriter.write("2. Add furniture to this house.", 50, 150);
                     typeWriter.write("3. Remove pet from this house.", 50, 150);
+                    typeWriter.write("4. Remove furniture from this house.", 50, 150);
                     System.out.println();   
                     typeWriter.write("0. Exit.", 50, 150);
                     System.out.println();
@@ -436,6 +441,8 @@ public class Inventory {
                                 Furniture furniture = furnitureList.findFurnitureByName(furName);
                                 
                                 if(furniture != null){
+                                    // decrement furniture quantity when adding to house
+                                    furnitureList.removeFurniture(furniture.getItemID()/100, 1);
                                     houseList.assignFurToHouse(index,furniture.getItemID());
                                     houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
                                 }
@@ -476,6 +483,39 @@ public class Inventory {
                                 typeWriter.write("House not found...", 50, 150);
                             }
                             scan.nextLine();
+                            Thread.sleep(250);
+                            clearScreen.clear();
+                            break;
+                        
+                        case 4:
+                            houseList.printHouse();
+                            System.out.println();
+                            typeWriter.write("Choose the house you want to remove furniture from (use the number of the house)", 50, 150);
+                            typeWriter.write("-> ", 50);
+                            index = scan.nextInt();
+                            scan.nextLine();
+                            house = houseList.findHouseByID(index);
+                            
+                            if(house != null){
+                                house.seeFurniture();
+                                System.out.println();
+                                String furName;
+                                typeWriter.write("Type the name of the furniture you want to remove (type the name)", 50, 150);
+                                typeWriter.write("-> ", 50);
+                                furName = scan.nextLine().toLowerCase();
+                                
+                                Furniture removedFur = house.removeFurnitureByName(furName);
+                                if(removedFur != null){
+                                    // return furniture to owned inventory
+                                    furnitureList.addFurniture(removedFur.getItemID()/100, 1);
+                                    houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
+                                } else {
+                                    typeWriter.write("Furniture not found in this house!", 50, 150);
+                                }
+                            } else {
+                                typeWriter.write("House not found...", 50, 150);
+                            }
+                            
                             Thread.sleep(250);
                             clearScreen.clear();
                             break;

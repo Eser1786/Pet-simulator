@@ -87,8 +87,18 @@ public class House {
         return furnitureList;
     }
 
+    public Furniture removeFurnitureByName(String name) throws InterruptedException{
+        for(Furniture furniture : furnitureList){
+            if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name)){
+                furnitureList.remove(furniture);
+                typeWriter.write("This furniture has been removed!", 50, 150);
+                return furniture;
+            }
+        }
+        return null;
+    }
 
-    // public void getTotalComfort() throws InterruptedException{
+
     //     int sumComfort = 0;
     //     for(int i = 0; i < furnitureList.size(); i++){
     //         sumComfort += furnitureList.get(i).getComfort();
