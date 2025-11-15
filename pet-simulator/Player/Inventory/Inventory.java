@@ -205,9 +205,11 @@ public class Inventory {
                         Accessory accessory = accessoryList.findAccessoryByName(accessoryName);
                         
                         if(pet != null && accessory != null){
-                            pet.equipAccessory(accessory);
-                            petManager.saveAllPets(OWNED_PETS_PATH);
-                            accessoryList.saveAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+                            boolean equipped = pet.equipAccessory(accessory);
+                            if(equipped){
+                                accessoryList.removeAccessory(accessory.getItemID()/100, 1);
+                                petManager.saveAllPets(OWNED_PETS_PATH);
+                            }
                         }
                         else{
                             if(pet == null) typeWriter.write("Pet not found!", 50, 150);
@@ -229,9 +231,15 @@ public class Inventory {
 
                         Pet pet = petManager.findPetByName(petName);
                         if(pet != null){
-                            pet.unequipAccessory();
-                            petManager.saveAllPets(OWNED_PETS_PATH);
-                            accessoryList.saveAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+                            Accessory equipped = pet.getAccessory();
+                            if(equipped != null){
+                                pet.unequipAccessory();
+                                
+                                accessoryList.addAccessory(equipped.getItemID()/100, 1);
+                                petManager.saveAllPets(OWNED_PETS_PATH);
+                            } else {
+                                typeWriter.write("This pet has no accessory to unequip.", 50, 150);
+                            }
                         }
                         else{
                             typeWriter.write("Pet not found!", 50, 150);
