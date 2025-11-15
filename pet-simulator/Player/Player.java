@@ -4,6 +4,11 @@ package Player;
 import java.io.*;
 import java.util.*;
 
+import House.HouseList;
+import Item.Accessory.AccessoryList;
+import Item.Food.FoodList;
+import Item.Furniture.FurnitureList;
+import Pet.PetManager;
 import Utils.clearScreen;
 
 // import Player.Inventory.*;
@@ -58,7 +63,7 @@ public class Player {
     }
 
 
-    public void profile(Player player) throws InterruptedException{
+    public void profile(Player player, PetManager petManager, FoodList foodList, AccessoryList accessoryList, FurnitureList furList, HouseList houseList) throws InterruptedException{
         Scanner scan = new Scanner(System.in);
         typeWriter.write("==== MYSELF ====", 50, 150);
         System.out.println();
@@ -67,6 +72,14 @@ public class Player {
         typeWriter.write("Coins: ", 50);
         textColor.yellowText(player.getCoin() + " Coins");
         typeWriter.write("'despite everything, it's still you...'", 50, 150);
+        System.out.println();
+        typeWriter.write("Total pets: " + textColor.PURPLE + petManager.totalPet() + textColor.RESET, 30, 150);
+        System.out.println();
+        typeWriter.write("Total foods: " + textColor.ORANGE + foodList.totalFood() + textColor.RESET, 30, 150);
+        typeWriter.write("Total accessories: " + textColor.ORANGE + accessoryList.totalAccessory() + textColor.RESET, 30, 150);
+        typeWriter.write("Total furniture: " + textColor.ORANGE + furList.totalFurniture() + textColor.RESET, 30, 150);
+        System.out.println();
+        typeWriter.write("Total houses: " + textColor.BLUE + houseList.totalHouse() + textColor.RESET, 30, 150);
 
         System.out.println();
         typeWriter.write("What do you want to do?", 50, 150);

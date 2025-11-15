@@ -55,6 +55,8 @@ public class Inventory {
         FoodList food = new FoodList();
         FurnitureList furnitureList = new FurnitureList();
 
+        HouseList houseList = new HouseList();
+
         while(firstChoice!=0){
             try {
                 typeWriter.write("===== INVENTORY =====", 50, 150);
@@ -100,7 +102,7 @@ public class Inventory {
 
             switch(firstChoice){
                 case 1:
-                    player.profile(player);
+                    player.profile(player,petManager, food, accessoryList, furnitureList, houseList);
                     break;
                 case 2:
                     this.openInventory(player);
@@ -150,8 +152,9 @@ public class Inventory {
                     break;
                 case 4: 
                     accessoryList.loadAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
+                    
 
-                    if(accessoryList.findAccessoryByID(1) == null){
+                    if(accessoryList.totalAccessory() == 0){
                         typeWriter.write("You don't have any accessory....Please buy any in the shop", 30, 150);
                         System.out.println();
                         typeWriter.write("Press any key to continue", 30, 150);
@@ -241,7 +244,7 @@ public class Inventory {
                     HouseList hl = new HouseList();
                     hl.loadHouse();
                     furnitureList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
-                    if(furnitureList.findFurByID(1) == null){
+                    if(furnitureList.totalFurniture() == 0){
                         typeWriter.write("You don't have any furniture... please buy one before checking?", 30, 150);
                         System.out.println();
                         typeWriter.write("Press any key to continue", 30, 150);
@@ -324,10 +327,10 @@ public class Inventory {
                     
 
                 case 7:
-                    HouseList houseList = new HouseList();
+                    houseList = new HouseList();
                     houseList.loadHouse();
                     
-                    if(houseList.getHouseCount() == 0){
+                    if(houseList.totalHouse() == 0){
                         typeWriter.write("You don't have any house yet! Please buy a house from the shop.", 50, 150);
                         Thread.sleep(250);
                         clearScreen.clear();
@@ -449,11 +452,6 @@ public class Inventory {
             }
         }
     }
-
-
-
-
-
 
 
 

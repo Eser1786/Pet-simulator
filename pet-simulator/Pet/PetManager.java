@@ -414,14 +414,7 @@ public class PetManager {
         }
 
         typeWriter.write(textColor.PURPLE + pet.getName()  + textColor.RESET + " has eaten the " + food.getItemName(), 50, 150);
-        pet.setHunger(pet.getHunger() - food.getSat());
-        
-       
-        if(pet.getHunger() < 0){
-            pet.setHunger(0);
-        }
-        typeWriter.write( textColor.PURPLE + pet.getName()  + textColor.RESET + " hunger: " + textColor.ORANGE +pet.getHunger() + textColor.RESET, 50, 150);
-        pet.gainedHealth(20);
+        pet.minusHunger(food.getSat());
         food.setQuantity(food.getQuantity()-1);
     }
 
@@ -456,7 +449,15 @@ public class PetManager {
         System.out.println();
     }
 
+    public int totalPet(){
+        loadPetFromFile(OWNED_PETS_PATH);
 
+        int count = 0;
+        for(Pet pet : ownedPet){
+            count++;
+        }
+        return count;
+    }
 
 
 

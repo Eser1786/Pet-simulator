@@ -361,6 +361,25 @@ public class FurnitureList {
         }
         return null;
     }
+
+    public int totalFurniture(){
+        loadFur(OWNED_FURNITURE_PATH);
+        int count = 0;
+        for(Furniture furniture : ownedFur){
+            count += furniture.getQuantity();
+        }
+        return count;
+    }
+
+
+
+
+
+
+
+
+
+
 }
     
 

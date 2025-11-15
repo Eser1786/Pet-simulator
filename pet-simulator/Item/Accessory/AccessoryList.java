@@ -299,4 +299,13 @@ public class AccessoryList {
             index++;
         }
     }
+
+    public int totalAccessory(){
+        loadAccessory(OWNED_ACCESSORY_PATH);
+        int count = 0;
+        for(Accessory accessory : ownedAccessory){
+            count += accessory.getQuantity();
+        }
+        return count;
+    }
 }

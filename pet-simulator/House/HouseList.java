@@ -213,4 +213,13 @@ public class HouseList {
             index++;
         }
     }
+
+    public int totalHouse() throws InterruptedException{
+        loadHouse();
+        int count = 0;
+        for(House house : ownedHouse){
+            count++;
+        }
+        return count;
+    }
 }

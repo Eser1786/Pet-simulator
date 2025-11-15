@@ -314,6 +314,14 @@ public class FoodList {
         }
     }
 
+    public int totalFood(){
+        loadFood(OWNED_FOOD_PATH);
 
+        int count = 0;
+        for(Food food : ownedFood){
+            count+= food.getQuantity();
+        }
+        return count;
+    }
 
 }
