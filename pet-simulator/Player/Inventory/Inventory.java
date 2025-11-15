@@ -506,8 +506,8 @@ public class Inventory {
                                 
                                 Furniture removedFur = house.removeFurnitureByName(furName);
                                 if(removedFur != null){
-                                    // return furniture to owned inventory
-                                    furnitureList.addFurniture(removedFur.getItemID()/100, 1);
+                        
+                                    furnitureList.addFurniture(removedFur.getItemID(), 1);
                                     houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
                                 } else {
                                     typeWriter.write("Furniture not found in this house!", 50, 150);

@@ -354,6 +354,7 @@ public class FurnitureList {
         }
     }
     public Furniture findFurnitureByName(String name){
+        loadFur(OWNED_FURNITURE_PATH);
         for(Furniture furniture : ownedFur){
             if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name) && furniture.getQuantity() > 0){
                 return furniture;
