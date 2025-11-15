@@ -77,6 +77,7 @@ public class FoodList {
                             break;
                     }
                     if(food != null){
+                        food.setSat(findSat(FoodID/100));
                         ownedFood.add(food);
                     }
                 }

@@ -400,10 +400,10 @@ public class PetManager {
     }
 
     public void feedPet(String petName, String foodName) throws InterruptedException{    // find pet by name
-        PetManager petManager = new PetManager();
-        Pet pet = petManager.findPetByName(petName.toLowerCase());
+        // operate on this PetManager instance so changes persist
+        Pet pet = this.findPetByName(petName);
         FoodList fl = new FoodList();
-        Food food = fl.findFoodByName(foodName.toLowerCase());
+        Food food = fl.findFoodByName(foodName);
         if(food==null){
             typeWriter.write("you don't have this food", 50, 150);
             return;
@@ -414,8 +414,13 @@ public class PetManager {
         }
 
         typeWriter.write(textColor.PURPLE + pet.getName()  + textColor.RESET + " has eaten the " + food.getItemName(), 50, 150);
-        pet.minusHunger(food.getSat());
+       
+        int sat = fl.findSat(food.getItemID() / 100);
+        pet.minusHunger(sat);
         food.setQuantity(food.getQuantity()-1);
+        pet.gainedHealth(25);
+        fl.saveFood(FoodList.OWNED_FOOD_PATH);
+        this.saveAllPets(OWNED_PETS_PATH);
     }
 
     

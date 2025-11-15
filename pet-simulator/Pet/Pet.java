@@ -206,7 +206,6 @@ public abstract class Pet{
     public void minusHunger(int minus) throws InterruptedException{
         this.setHunger(this.getHunger() - minus);
         typeWriter.write(textColor.ORANGE + "-" + minus +" hunger!" +textColor.RESET, 30, 150);
-        //  +5 hunger!
         if(this.getHunger() < 0){
             this.setHunger(0);
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " is really full, it looks like a ball...", 30, 150);
