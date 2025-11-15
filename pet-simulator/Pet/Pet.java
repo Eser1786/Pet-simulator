@@ -79,10 +79,7 @@ public abstract class Pet{
 
 
     public Pet(){}
-
-    // public boolean isAccessoryEquip(){
-
-    // }
+    
     private Accessory accessory;
     public Accessory getAccessory(){
         return accessory;
@@ -190,16 +187,18 @@ public abstract class Pet{
     }
 
     public void addHunger(int plus) throws InterruptedException{
-        this.setHunger(this.getHunger() + plus );
+        this.setHunger(this.getHunger() + plus);
 
         if(this.getHunger() > 100){
             this.setHunger(100);
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " is really hungry you should feed it...", 30, 150);
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + this.getHunger(), 30   , 150);
             minusHealth(20);
+            return;
         }
         else{
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + this.getHunger(), 30   , 150);
+            return;
         }
     }
 
