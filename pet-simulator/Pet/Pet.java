@@ -112,7 +112,7 @@ public abstract class Pet{
         }
         accessory.setQuantity(accessory.getQuantity()+1);
         this.accessory = null;
-        setItem(null);
+        this.setItem(null);
         typeWriter.write("The pet is no longer equip the accessory!", 50, 150);
         
         System.out.println();
