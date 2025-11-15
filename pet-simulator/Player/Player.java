@@ -75,11 +75,31 @@ public class Player {
         System.out.println();
         typeWriter.write("Total pets: " + textColor.PURPLE + petManager.totalPet() + textColor.RESET, 30, 150);
         System.out.println();
-        typeWriter.write("Total foods: " + textColor.ORANGE + foodList.totalFood() + textColor.RESET, 30, 150);
-        typeWriter.write("Total accessories: " + textColor.ORANGE + accessoryList.totalAccessory() + textColor.RESET, 30, 150);
-        typeWriter.write("Total furniture: " + textColor.ORANGE + furList.totalFurniture() + textColor.RESET, 30, 150);
+        if( foodList.totalFood() == 0){
+            typeWriter.write("You don't have any " + textColor.ORANGE + "food" + textColor.RESET +".", 30, 150);
+        }
+        else{
+            typeWriter.write("Total foods: " + textColor.ORANGE + foodList.totalFood() + textColor.RESET, 30, 150);
+        }
+        if(accessoryList.totalAccessory() == 0){
+            typeWriter.write("You don't have any " + textColor.ORANGE + "accessory" + textColor.RESET + ".", 30, 150);
+        }
+        else{
+            typeWriter.write("Total accessories: " + textColor.ORANGE + accessoryList.totalAccessory() + textColor.RESET, 30, 150);
+        }
+        if(furList.totalFurniture() == 0){
+            typeWriter.write("You don't have any " + textColor.ORANGE + "furniture" + textColor.RESET +".", 30, 150);
+        }
+        else{
+            typeWriter.write("Total furniture: " + textColor.ORANGE + furList.totalFurniture() + textColor.RESET, 30, 150);
+        }
         System.out.println();
-        typeWriter.write("Total houses: " + textColor.BLUE + houseList.totalHouse() + textColor.RESET, 30, 150);
+        if(houseList.totalHouse() == 0){
+            typeWriter.write("You don't have any " + textColor.BLUE + "house" + textColor.RESET + ".", 30, 150);
+        }
+        else{
+            typeWriter.write("Total houses: " + textColor.BLUE + houseList.totalHouse() + textColor.RESET, 30, 150);
+        }
 
         System.out.println();
         typeWriter.write("What do you want to do?", 50, 150);

@@ -34,6 +34,7 @@ public class HouseList {
 
 
     public void loadHouse() throws InterruptedException{
+        ownedHouse.clear();
         petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
         try( BufferedReader br = new BufferedReader(new FileReader(OWNED_HOUSE_PATH))){
             String line;
