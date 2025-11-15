@@ -331,7 +331,7 @@ public class Inventory {
                         typeWriter.write("You don't have any house yet! Please buy a house from the shop.", 50, 150);
                         Thread.sleep(250);
                         clearScreen.clear();
-                        break;
+                        return;
                     }
                     
                     houseList.printHouse();
@@ -384,7 +384,7 @@ public class Inventory {
                                     Pet pet = petManager.findPetByName(petName);
                                     
                                     if(pet != null){
-                                        house.setPet(pet);
+                                        houseList.assignPetToHouse(index,pet.getPetID());
                                         houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
                                     }
                                     else{
@@ -422,7 +422,7 @@ public class Inventory {
                                 Furniture furniture = furnitureList.findFurnitureByName(furName);
                                 
                                 if(furniture != null){
-                                    house.addFurniture(furniture);
+                                    houseList.assignFurToHouse(index,furniture.getItemID());
                                     houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
                                 }
                                 else{

@@ -36,7 +36,7 @@ public class Launcher {
         System.out.println();
 
         if(player != null){
-            typeWriter.write("Welcome back " + player.getName() + "!" , 30, 150);
+            typeWriter.write("Welcome back " + textColor.YELLOW + player.getName()  + textColor.RESET + "!" , 30, 150);
             typeWriter.write("Let's get started", 30, 150);
             System.out.println();
             typeWriter.write("Press any key to continue!", 30, 150);
@@ -60,6 +60,12 @@ public class Launcher {
 
         while(choice != 0){
             typeWriter.write("=== WHAT DO YOU WANT TO DO ===", 50, 150);
+            System.out.println();
+
+            typeWriter.write("Name: " + textColor.YELLOW + player.getName() + "!" + textColor.RESET, 30, 150);
+            typeWriter.write("Coin: " + textColor.YELLOW + player.getCoin() + " coins" + textColor.RESET, 30, 150);
+
+
             System.out.println();
 
             typeWriter.write("1. Interact with pet", 50, 150);
@@ -90,12 +96,12 @@ public class Launcher {
                     petManager.viewAllPets(petManager);
                     System.out.println();
                     String petName;
-                    typeWriter.write("Which pet do you want to interact with", 50, 150);
+                    typeWriter.write("Which pet do you want to interact with (input the name of the pet you want to interact with)", 50, 150);
                     typeWriter.write("-> ", 50);
                     scan.nextLine(); 
                     petName = scan.nextLine();
                     Pet pet = petManager.findPetByName(petName);
-                    
+                    System.out.println();
                     if (pet == null) {
                         typeWriter.write("Pet not found! Please try again.", 50, 150);
                         Thread.sleep(250);
@@ -105,9 +111,12 @@ public class Launcher {
 
                     int petChoice = 999;
                     while(petChoice != 0){
-                        typeWriter.write("1. See pet feeling.", 50, 150);
-                        typeWriter.write("2. Hear pet sound.", 50, 150);
-                        typeWriter.write("3. Interact with pet", 50, 150);
+                        typeWriter.write("==== CHOICE ====", 30, 150);
+                        System.out.println();
+                
+                        typeWriter.write("1. How is " + textColor.PURPLE + pet.getName() + textColor.RESET + " doing.", 50, 150);
+                        typeWriter.write("2. talk to " + textColor.PURPLE + pet.getName() + textColor.RESET + ".", 50, 150);
+                        typeWriter.write("3. Interact with " + textColor.PURPLE + pet.getName() + textColor.RESET + ".", 50, 150);
                         System.out.println();
                         typeWriter.write("0. Exit from interact with pet", 50, 150);
                         System.out.println();
@@ -119,29 +128,45 @@ public class Launcher {
                             typeWriter.write("Exiting...", 50);
                             Thread.sleep(250);
                             clearScreen.clear();
-                            return;
+                            break;
                         }
 
                         switch(petChoice){
                             case 1:
                                 pet.feeling();
                                 System.out.println();
-                                typeWriter.write("(press any key to escape) -> ", 50);
+                                typeWriter.write("Press any key to continue!", 30, 150);
+                                typeWriter.write("-> ",30);
                                 scan.nextLine();
+                                scan.nextLine();
+                                Thread.sleep(250);
+                                clearScreen.clear();
                                 break;
                             case 2:
                                 pet.sound();
                                 System.out.println();
-                                typeWriter.write("(press any key to escape) -> ", 50);
+                                typeWriter.write("Press any key to continue!", 50,150);
+                                typeWriter.write("-> ", 30);
                                 scan.nextLine();
+                                scan.nextLine();
+                                Thread.sleep(250);
+                                clearScreen.clear();
                                 break;
                             case 3:
                                 interactWithPet(pet, player);
+                                petManager.saveAllPets(PetManager.OWNED_PETS_PATH);
                                 player.savePlayer(player, "pet-simulator\\Player\\player.txt");
+                                System.out.println();
+                                typeWriter.write("Press any key to continue!", 50,150);
+                                typeWriter.write("-> ", 30);
+                                scan.nextLine();
+                                scan.nextLine();
+                                Thread.sleep(250);
+                                clearScreen.clear();
                                 break;
                         }
-     
                     }
+                    break;
                 case 2:
                     Shop shop = new Shop();
                     shop.menuShop(player);
@@ -150,6 +175,7 @@ public class Launcher {
                 case 3:
                     Inventory inventory = new Inventory();
                     inventory.menuInventory(player, petManager);
+                    player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                     break;
                 case 4:
                     int minigameChoice;
@@ -163,12 +189,16 @@ public class Launcher {
                     typeWriter.write("What will be your choice?", 50, 150);
                     typeWriter.write("-> ", 50);
 
-                    minigameChoice = scan.nextInt();
+                    minigameChoice = scan.nextInt();    
+
+                    Thread.sleep(250);
+                    clearScreen.clear();
+
 
                     if(minigameChoice == 0){
                         Thread.sleep(250);
                         clearScreen.clear();
-                        
+                        player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                         break;
                     }
 
@@ -194,6 +224,7 @@ public class Launcher {
                                 
                                 AniQuiz aniQuiz = new AniQuiz();
                                 aniQuiz.playAniQuiz(player, gamePet);
+                                petManager.saveAllPets(PetManager.OWNED_PETS_PATH);
                                 player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                                 
                                 Thread.sleep(250);
@@ -226,6 +257,7 @@ public class Launcher {
                                 
                                 SpeedMath speedMath = new SpeedMath();
                                 speedMath.playSpeedMath(player, gamePet2);
+                                petManager.saveAllPets(PetManager.OWNED_PETS_PATH);
                                 player.savePlayer(player, "pet-simulator\\Player\\player.txt");
                                 
                                 Thread.sleep(250);

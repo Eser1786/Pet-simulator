@@ -118,7 +118,7 @@ public abstract class Pet{
 
 
     public void gainedMentalHealth(int mentalHealth) throws InterruptedException{
-        typeWriter.write( this.name + " gained " + mentalHealth +" mental health!", 50, 150);
+        typeWriter.write( this.name + " gained " + textColor.BLUE + mentalHealth +" mental health!" + textColor.RESET, 50, 150);
         this.setMentalHealth(this.getMentalHealth() + mentalHealth);
 
         if(this.getMentalHealth() >100){
@@ -128,13 +128,13 @@ public abstract class Pet{
             this.setMentalHealth(0);
         }
 
-        typeWriter.write(this.getMentalHealth() + "/100 mental health",50,150);
+        typeWriter.write(textColor.BLUE + this.getMentalHealth()  + textColor.RESET + "/100 mental health",50,150);
         System.out.println();
     }
 
     public void showLevelBar(int currentLevel) {  
-        int maxLevel = 10;
-        int barLength = 10;
+        int maxLevel = 100;
+        int barLength = 30;
         int filledLength = (int) ((double) currentLevel / maxLevel * barLength);
 
         StringBuilder bar = new StringBuilder("[");
@@ -145,7 +145,7 @@ public abstract class Pet{
                 bar.append("--");
             }
         }
-        bar.append("] \nLevel ").append(currentLevel).append("/").append(100);
+        bar.append("] \n     Level ").append(currentLevel).append("/").append(barLength);
 
         try {
             typeWriter.write(bar.toString(), 30, 150);
@@ -163,7 +163,7 @@ public abstract class Pet{
 
     public void minusHealth(int minus) throws InterruptedException{
         this.setHealth(this.getHealth() - minus);
-
+        typeWriter.write(textColor.RED + "-" + minus + " health!", minus, minus);
         if(this.getHealth() < 0){
             this.setHealth(1);
             typeWriter.write( textColor.RED +"WARNING!!! Your pet is on low hp, feed your pet NOW!!!" + textColor.RESET, 30, 150);
@@ -176,7 +176,7 @@ public abstract class Pet{
 
     public void gainedHealth(int plus) throws InterruptedException{
         this.setHealth(this.getHealth() + plus);
-
+        typeWriter.write(textColor.GREEN + "+" + plus +" health!" + textColor.RESET, 30, 150);
         if(this.getHealth() > 100){
             this.setHealth(100);
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " health: " +  this.getHealth(), 30, 150);
@@ -188,16 +188,17 @@ public abstract class Pet{
 
     public void addHunger(int plus) throws InterruptedException{
         this.setHunger(this.getHunger() + plus);
-
+        typeWriter.write(textColor.ORANGE + "+" + plus +" hunger!" +textColor.RESET, 30, 150);
+        //  +5 hunger!
         if(this.getHunger() > 100){
             this.setHunger(100);
             typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " is really hungry you should feed it...", 30, 150);
-            typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + this.getHunger(), 30   , 150);
+            typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + textColor.ORANGE+ this.getHunger() + textColor.RESET, 30   , 150);
             minusHealth(20);
             return;
         }
         else{
-            typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + this.getHunger(), 30   , 150);
+            typeWriter.write(textColor.PURPLE + this.getName()  + textColor.RESET + " hunger: " + textColor.ORANGE+ this.getHunger() + textColor.RESET, 30   , 150);
             return;
         }
     }
