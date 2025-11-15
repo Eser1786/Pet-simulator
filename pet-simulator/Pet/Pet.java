@@ -100,7 +100,7 @@ public abstract class Pet{
         this.accessory = accessory;
         typeWriter.write("The pet has equipped the accessory!", 50, 150);
         typeWriter.write("+"+accessory.getStylePoint()+" style point!", 50, 150);
-        setItem(accessory.getItemName());
+        this.setItem(accessory.getItemName());
         accessory.setQuantity( accessory.getQuantity() - 1);
         System.out.println();
         return true;
