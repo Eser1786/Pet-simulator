@@ -131,8 +131,14 @@ public class House {
         return this.pet;
     }
 
-    public void removePet(){
+    public void removePet() throws InterruptedException{
+
+        if(this.pet!=null){
+            typeWriter.write(this.pet.getName() + " is no longer the owner of this house!", 30, 150);
+        }
+        this.pet.removeHouse(this);
         this.pet = null;
+        
     }
     
 }

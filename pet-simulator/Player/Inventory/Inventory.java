@@ -55,7 +55,7 @@ public class Inventory {
         FoodList food = new FoodList();
         FurnitureList furnitureList = new FurnitureList();
 
-        HouseList houseList = new HouseList();
+        HouseList houseList = new HouseList(petManager);
 
         while(firstChoice!=0){
             try {
@@ -207,6 +207,7 @@ public class Inventory {
                         if(pet != null && accessory != null){
                             pet.equipAccessory(accessory);
                             petManager.saveAllPets(OWNED_PETS_PATH);
+                            accessoryList.saveAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
                         }
                         else{
                             if(pet == null) typeWriter.write("Pet not found!", 50, 150);
@@ -230,6 +231,7 @@ public class Inventory {
                         if(pet != null){
                             pet.unequipAccessory();
                             petManager.saveAllPets(OWNED_PETS_PATH);
+                            accessoryList.saveAccessory("pet-simulator\\Item\\Accessory\\ownedAccessory.txt");
                         }
                         else{
                             typeWriter.write("Pet not found!", 50, 150);
@@ -327,7 +329,7 @@ public class Inventory {
                     
 
                 case 7:
-                    houseList = new HouseList();
+                    houseList = new HouseList(petManager);
                     houseList.loadHouse();
                     
                     if(houseList.totalHouse() == 0){
@@ -343,7 +345,8 @@ public class Inventory {
                     System.out.println();
                     typeWriter.write("1. Add a pet to this house.", 50, 150);
                     typeWriter.write("2. Add furniture to this house.", 50, 150);
-                    System.out.println();
+                    typeWriter.write("3. Remove pet from this house.", 50, 150);
+                    System.out.println();   
                     typeWriter.write("0. Exit.", 50, 150);
                     System.out.println();
                     typeWriter.write("What is your choice?", 50, 150);
@@ -440,6 +443,33 @@ public class Inventory {
                                 Thread.sleep(250);
                                 clearScreen.clear();
                             }
+                            break;
+
+                        case 3:
+                            houseList.printHouse();
+                            System.out.println();
+                            typeWriter.write("Choose the house you want to remove the pet from (use the number of the house)", 50, 150);
+                            typeWriter.write("-> ", 50);
+                            index = scan.nextInt();
+                            scan.nextLine(); 
+                            house = houseList.findHouseByID(index);
+                            if(house != null){
+                                if(!house.hasPet()){
+                                    typeWriter.write("This house has no pet to remove.", 50, 150);
+                                } else {
+                                    house.removePet();
+                                    System.out.println();
+                                    typeWriter.write("Press any key to continue!", 50, 150);
+                                    typeWriter.write("-> ", 50);
+                                    houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
+                                    petManager.saveAllPets(OWNED_PETS_PATH);
+                                }
+                            } else {
+                                typeWriter.write("House not found...", 50, 150);
+                            }
+                            scan.nextLine();
+                            Thread.sleep(250);
+                            clearScreen.clear();
                             break;
                     }
 

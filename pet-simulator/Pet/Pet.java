@@ -101,6 +101,7 @@ public abstract class Pet{
         typeWriter.write("The pet has equipped the accessory!", 50, 150);
         typeWriter.write("+"+accessory.getStylePoint()+" style point!", 50, 150);
         setItem(accessory.getItemName());
+        accessory.setQuantity( accessory.getQuantity() - 1);
         System.out.println();
         return true;
     }
@@ -109,9 +110,11 @@ public abstract class Pet{
         if(accessory == null){
             typeWriter.write("this pet doesn't have any accessory on", 50, 150);
         }
+        accessory.setQuantity(accessory.getQuantity()+1);
         this.accessory = null;
         setItem(null);
         typeWriter.write("The pet is no longer equip the accessory!", 50, 150);
+        
         System.out.println();
     }
 
@@ -234,7 +237,9 @@ public abstract class Pet{
     }
     
 
-
+    public void removeHouse(House house){
+        this.house = null;
+    }
 
 
 
