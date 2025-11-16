@@ -92,7 +92,7 @@ public class Dog extends Pet implements ground {
     }
 
     public void walkAroundThePark(Player player) throws InterruptedException{
-        typeWriter.write(this.getName() + " and you go for a walk in the park. " + this.getName() + "looks excited!", 50);
+        typeWriter.write(this.getName() + " and you go for a walk in the park. " + this.getName() + "looks excited!", 50,150);
         typeWriter.write(this.getName() + " running around playing with other dogs " , 50, 150);
         typeWriter.write("...", 450, 150);
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);

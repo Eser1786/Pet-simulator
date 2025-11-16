@@ -94,7 +94,7 @@ public class Dragon extends Pet implements aerial {
     }
 
     public void flyYouAround(Player player) throws InterruptedException{
-        typeWriter.write(textColor.PURPLE + this.getName() + textColor.RESET + " let you ride on its back.", 50);
+        typeWriter.write(textColor.PURPLE + this.getName() + textColor.RESET + " let you ride on its back.", 50,150);
         typeWriter.write(textColor.PURPLE + this.getName() + textColor.RESET + " proceed to do a front flip with you on its back... " + textColor.PURPLE + this.getName() + textColor.RESET +" looks proud!", 50, 150);
         typeWriter.write("...", 450, 150);
         typeWriter.write( textColor.PURPLE + this.getName() + textColor.RESET + " and you have a great time!", 50, 150);

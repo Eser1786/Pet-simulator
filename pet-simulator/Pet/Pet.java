@@ -143,9 +143,9 @@ public abstract class Pet{
         StringBuilder bar = new StringBuilder("[");
         for (int i = 0; i < barLength; i++) {
             if (i < filledLength) {
-                bar.append("==");
+                bar.append("=");
             } else {
-                bar.append("--");
+                bar.append("-");
             }
         }
         bar.append("] \n     Level ").append(currentLevel).append("/").append(maxLevel);

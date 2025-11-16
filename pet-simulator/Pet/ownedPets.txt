@@ -1,1 +1,1 @@
-401|shark|Beam|51|0|80|91|female|null
+401|shark|Beam|51|2|100|100|female|null

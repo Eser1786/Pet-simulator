@@ -55,7 +55,7 @@ public class House {
             System.out.println();
             return;
         }
-
+        
         for(Furniture furniture : furnitureList){
            
             FurnitureList furList = new FurnitureList();

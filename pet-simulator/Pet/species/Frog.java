@@ -92,7 +92,7 @@ public class Frog extends Pet implements swamp {
     }
 
     public void exploreTheSwamp(Player player) throws InterruptedException{
-        typeWriter.write(this.getName() + " and you go to a swamp nearby...", 50);
+        typeWriter.write(this.getName() + " and you go to a swamp nearby...", 50,150);
         typeWriter.write(this.getName() + " catches a lot of flys... its even share you some... what a wholesome frog! " , 50, 150);
         typeWriter.write("...", 450, 150);
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);

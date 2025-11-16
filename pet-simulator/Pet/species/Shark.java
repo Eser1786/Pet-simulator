@@ -99,7 +99,7 @@ public class Shark extends Pet implements aquatic {
     public void takeYouToSwimming(Player player) throws InterruptedException{
         Random random = new Random();
         int unexpectedCoins = random.nextInt(20)+1;
-        typeWriter.write("you go for a swim with " + this.getName(), 50);
+        typeWriter.write("you go for a swim with " + this.getName(), 50,150);
         typeWriter.write(this.getName() + " let you ride on its back, " + this.getName() +" swim really fast...", 50, 150);
         typeWriter.write(".... "+this.getName()+" found something on the ocean... It's ", 50, 150);
         textColor.yellowText(unexpectedCoins + " coins");

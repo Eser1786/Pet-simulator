@@ -96,7 +96,7 @@ public class Parrot extends Pet implements aerial {
 
     public void flyYouAround(Player player) throws InterruptedException{
         Random random = new Random();
-        typeWriter.write("you go for a walk with " + this.getName(), 50);
+        typeWriter.write("you go for a walk with " + this.getName(), 50,150);
         typeWriter.write(this.getName() + " flies around, bringing you things ", 50, 150);
         typeWriter.write("...", 450, 150);
         typeWriter.write("what is this...?  " + this.getName() + " brought you ", 50);

@@ -209,11 +209,60 @@ public class HouseList {
             else{
                 typeWriter.write(" | Pet: none", 50, 150);      
             }
-            house.seeFurniture();
+            
+            
+                try(BufferedReader br = new BufferedReader(new FileReader("pet-simulator\\House\\ownedHouse.txt"))){
+                    String line;
+                    while((line = br.readLine())!=null){
+                        String[] parts = line.split("\\|");
+                        if(parts.length == 5){
+                            FurnitureList fl = new FurnitureList();
+                            
+                            int fur1ID = Integer.parseInt(parts[2].trim());
+                            int fur2ID = Integer.parseInt(parts[3].trim());
+                            int fur3ID = Integer.parseInt(parts[4].trim());
+                        
+                            if(fur1ID != -999 || fur2ID != -999 || fur3ID != -999){
+                                Furniture fur1 = fl.findFurByIndex(fur1ID);
+                                Furniture fur2 = fl.findFurByIndex(fur2ID);
+                                Furniture fur3 = fl.findFurByIndex(fur3ID);
+                                
+                                ArrayList<Furniture> furOfHouse = new ArrayList<>();
+                                if(fur1!=null){
+                                    furOfHouse.add(fur1);
+                                }
+                                if(fur2!=null){
+                                    furOfHouse.add(fur2);
+                                }
+                                if(fur3!=null){
+                                    furOfHouse.add(fur3);
+                                }
+
+                                typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 30, 150);
+                                System.out.println();
+                                int sumComfort = 0;
+                                for(Furniture fur : furOfHouse){
+                                    typeWriter.write(textColor.GREEN + fur.getItemName()+textColor.RESET, 30, 150);
+                                    typeWriter.write(" | Comfort: " + textColor.ORANGE + fur.getComfort() + textColor.RESET, 30, 150);
+                                    System.out.println();
+                                    sumComfort += fur.getComfort();
+                                }
+                                System.out.println();
+                                typeWriter.write("Total comfort of this house: " + textColor.ORANGE + sumComfort + textColor.RESET, 30, 150);
+                            }
+                        
+                        }
+                        
+                        
+                    }
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
             System.out.println();
             index++;
         }
-    }
+    
 
     public int totalHouse() throws InterruptedException{
         loadHouse();

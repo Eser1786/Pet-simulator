@@ -94,10 +94,10 @@ public class Axolotl extends Pet implements aquatic {
     }
 
     public void takeYouToSwimming(Player player) throws InterruptedException{
-        typeWriter.write("you go for a swim with " + this.getName(), 50);
+        typeWriter.write("you go for a swim with " + this.getName(), 50,150);
         typeWriter.write("you swimming with " + this.getName() + " in the ocean", 50, 150);
         typeWriter.write("...", 450, 150);
-        typeWriter.write(this.getName() + "brought you to a family of axololt, they are all adorable", 50, 150);
+        typeWriter.write(this.getName() + " brought you to a family of axololt, they are all adorable", 50, 150);
         typeWriter.write( this.getName() + " and you have a great time!", 50, 150);
         this.gainedLevel(2);
         this.gainedMentalHealth(10);

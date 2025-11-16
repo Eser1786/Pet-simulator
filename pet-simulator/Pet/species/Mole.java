@@ -100,7 +100,7 @@ public class Mole extends Pet implements underground {
 
     public void digSomethingForYou(Player player) throws InterruptedException{
         Random random = new Random();
-        typeWriter.write(this.getName() + " and you go to its backyard", 50);
+        typeWriter.write(this.getName() + " and you go to its backyard", 50,150);
         typeWriter.write(this.getName() + " proceed to dig down where you are standing... ", 50, 150);
         
         int unexpectedCoin = random.nextInt(20)+1;
