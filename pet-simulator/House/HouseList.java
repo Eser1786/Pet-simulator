@@ -115,7 +115,9 @@ public class HouseList {
         }
     }
 
-    public int generateHouseID(){
+    public int generateHouseID() throws InterruptedException{
+        ownedHouse.clear();
+        loadHouse();
         return ownedHouse.size()+1;
     }
 
@@ -124,7 +126,7 @@ public class HouseList {
     }
 
     
-    public void addHouse(){
+    public void addHouse() throws InterruptedException{
         int newHouseID = generateHouseID();
         House newHouse = new House();
         newHouse.setHouseID(newHouseID);
@@ -222,6 +224,15 @@ public class HouseList {
                             int fur2ID = Integer.parseInt(parts[3].trim());
                             int fur3ID = Integer.parseInt(parts[4].trim());
                         
+                            if(fur1ID == -999 && fur2ID == -999 && fur3ID == -999){
+                                typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 30, 150);
+                                System.out.println();
+                                typeWriter.write("This house doesn't have any furniture", 30, 150);
+                                System.out.println();
+                            }
+
+
+
                             if(fur1ID != -999 || fur2ID != -999 || fur3ID != -999){
                                 Furniture fur1 = fl.findFurByIndex(fur1ID);
                                 Furniture fur2 = fl.findFurByIndex(fur2ID);
