@@ -57,17 +57,14 @@ public class House {
         }
 
         for(Furniture furniture : furnitureList){
-            if(furniture.getComfort() == 0){
-                
-                FurnitureList furList = new FurnitureList();
-                int comfort = furList.findComfortByName(furniture.getItemName());
-                furniture.setComfort(comfort);
-            }
+           
+            FurnitureList furList = new FurnitureList();
+            int comfort = furList.findComfortByName(furniture.getItemName());
             
             typeWriter.write("- ", 50);
             textColor.yellowText(furniture.getItemName());
             typeWriter.write(" | Comfort: ", 50);
-            textColor.blueText(String.valueOf(furniture.getComfort()));
+            textColor.blueText(String.valueOf(comfort));
             System.out.println();
         }
         typeWriter.write("Total comfort of this house: ", 50);
@@ -77,8 +74,10 @@ public class House {
 
     public int sumOfComfort(){
         int sum = 0;
+        FurnitureList furList = new FurnitureList();
         for(Furniture furniture : furnitureList){
-            sum += furniture.getComfort();
+            int comfort = furList.findComfortByName(furniture.getItemName());
+            sum += comfort;
         }
         return sum;
     }

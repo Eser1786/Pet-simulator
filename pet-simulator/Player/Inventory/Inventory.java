@@ -207,7 +207,7 @@ public class Inventory {
                         if(pet != null && accessory != null){
                             boolean equipped = pet.equipAccessory(accessory);
                             if(equipped){
-                                accessoryList.removeAccessory(accessory.getItemID()/100, 1);
+                                accessoryList.removeAccessory(accessory.getItemID(), 1);
                                 petManager.saveAllPets(OWNED_PETS_PATH);
                             }
                         }
@@ -235,7 +235,7 @@ public class Inventory {
                             if(equipped != null){
                                 pet.unequipAccessory();
                                 
-                                accessoryList.addAccessory(equipped.getItemID()/100, 1);
+                                accessoryList.addAccessory(equipped.getItemID(), 1);
                                 petManager.saveAllPets(OWNED_PETS_PATH);
                             } else {
                                 typeWriter.write("This pet has no accessory to unequip.", 50, 150);
@@ -294,7 +294,7 @@ public class Inventory {
                             typeWriter.write("-> ", 50);
                             int index;
                             index = scan.nextInt();
-                            scan.nextLine(); // Clear newline
+                            scan.nextLine(); 
                             House house = hl.findHouseByID(index);
                             
                             if(house!=null){
@@ -308,8 +308,7 @@ public class Inventory {
                                 if(furniture != null){
                                     boolean added = house.addFurniture(furniture);
                                     if(added){
-                                        
-                                        furnitureList.removeFurniture(furniture.getItemID()/100, 1);
+                                        furnitureList.removeFurniture(furniture.getItemID(), 1);
                                     }
                                 }
                                 else{
@@ -441,10 +440,12 @@ public class Inventory {
                                 Furniture furniture = furnitureList.findFurnitureByName(furName);
                                 
                                 if(furniture != null){
-                                    // decrement furniture quantity when adding to house
-                                    furnitureList.removeFurniture(furniture.getItemID()/100, 1);
-                                    houseList.assignFurToHouse(index,furniture.getItemID());
-                                    houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
+                                    boolean added = house.addFurniture(furniture);
+                                    if(added){
+                                        
+                                        furnitureList.removeFurniture(furniture.getItemID(), 1);
+                                        houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
+                                    }
                                 }
                                 else{
                                     typeWriter.write("Furniture not found!", 50, 150);
@@ -506,9 +507,11 @@ public class Inventory {
                                 
                                 Furniture removedFur = house.removeFurnitureByName(furName);
                                 if(removedFur != null){
-                        
+                                    
                                     furnitureList.addFurniture(removedFur.getItemID(), 1);
+                                   
                                     houseList.saveHouse("pet-simulator\\House\\ownedHouse.txt");
+                                    typeWriter.write("Furniture returned to inventory!", 50, 150);
                                 } else {
                                     typeWriter.write("Furniture not found in this house!", 50, 150);
                                 }

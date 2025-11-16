@@ -15,16 +15,16 @@ public class FoodList {
     
     private int generateID(String name){   
         switch(name){
-            case "bone": return 100;
-            case "beef": return 200;
-            case "pate":  return 300;
-            case "seeds":  return 400;
-            case "fruit bowl": return 500;
-            case "rice ball": return 600;
-            case "honey treat": return 700;
-            case "egg roll": return 800;
-            case "shrimp snack": return 900;
-            default: return 1000;
+            case "bone": return 1;
+            case "beef": return 2;
+            case "pate":  return 3;
+            case "seeds":  return 4;
+            case "fruit bowl": return 5;
+            case "rice ball": return 6;
+            case "honey treat": return 7;
+            case "egg roll": return 8;
+            case "shrimp snack": return 9;
+            default: return 10;
         }
     }
         
@@ -77,7 +77,7 @@ public class FoodList {
                             break;
                     }
                     if(food != null){
-                        food.setSat(findSat(FoodID/100));
+                        food.setSat(findSat(FoodID));
                         ownedFood.add(food);
                     }
                 }
@@ -103,7 +103,7 @@ public class FoodList {
     public String findFoodNameByID(int id){
         loadFood(OWNED_FOOD_PATH);
         for(Food a : ownedFood){
-            if(a.getItemID() == id*100){
+            if(a.getItemID() == id){
                 return a.getItemName();
             }
         }
@@ -226,7 +226,7 @@ public class FoodList {
         int j = 0;
 
         for(Food a : ownedFood){
-            a.setSat(findSat(a.getItemID()/100));
+            a.setSat(findSat(a.getItemID()));
 
             typeWriter.write("Name: ", 50);
             textColor.yellowText(a.getItemName());
@@ -255,7 +255,7 @@ public class FoodList {
 
     public void removeFood(int foodID, int quantity) throws InterruptedException{
         loadFood(OWNED_FOOD_PATH);
-        Food target = findFoodByID(foodID * 100);
+        Food target = findFoodByID(foodID);
         if(target == null){
             typeWriter.write("This item doesn't exist...?", 50,300);
             return;

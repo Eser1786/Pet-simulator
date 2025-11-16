@@ -291,6 +291,7 @@ public class FurnitureList {
 
 
     public void removeFurniture(int FurnitureID, int quantity) throws InterruptedException{
+        ownedFur.clear();
         loadFur(OWNED_FURNITURE_PATH);
         Furniture target = findFurByID(FurnitureID);
         if(target == null){
@@ -354,6 +355,7 @@ public class FurnitureList {
         }
     }
     public Furniture findFurnitureByName(String name){
+        ownedFur.clear();
         loadFur(OWNED_FURNITURE_PATH);
         for(Furniture furniture : ownedFur){
             if(furniture.getItemName() != null && furniture.getItemName().equalsIgnoreCase(name) && furniture.getQuantity() > 0){

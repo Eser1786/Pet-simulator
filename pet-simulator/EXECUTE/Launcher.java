@@ -62,7 +62,7 @@ public class Launcher {
             typeWriter.write("=== WHAT DO YOU WANT TO DO ===", 50, 150);
             System.out.println();
 
-            typeWriter.write("Name: " + textColor.YELLOW + player.getName() + "!" + textColor.RESET, 30, 150);
+            typeWriter.write("Name: " + textColor.YELLOW + player.getName()  + textColor.RESET + "!", 30, 150);
             typeWriter.write("Coin: " + textColor.YELLOW + player.getCoin() + " coins" + textColor.RESET, 30, 150);
 
 

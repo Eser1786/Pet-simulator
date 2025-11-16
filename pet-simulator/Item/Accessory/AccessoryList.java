@@ -15,16 +15,16 @@ public class AccessoryList {
     
     private int generateID(String name){   
         switch(name){
-            case "hat": return 100;
-            case "cape": return 200;
-            case "collar": return 300;
-            case "crown": return 400;
-            case "backpack":  return 500;
-            case "gloves": return 600;
-            case "belt": return 700;
-            case "boots": return 800;
-            case "mask": return 900;
-            default: return 1000;
+            case "hat": return 1;
+            case "cape": return 2;
+            case "collar": return 3;
+            case "crown": return 4;
+            case "backpack":  return 5;
+            case "gloves": return 6;
+            case "belt": return 7;
+            case "boots": return 8;
+            case "mask": return 9;
+            default: return 10;
             }
     }
         
@@ -103,7 +103,7 @@ public class AccessoryList {
 
     public String findAccessoryNameByID(int id){
         for(Accessory a : ownedAccessory){
-            if(a.getItemID() == id * 100){
+            if(a.getItemID() == id){
                 return a.getItemName();
             }
         }
@@ -175,7 +175,7 @@ public class AccessoryList {
 
     public void removeAccessory(int accessoryID, int quantity) throws InterruptedException{
         loadAccessory(OWNED_ACCESSORY_PATH);
-        Accessory target = findAccessoryByID(accessoryID * 100);
+        Accessory target = findAccessoryByID(accessoryID);
         if(target == null){
             typeWriter.write("This item doesn't exist...?", 50,300);
             return;
@@ -233,7 +233,7 @@ public class AccessoryList {
         int j = 0;
 
         for(Accessory a : ownedAccessory){
-            a.setStylePoint(findStylePoint(a.getItemID()/100));
+            a.setStylePoint(findStylePoint(a.getItemID()));
 
             typeWriter.write("Name: ", 50);
             textColor.yellowText(a.getItemName());

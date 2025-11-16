@@ -1,2 +1,1 @@
-601|dragon|rumble|26|6|70|51|female|null
-201|cat|leo|87|0|25|90|female|cape
+401|shark|Beam|51|0|80|91|female|null
