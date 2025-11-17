@@ -46,41 +46,38 @@ public class House {
         return true;
     }
 
-    public void seeFurniture() throws InterruptedException{
-        typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 50, 150);
+    public void seeFurniture() throws InterruptedException {
+    typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 50, 150);
+    System.out.println();
+    
+    if (furnitureList.isEmpty()) {
+        typeWriter.write("This house has no furniture yet.", 50, 150);
         System.out.println();
-        
-        if(furnitureList.isEmpty()){
-            typeWriter.write("This house has no furniture yet.", 50, 150);
-            System.out.println();
-            return;
-        }
-        
-        for(Furniture furniture : furnitureList){
-           
-            FurnitureList furList = new FurnitureList();
-            int comfort = furList.findComfortByName(furniture.getItemName());
-            
-            typeWriter.write("- ", 50);
-            textColor.yellowText(furniture.getItemName());
-            typeWriter.write(" | Comfort: ", 50);
-            textColor.blueText(String.valueOf(comfort));
-            System.out.println();
-        }
-        typeWriter.write("Total comfort of this house: ", 50);
-        textColor.orangeText(String.valueOf(sumOfComfort()));
+        return;
+    }
+    
+    for (Furniture furniture : furnitureList) {
+        typeWriter.write("- ", 50);
+        textColor.yellowText(furniture.getItemName());
+        typeWriter.write(" | Comfort: ", 50);
+        textColor.blueText(String.valueOf(furniture.getComfort())); // DÙNG getComfort() TRỰC TIẾP!
         System.out.println();
     }
+    
+    typeWriter.write("Total comfort of this house: ", 50);
+    textColor.orangeText(String.valueOf(sumOfComfort()));
+    System.out.println();
+}
 
-    public int sumOfComfort(){
-        int sum = 0;
-        FurnitureList furList = new FurnitureList();
-        for(Furniture furniture : furnitureList){
-            int comfort = furList.findComfortByName(furniture.getItemName());
-            sum += comfort;
-        }
-        return sum;
+public int sumOfComfort() {
+    int sum = 0;
+    for (Furniture f : furnitureList) {
+        sum += f.getComfort(); // Dùng trực tiếp, không cần tìm file nữa!
     }
+    return sum;
+}
+
+    
 
     public ArrayList<Furniture> getFurnitureList(){
         return furnitureList;
@@ -98,12 +95,7 @@ public class House {
     }
 
 
-    //     int sumComfort = 0;
-    //     for(int i = 0; i < furnitureList.size(); i++){
-    //         sumComfort += furnitureList.get(i).getComfort();
-    //     }
-    //     typeWriter.write("The comfort of this house is " + sumComfort, 500);
-    // }
+   
 
     private Pet pet;
 

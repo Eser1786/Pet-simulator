@@ -1,13 +1,12 @@
 package House;
 
-import java.io.*;
-import java.util.*;
-
+import Item.Furniture.*;
+import Pet.Pet;
 import Pet.PetManager;
 import Utils.textColor;
 import Utils.typeWriter;
-import Pet.Pet;
-import Item.Furniture.*;
+import java.io.*;
+import java.util.*;
 
 public class HouseList {
     private static final String OWNED_HOUSE_PATH = "pet-simulator\\House\\ownedHouse.txt";
@@ -33,51 +32,77 @@ public class HouseList {
     }
 
 
-    public void loadHouse() throws InterruptedException{
-        ownedHouse.clear();
-        petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
-        try( BufferedReader br = new BufferedReader(new FileReader(OWNED_HOUSE_PATH))){
-            String line;
+    public void loadHouse() throws InterruptedException {
+    ownedHouse.clear();
+    petManager.loadPetFromFile("pet-simulator\\Pet\\ownedPets.txt");
 
-            while(( line = br.readLine())!= null ){
-                String[] parts = line.split("\\|");
-                
-                if(parts.length == 5){
-                    int houseID = Integer.parseInt(parts[0].trim());
-                    int petID = Integer.parseInt(parts[1].trim());
-                    int fur1ID = Integer.parseInt(parts[2].trim());
-                    int fur2ID = Integer.parseInt(parts[3].trim());
-                    int fur3ID = Integer.parseInt(parts[4].trim());
+    try (BufferedReader br = new BufferedReader(new FileReader(OWNED_HOUSE_PATH))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split("\\|");
+            if (parts.length != 5) continue;
 
-                    House house = new House();
-                    house.setHouseID(houseID);
+            int houseID = Integer.parseInt(parts[0].trim());
+            int petID   = Integer.parseInt(parts[1].trim());
+            int fur1ID  = Integer.parseInt(parts[2].trim());
+            int fur2ID  = Integer.parseInt(parts[3].trim());
+            int fur3ID  = Integer.parseInt(parts[4].trim());
 
-                    if(petID != -999){
-                        Pet pet = petManager.findPetByID(petID);
-                        if(pet!=null){
-                            house.setPetSilent(pet);
-                        }
-                    }
+            House house = new House();
+            house.setHouseID(houseID);
 
-                    for(int furID : new int[]{fur1ID, fur2ID, fur3ID}){
-                        if(furID != -999){
-                            FurnitureList furList = new FurnitureList();
-                            furList.loadFur("pet-simulator\\Item\\Furniture\\ownedFurniture.txt");
-                            Furniture furniture = furList.findFurByID(furID);
-                            if(furniture != null){
-                                house.addFurnitureSilent(furniture);
-                            }
-                        }
-                    }
-                    ownedHouse.add(house);
+            // Gán pet
+            if (petID != NULL) {
+                Pet pet = petManager.findPetByID(petID);
+                if (pet != null) {
+                    house.setPetSilent(pet);
                 }
             }
 
+            // GÁN FURNITURE: Tìm thông tin từ Furniture.txt (mẫu) rồi tạo mới có comfort
+            int[] furIDs = {fur1ID, fur2ID, fur3ID};
+            for (int furID : furIDs) {
+                if (furID != NULL) {
+                    Furniture furniture = createFurnitureFromTemplate(furID);
+                    if (furniture != null) {
+                        house.addFurnitureSilent(furniture); // có tên + comfort luôn!
+                    }
+                }
+            }
 
-        } catch (IOException e){
-            e.getStackTrace();
+            ownedHouse.add(house);
         }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
+// Tạo furniture từ file mẫu Furniture.txt (chỉ đọc file 1 lần mỗi lần loadHouse)
+private Furniture createFurnitureFromTemplate(int targetID) {
+    try (BufferedReader br = new BufferedReader(new FileReader("pet-simulator\\Item\\Furniture\\Furniture.txt"))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split("\\|");
+            if (parts.length == 3) {
+                int id = Integer.parseInt(parts[0].trim());
+                if (id == targetID) {
+                    String name = parts[1].trim();
+                    int comfort = Integer.parseInt(parts[2].trim());
+                    
+                    Furniture f = new Furniture();
+                    f.setItemID(targetID);
+                    f.setItemName(name);
+                    f.setComfort(comfort);
+                    f.setQuantity(1);
+                    return f;
+                }
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
 
 
     public void saveHouse(String filePath){
@@ -200,7 +225,6 @@ public class HouseList {
         if(ownedHouse.isEmpty()){
             loadHouse();
         }
-        PetManager pm = new PetManager();
         int index = 1;
         for(House house : ownedHouse){
             typeWriter.write("House " + index, 50, 150);
@@ -211,70 +235,13 @@ public class HouseList {
             else{
                 typeWriter.write(" | Pet: none", 50, 150);      
             }
-            
-            
-                try(BufferedReader br = new BufferedReader(new FileReader("pet-simulator\\House\\ownedHouse.txt"))){
-                    String line;
-                    while((line = br.readLine())!=null){
-                        String[] parts = line.split("\\|");
-                        if(parts.length == 5){
-                            FurnitureList fl = new FurnitureList();
-                            
-                            int fur1ID = Integer.parseInt(parts[2].trim());
-                            int fur2ID = Integer.parseInt(parts[3].trim());
-                            int fur3ID = Integer.parseInt(parts[4].trim());
-                        
-                            if(fur1ID == -999 && fur2ID == -999 && fur3ID == -999){
-                                typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 30, 150);
-                                System.out.println();
-                                typeWriter.write("This house doesn't have any furniture", 30, 150);
-                                System.out.println();
-                            }
-
-
-
-                            if(fur1ID != -999 || fur2ID != -999 || fur3ID != -999){
-                                Furniture fur1 = fl.findFurByIndex(fur1ID);
-                                Furniture fur2 = fl.findFurByIndex(fur2ID);
-                                Furniture fur3 = fl.findFurByIndex(fur3ID);
-                                
-                                ArrayList<Furniture> furOfHouse = new ArrayList<>();
-                                if(fur1!=null){
-                                    furOfHouse.add(fur1);
-                                }
-                                if(fur2!=null){
-                                    furOfHouse.add(fur2);
-                                }
-                                if(fur3!=null){
-                                    furOfHouse.add(fur3);
-                                }
-
-                                typeWriter.write("=== FURNITURE OF THIS HOUSE ===", 30, 150);
-                                System.out.println();
-                                int sumComfort = 0;
-                                for(Furniture fur : furOfHouse){
-                                    typeWriter.write(textColor.GREEN + fur.getItemName()+textColor.RESET, 30, 150);
-                                    typeWriter.write(" | Comfort: " + textColor.ORANGE + fur.getComfort() + textColor.RESET, 30, 150);
-                                    System.out.println();
-                                    sumComfort += fur.getComfort();
-                                }
-                                System.out.println();
-                                typeWriter.write("Total comfort of this house: " + textColor.ORANGE + sumComfort + textColor.RESET, 30, 150);
-                            }
-                        
-                        }
-                        
-                        
-                    }
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
+          
+            house.seeFurniture(); 
             System.out.println();
             index++;
         }
+    }
     
-
     public int totalHouse() throws InterruptedException{
         loadHouse();
         int count = 0;

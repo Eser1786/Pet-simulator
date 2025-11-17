@@ -1,16 +1,15 @@
 package Player.Inventory;
 
-import java.util.*;
-
 import House.House;
 import House.HouseList;
 import Item.Accessory.*;
 import Item.Food.*;
 import Item.Furniture.*;
-import Utils.*;
 import Pet.Pet;
 import Pet.PetManager;
 import Player.Player;
+import Utils.*;
+import java.util.*;
 
 public class Inventory {
     public static final String OWNED_PETS_PATH = "pet-simulator\\Pet\\ownedPets.txt";
@@ -309,6 +308,7 @@ public class Inventory {
                                     boolean added = house.addFurniture(furniture);
                                     if(added){
                                         furnitureList.removeFurniture(furniture.getItemID(), 1);
+                                        hl.saveHouse("pet-simulator\\House\\ownedHouse.txt");
                                     }
                                 }
                                 else{
